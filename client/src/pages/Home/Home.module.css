@@ -1,0 +1,5 @@
+.ContHome {
+    /* border: 1px solid red; */
+    min-height: 100vh;
+    background-color: var(--backColor);
+}
