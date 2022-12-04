@@ -29,13 +29,13 @@ export default function Visualizer () {
                     <div className={style.info}>
                         <div className={style.description}>
                             <div className={style.title}>
-                                <h3>{movies.homeMovie.title}</h3>
+                                <h3>{movies.homeMovie?.title}</h3>
                             </div>
                             <div className={style.rate}>
 
                             </div>
                             <div className={style.overview}>
-                                <p className={style.texto}>{movies.homeMovie.description}</p>
+                                <p className={style.texto}>{movies.homeMovie?.description}</p>
                             </div>
                             <div className={style.buttons}>
                                 <button className={style.playButton}>
