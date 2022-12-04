@@ -1,0 +1,76 @@
+.ContNavBar {
+    /* border: 1px solid red; */
+    position: fixed;
+    width: 100%;
+    height: 4rem;
+    padding: 0 55px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .2s ease;
+    background: linear-gradient(0deg, transparent, rgba(0, 0, 0, .7));
+    background-color: transparent;
+}
+.ContNavBarScroll {
+    /* border: 1px solid red; */
+    position: fixed;
+    width: 100%;
+    height: 4rem;
+    padding: 0 55px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(0deg, transparent, rgba(0, 0, 0, .7));
+    background-color: var(--backColor);
+    transition: all .2s ease;
+}
+.links {
+    /* border: 1px solid green; */
+    width: 27%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.userMenu {
+    border: 1px solid white;
+    /* width: 50%; */
+    height: 100%;
+}
+.homeImageLink {
+    /* border: 1px solid blueviolet; */
+    width: 6rem;
+    height: 60%;
+}
+.homeImageLink > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.link {
+    color: var(--textColor);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: .9rem;
+    font-family: 'Noto Sans';
+    filter: opacity(.9);
+    transition: all 0.2s ease;
+}
+.link:hover {
+    filter: opacity(.6);
+}
+.linkActive {
+    color: var(--textColor);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: .9rem;
+    font-family: 'Noto Sans';
+    transition: all 0.2s ease;
+
+}

@@ -1,5 +1,6 @@
 import style from './Home.module.css';
 import Visualizer from '../../components/visualizer/Visualizer';
+import { useEffect } from 'react';
 
 
 
@@ -8,6 +9,9 @@ import Visualizer from '../../components/visualizer/Visualizer';
 
 export default function Home () {
 
+    useEffect(() => {
+        document.title = 'Home - MovieApp'
+    }, [])
 
 
 
