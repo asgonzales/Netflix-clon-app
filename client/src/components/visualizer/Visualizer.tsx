@@ -22,7 +22,7 @@ export default function Visualizer () {
         <div className={style.ContVisualizer}>
             <div className={style.imgCont}>
                 {/* <img src={imagendeprueba} alt="background movie" /> */}
-                <img src={movies.homeMovie.image} alt="background movie" />
+                <img src={movies.homeMovie?.image} alt="background movie" />
             </div>
             <div className={style.shadow}> 
                 <div className={style.up}>
