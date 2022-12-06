@@ -1,0 +1,207 @@
+.ContMiniCard {
+    border: 1px solid red;
+    /* width: 214px; */
+    /* height: 118px; */
+    width: 100%;
+    height: 100vh;
+    /* margin: 3.5rem; */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.ContMiniCard:hover {
+    /* transform: scale(1.5); */
+    transition-delay: 1s;
+}
+.backgroundImage {
+    border: 1px solid red;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.backgroundImage > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* medidas:
+    normal: 
+        width: 215px
+        height: 120;
+    expandido:
+        width: 318px
+        height: 375px
+    */
+.Card {
+    width: 215px;
+    height: 120px;
+    /* border: 1px solid red; */
+    position: absolute;
+    /* bottom: 0; */
+    margin: 3.8rem;
+    margin-top: 19.9rem;
+    transition: all .2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.Card:hover {
+    transition-delay: 1s;
+    width: 318px;
+    height: 375px;
+}
+.Card:hover > .texto {
+    transition-delay: 1s;
+    width: 100%;
+    height: 52%;
+    /* display: flex; */
+    transform: scale(1);
+}
+.Card:hover > .imagen {
+    height: 48%;
+    transition-delay: 1s;
+}
+.imagen {
+    width: 100%;
+    height: 100%;
+    transition: all .2s ease;
+    /* border: 1px solid red; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+.imagen > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.imagen > h1 {
+    position: absolute;
+    /* border: 1px solid violet; */
+    bottom: 0;
+    margin: .5rem;
+    width: 90%;
+    color: var(--textColor);
+    font-family: 'Noto Sans';
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    filter: opacity(.3);
+    transition: all .2s ease;
+}
+.Card:hover > .imagen > h1 {
+    filter: opacity(1);
+    transition-delay: 1s;
+}
+.texto {
+    /* display: none; */
+    width: 0%;
+    height: 0%;
+    /* padding-right: 1rem; */
+    transform: scale(0);
+    /* border: 1px solid green; */
+    transition: all .2s ease;
+    background-color: var(--backColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--textColor);
+}
+.controls {
+    /* border: 1px solid green; */
+    width: 100%;
+    height: 48px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+.controls > div {
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 50px;
+    width: 40px;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, .07);
+    /* filter: opacity(.6); */
+}
+.controls > div:hover {
+    border: 2px solid white;
+}
+.controls > div > img {
+    /* margin-left: 2px; */
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    filter: invert(1);
+    /* border: 1px solid green; */
+}
+.controls > div:first-child {
+    /* filter: opacity(1); */
+    margin-left: 1rem;
+    /* background-color: var(--textColor); */
+    background-color: white;
+}
+.controls > div:first-child > img {
+    filter: invert(0);
+    margin-left: 4px;
+    width: 45%;
+    height: 45%;
+}
+.controls > div:last-child {
+    margin-right: 1.4rem;
+    /* margin: 1rem; */
+    margin-left: auto;
+    /* align-self: flex-end; */
+}
+.firstLine {
+    /* border: 1px solid white; */
+    width: 100%;
+    margin-top: 10px;
+    height: 30px;
+    font-family: 'Noto Sans';
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.rate {
+    color: var(--greenColor);
+}
+.firstLine > span {
+    margin: 1rem;
+}
+.firstLine > span:last-child {
+    margin-left: 2rem;
+}
+.secondLine {
+    /* border: 1px solid blueviolet; */
+    margin-top: 10px;
+    height: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Noto Sans';
+    font-weight: 600;
+}
+.secondLine > span:first-child {
+    margin-left: 1rem;
+}
+
+/* 
+@keyframes grow {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+} */

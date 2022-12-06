@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import { Category, RandomMovie, videoResponseType } from "../config/types";
+import { Category, MiniCard, RandomMovie, videoResponseType } from "../config/types";
 import { imageUrl, videoUrl } from "../config/config";
 // import config from "../config/config";
 
@@ -78,3 +78,53 @@ export const getRandomMovie = async (_:Request, res:Response) => {
         })
     }
 } 
+
+export const getPopularMovies = async (_:Request, res:Response) => {
+    try {
+        let responses:any = []
+        let filteredResponse:MiniCard[] = []
+        const limit = 42
+
+        //Obtengo la lista de peliculas populares desde la API
+        const response = await axios({
+            method: 'GET',
+            url: 'https://api.themoviedb.org/3/movie/popular?language=es-ES&page=1'
+        })
+        responses = [...responses, ...response.data.results]
+
+        const response2 = await axios({
+            method: 'GET',
+            url: 'https://api.themoviedb.org/3/movie/popular?language=es-ES&page=2'
+        })
+        responses = [...responses, ...response2.data.results]
+
+        const response3 = await axios({
+            method: 'GET',
+            url: 'https://api.themoviedb.org/3/movie/popular?language=es-ES&page=3'
+        })
+        responses = [...responses, ...response3.data.results]
+
+        //Filtro los datos
+        for(let i = 0; i < limit; i++) {
+            const filter:MiniCard = {
+                image: imageUrl + responses[i].backdrop_path,
+                genres: responses[i].genre_ids,
+                id: responses[i].id,
+                title: responses[i].title,
+                date: responses[i].release_date,
+                rate: responses[i].vote_average
+            }
+            filteredResponse.push(filter)
+        }
+
+        res.status(200).json({
+            status: 200,
+            data: filteredResponse
+        })
+    } catch (err:any) {
+        res.status(400).json({
+            status: 400,
+            error: err.message
+        })
+    }
+}

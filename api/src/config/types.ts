@@ -15,3 +15,11 @@ export type videoResponseType = {
     key:string,
     type:string
 }
+export interface MiniCard {
+    image:string
+    genres:number[]
+    id:number
+    title:string
+    date:string
+    rate:number
+}
