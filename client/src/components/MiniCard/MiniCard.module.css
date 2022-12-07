@@ -45,15 +45,15 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .Card:hover {
-    transition-delay: 1s;
+    transition-delay: .5s;
     width: 318px;
     height: 375px;
 }
 .Card:hover > .texto {
-    transition-delay: 1s;
+    transition-delay: .5s;
     width: 100%;
     height: 52%;
     /* display: flex; */
@@ -78,6 +78,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 5px 5px 0 0;
 }
 .imagen > h1 {
     position: absolute;
@@ -110,6 +111,7 @@
     flex-direction: column;
     align-items: center;
     color: var(--textColor);
+    border-radius: 0 0 5px 5px;
 }
 .controls {
     /* border: 1px solid green; */
@@ -119,7 +121,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 10px;
 }
 .controls > div {
     border: 2px solid rgba(255, 255, 255, .5);
@@ -130,6 +132,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, .07);
+    /* position: absolute; */
     /* filter: opacity(.6); */
 }
 .controls > div:hover {
@@ -155,11 +158,100 @@
     width: 45%;
     height: 45%;
 }
+.controls > div:first-child:hover {
+    background-color: rgba(255, 255, 255, .85);
+    border: 2px solid rgba(255, 255, 255, .85);
+}
+/* .controls > div:nth-child(3):hover {
+    border: 1px solid red;
+} */
+.likes {
+    /* border: 1px solid red; */
+    position: absolute;
+    width: 140px;
+    height: 55px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    justify-content: space-evenly;
+    gap: 5px;
+    visibility: hidden;
+    filter: opacity(0);
+    transform: scale(0);
+    transition: all .5s ease;
+    background-color: var(--backColor);
+    box-shadow: 0 0 15px 1px black;
+}
+.likes > div {
+    /* border: 1px solid green; */
+    width: 27%;
+    height: 65%;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.likes > div > img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    filter: invert(1);
+}
+.likes > div:first-child > img {
+    transform: rotateZ(180deg);
+}
+.likes > div:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+.likes > div:hover > .popup {
+    filter: opacity(1);
+    visibility: visible;
+    transition-delay: .2s;
+}
+.controls > div:nth-child(3):hover > .likes{
+    filter: opacity(1);
+    transform: scale(1);
+    visibility: visible;
+    transition-delay: .5s;
+}
 .controls > div:last-child {
     margin-right: 1.4rem;
     /* margin: 1rem; */
     margin-left: auto;
     /* align-self: flex-end; */
+}
+.popup {
+    /* border: 1px solid red; */
+    position: absolute;
+    top: -2.4rem;
+    background-color: var(--textColor);
+    border-radius: 5px;
+    padding: 8px 16px;
+    color: var(--backColor);
+    font-weight: 600;
+    font-family: 'Noto Sans';
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+    filter: opacity(0);
+    visibility: hidden;
+    transition: all 0.2s ease;
+}
+.popup > div {
+    /* border: 1px solid red; */
+    /* border-radius: 0 0 2px 0; */
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    bottom: -7px;
+    transform: rotateZ(45deg);
+    background-color: var(--textColor);
+}
+.controls > div:hover > .popup {
+    filter: opacity(1);
+    visibility: visible;
+    transition-delay: .2s;
 }
 .firstLine {
     /* border: 1px solid white; */
@@ -184,16 +276,37 @@
 .secondLine {
     /* border: 1px solid blueviolet; */
     margin-top: 10px;
-    height: 20px;
-    width: 100%;
+    /* height: 20px; */
+    width: 90%;
+    padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-family: 'Noto Sans';
+    flex-wrap: wrap;
     font-weight: 600;
 }
-.secondLine > span:first-child {
+/* .secondLine > span:first-child {
     margin-left: 1rem;
+} */
+.secondLine > div {
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+}
+.secondLine > span {
+    /* border: 1px solid red; */
+    color: var(--textColor);
+    /* font-family: 'Noto Sans'; */
+}
+.dot {
+    border: 1px solid white;
+    width: 5px;
+    height: 5px;
+    border-radius: 10px;
+    background-color: white;
+    margin: 5px;
+    filter: opacity(.4);
 }
 
 /* 
