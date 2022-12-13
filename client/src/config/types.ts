@@ -20,7 +20,7 @@ export interface Categories {
     data: categorieType[]
 }
 
-export interface MiniCard {
+export interface MiniCardInterface {
     image:string
     genres:number[]
     id:number
@@ -30,7 +30,7 @@ export interface MiniCard {
 }
 export interface CardList {
     name:string
-    data:MiniCard[]
+    data:MiniCardInterface[]
     loading:boolean
     error:boolean
 }

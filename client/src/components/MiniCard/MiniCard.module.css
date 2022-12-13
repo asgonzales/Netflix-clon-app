@@ -1,27 +1,22 @@
 .ContMiniCard {
-    border: 1px solid red;
+    /* border: 1px solid black; */
     /* width: 214px; */
     /* height: 118px; */
-    width: 100%;
-    height: 100vh;
+    /* width: 100%; */
+    /* height: 100vh; */
     /* margin: 3.5rem; */
     cursor: pointer;
-    transition: all 0.2s ease;
-}
-.ContMiniCard:hover {
-    /* transform: scale(1.5); */
-    transition-delay: 1s;
-}
-.backgroundImage {
-    border: 1px solid red;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-.backgroundImage > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    /* transition: all 0.2s ease; */
+    /* flex-shrink: 0; */
+    margin: 5px 2px;
+    /* margin-left: 0; */
+    /* margin-right: 4px; */
+    width: 215px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* z-index: 1; */
 }
 /* medidas:
     normal: 
@@ -32,13 +27,14 @@
         height: 375px
     */
 .Card {
+    flex-shrink: 0;
     width: 215px;
     height: 120px;
     /* border: 1px solid red; */
-    position: absolute;
+    /* position: absolute; */
     /* bottom: 0; */
     margin: 3.8rem;
-    margin-top: 19.9rem;
+    /* margin-top: 19.9rem; */
     transition: all .2s ease;
     display: flex;
     flex-direction: column;
@@ -47,19 +43,31 @@
     border-radius: 5px;
     /* overflow: hidden; */
 }
-.Card:hover {
+.pepe {
+    border: 1px solid red;
+}
+.ContMiniCard:hover > .first {
+    transform: translateX(51px);
+}
+.ContMiniCard:hover > .last {
+    transform: translateX(-51px);
+}
+.ContMiniCard:hover > .Card {
+    z-index: 1;
     transition-delay: .5s;
     width: 318px;
     height: 375px;
+    box-shadow: 0 0 10px 1px black;
+    /* position:static; */
 }
-.Card:hover > .texto {
+.ContMiniCard:hover > .Card > .texto {
     transition-delay: .5s;
     width: 100%;
     height: 52%;
     /* display: flex; */
     transform: scale(1);
 }
-.Card:hover > .imagen {
+.ContMiniCard:hover > .Card > .imagen {
     height: 48%;
     transition-delay: 1s;
 }
@@ -73,6 +81,7 @@
     align-items: center;
     flex-direction: column;
     overflow: hidden;
+    background-color: white;
 }
 .imagen > img {
     width: 100%;
@@ -86,7 +95,7 @@
     bottom: 0;
     margin: .5rem;
     width: 90%;
-    color: var(--textColor);
+    /* color: var(--textColor); */
     font-family: 'Noto Sans';
     overflow: hidden;
     white-space: nowrap;
@@ -94,7 +103,7 @@
     filter: opacity(.3);
     transition: all .2s ease;
 }
-.Card:hover > .imagen > h1 {
+.ContMiniCard:hover > .Card > .imagen > h1 {
     filter: opacity(1);
     transition-delay: 1s;
 }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getMovieCategories, getPopularMovies } from '../../redux/movieSlice';
+import { getMovieCategories } from '../../redux/movieSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import style from './MiniCard.module.css';
 import playIcon from '../../media/play.svg';
@@ -11,35 +11,38 @@ import downArrowIcon from '../../media/downArrow.svg';
 
 import imagenPrueba from './pruebaCard.jpg';
 import fondoPrueba from './IMAGENDEPRUEBA.jpg';
+import { MiniCardInterface } from '../../config/types';
+
+interface Props {
+    data:MiniCardInterface
+    first?:boolean
+    last?:boolean
+    // onClick:void
+}
 
 
 
-
-
-export default function MiniCard () {
+export default function MiniCard ({ data, first, last }:Props) {
     const dispatch = useAppDispatch()
-    const data = useAppSelector(state => state.movies.lists?.popular)
+    // const data = useAppSelector(state => state.movies.lists?.popular)
     const categories = useAppSelector(state => state.movies.categories.data)
 
     useEffect(() => {
-        dispatch(getPopularMovies())
-        dispatch(getMovieCategories())
+        // dispatch(getPopularMovies())
+        // dispatch(getMovieCategories())
     }, [])
 
-    const generos = [28, 12, 16, 99]
+    const generos = data.genres
     const generosletras = generos.map(elmnt => {
         const find = categories.find(el => el.id === elmnt)
         return find?.name
     })
     return (
-        <div className={style.ContMiniCard}>
-            <div className={style.backgroundImage} >
-                <img src={imagenPrueba} alt='pepe' />
-            </div>
-            <div className={style.Card}>
+        <div className={style.ContMiniCard} >
+            <div className={`${style.Card}  ${first ? style.first : last ? style.last : ''}`}>
                 <div className={style.imagen}>
-                    <img src={fondoPrueba} alt="fondoPrueba" />
-                    {/* <h1>TituloTituloTituloTituloTituloTituloTituloTituloTituloTitulo</h1> */}
+                    <img src={data.image} alt="fondoPrueba" />
+                    <h1>{data.title}</h1>
                 </div>
                 <div className={style.texto}>
                     <div className={style.controls}>
@@ -93,22 +96,22 @@ export default function MiniCard () {
                         </div>
                     </div>
                     <div className={style.firstLine}>
-                        <span className={style.rate}>78% Match</span>
-                        <span>Date</span>
+                        <span className={style.rate}>{data.rate * 10}% Match</span>
+                        <span>{data.date}</span>
                     </div>
                     <div className={style.secondLine}>
                         {
                             generosletras.map((el, index) => {
                                 if (index === 0) {
                                     return (
-                                        <div>
+                                        <div key={index}>
                                             <span>{el}</span>
                                         </div>
                                     )
                                 }
                                 else {
                                     return (
-                                        <div>
+                                        <div key={index}>
                                             <div className={style.dot}>
                                             </div>
                                             <span>{el}</span>
@@ -120,7 +123,6 @@ export default function MiniCard () {
                     </div>
                 </div>
             </div>
-                <button onClick={() => console.log(data)}>HIT ME</button>
         </div>
     )
 }

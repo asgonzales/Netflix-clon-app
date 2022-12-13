@@ -1,11 +1,12 @@
 import { useEffect } from "react"
-import { getHomeMovie } from "../../redux/movieSlice"
+import { getHomeMovie, getPopularMovies } from "../../redux/movieSlice"
 import { useAppDispatch, useAppSelector } from "../../redux/store"
 import style from './Visualizer.module.css';
 import imagendeprueba from './IMAGENDEPRUEBA2.jpg';
 import playIcon from '../../media/play.svg';
 import infoIcon from '../../media/info.svg';
 import reloadIcon from '../../media/reload.svg';
+import List from "../List/List";
 
 
 
@@ -63,9 +64,10 @@ export default function Visualizer () {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={style.down}>
-
+                <div className={style.down}>
+                    <List name={'popular'} call={getPopularMovies()} />
+                    {/* <List name={'popular'} call={getPopularMovies()} /> */}
+                </div>
             </div>
         </div>
     )

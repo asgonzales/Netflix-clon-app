@@ -3,3 +3,8 @@
     min-height: 100vh;
     background-color: var(--backColor);
 }
+.lists {
+    width: 100%;
+    /* border: 1px solid white; */
+    /* overflow: hidden; */
+}

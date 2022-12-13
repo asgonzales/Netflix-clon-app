@@ -1,6 +1,6 @@
 import { Route, Router, Routes } from 'react-router-dom';
 import './App.css';
-import MiniCard from './components/MiniCard/MiniCard';
+// import MiniCard from './components/MiniCard/MiniCard';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home/Home';
 
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/browse' element={<Home/>} />
       </Routes>
-      <MiniCard />
+      {/* <MiniCard /> */}
     </div>
   );
 }
