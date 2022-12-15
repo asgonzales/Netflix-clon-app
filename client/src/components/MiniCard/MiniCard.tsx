@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { getMovieCategories } from '../../redux/movieSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import style from './MiniCard.module.css';
@@ -23,13 +23,35 @@ interface Props {
 
 
 export default function MiniCard ({ data, first, last }:Props) {
-    const dispatch = useAppDispatch()
+    // const dispatch = useAppDispatch()
     // const data = useAppSelector(state => state.movies.lists?.popular)
     const categories = useAppSelector(state => state.movies.categories.data)
-
+    const miniCardRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         // dispatch(getPopularMovies())
         // dispatch(getMovieCategories())
+        if(miniCardRef.current) {
+            miniCardRef.current.onmouseenter = () => {
+                // console.log('asdasd')
+                const titles = document.getElementsByClassName('listTitle')
+                // console.log(titles)
+                for(let i = 0; i < titles.length; i++) {
+                    const element = titles[i] as HTMLDivElement
+                    element.style.zIndex = '0'
+                    // console.log(element)
+                }
+            }
+            miniCardRef.current.onmouseleave = () => {
+                // console.log('asdasdasds')
+                const titles = document.getElementsByClassName('listTitle')
+                // console.log(titles)
+                for(let i = 0; i < titles.length; i++) {
+                    const element = titles[i] as HTMLDivElement
+                    element.style.zIndex = '1'
+                    // console.log(element)
+                }
+            }
+        }
     }, [])
 
     const generos = data.genres
@@ -38,11 +60,11 @@ export default function MiniCard ({ data, first, last }:Props) {
         return find?.name
     })
     return (
-        <div className={style.ContMiniCard} >
+        <div ref={miniCardRef} className={style.ContMiniCard} >
             <div className={`${style.Card}  ${first ? style.first : last ? style.last : ''}`}>
                 <div className={style.imagen}>
-                    <img src={data.image} alt="fondoPrueba" />
-                    <h1>{data.title}</h1>
+                    <img src={data.image} alt="cover" />
+                    {/* <h1>{data.title}</h1> */}
                 </div>
                 <div className={style.texto}>
                     <div className={style.controls}>

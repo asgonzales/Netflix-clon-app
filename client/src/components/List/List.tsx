@@ -173,7 +173,7 @@ export default function List ({name, call}:Props) {
     return (
         <div className={style.ContList}>
             {/* <h1>{name[0].toUpperCase() + name.slice(1)}</h1> */}
-            <div className={style.titleDiv}>
+            <div className={`${style.listTitle} listTitle`}>
                 <Link to='' className={style.link}>
                     <h1 ref={titleRef}>
                     {'Imaginative US TV Sci-Fi & Fantasy'}

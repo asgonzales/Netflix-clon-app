@@ -16,7 +16,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: var(--backColor); */
     /* z-index: 1; */
+    /* border-radius: 5px; */
+    /* overflow: hidden; */
 }
 /* medidas:
     normal: 
@@ -41,11 +44,12 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+    /* background-color: transparent; */
     /* overflow: hidden; */
 }
-.pepe {
+/* .pepe {
     border: 1px solid red;
-}
+} */
 .ContMiniCard:hover > .first {
     transform: translateX(51px);
 }
@@ -53,23 +57,28 @@
     transform: translateX(-51px);
 }
 .ContMiniCard:hover > .Card {
-    z-index: 1;
+    z-index: 5;
     transition-delay: .5s;
     width: 318px;
     height: 375px;
     box-shadow: 0 0 10px 1px black;
+    background-color: var(--backColor);
     /* position:static; */
 }
 .ContMiniCard:hover > .Card > .texto {
     transition-delay: .5s;
     width: 100%;
     height: 52%;
+    filter: opacity(1);
+    overflow: visible;
+    /* pointer-events: all; */
+
     /* display: flex; */
-    transform: scale(1);
+    /* transform: scale(1); */
 }
 .ContMiniCard:hover > .Card > .imagen {
     height: 48%;
-    transition-delay: 1s;
+    transition-delay: .5s;
 }
 .imagen {
     width: 100%;
@@ -81,13 +90,14 @@
     align-items: center;
     flex-direction: column;
     overflow: hidden;
-    background-color: white;
+    /* background-color: white; */
 }
 .imagen > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
+    z-index: 0;
 }
 .imagen > h1 {
     position: absolute;
@@ -105,14 +115,17 @@
 }
 .ContMiniCard:hover > .Card > .imagen > h1 {
     filter: opacity(1);
-    transition-delay: 1s;
+    transition-delay: .5s;
 }
 .texto {
+    /* pointer-events: none; */
+    overflow: hidden;
     /* display: none; */
-    width: 0%;
-    height: 0%;
+    width: 100%;
+    height: 0px;
     /* padding-right: 1rem; */
-    transform: scale(0);
+    filter: opacity(0);
+    /* transform: scale(0); */
     /* border: 1px solid green; */
     transition: all .2s ease;
     background-color: var(--backColor);
@@ -246,6 +259,7 @@
     filter: opacity(0);
     visibility: hidden;
     transition: all 0.2s ease;
+    /* z-index: 5; */
 }
 .popup > div {
     /* border: 1px solid red; */
@@ -261,6 +275,7 @@
     filter: opacity(1);
     visibility: visible;
     transition-delay: .2s;
+    /* z-index: 20; */
 }
 .firstLine {
     /* border: 1px solid white; */
