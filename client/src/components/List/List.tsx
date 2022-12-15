@@ -5,7 +5,7 @@ import { MiniCardInterface } from '../../config/types';
 import { AppDispatch, useAppDispatch, useAppSelector } from '../../redux/store';
 import MiniCard from '../MiniCard/MiniCard';
 import style from './List.module.css';
-import DataDePrueba from './listadePrueba';
+// import DataDePrueba from './listadePrueba';
 import leftArrowIcon from '../../media/listArrow.svg';
 import { Link } from 'react-router-dom'
 
@@ -21,7 +21,7 @@ export default function List ({name, call}:Props) {
     const elements = 6
     const dispatch = useAppDispatch()
     const lista = useAppSelector(state => state.movies.lists[name])
-    const [dataDePrueba, setDataDePrueba] = useState<MiniCardInterface[]>(DataDePrueba)
+    // const [dataDePrueba, setDataDePrueba] = useState<MiniCardInterface[]>(DataDePrueba)
     // const [extracted, setExtracted] = useState<MiniCardInterface[]>([])
     const [indice, setIndice] = useState(0)
     const pepe = useRef<HTMLDivElement>(null)
@@ -38,7 +38,10 @@ export default function List ({name, call}:Props) {
     const titleRef = useRef<HTMLHeadingElement>(null)
 
     useEffect(() => {
-        dispatch(call)
+        // console.log('asdsa')
+        if(!lista) {
+            dispatch(call)
+        }
         if(miniButtonsRef.current) {
             miniButtonsRef.current.children[indice].className = style.miniButtonSelected
         }
@@ -77,13 +80,13 @@ export default function List ({name, call}:Props) {
     useEffect(() => {
         if(indice > elements - 1) {
             // console.log('epep', after)
-            setAfterItems(dataDePrueba.slice(0, 8))
+            setAfterItems(lista.data.slice(0, 8))
             // setAfer(true)
         }
         
         if(indice == 1 && beforeItems.length < 1) {
-            const items = dataDePrueba.slice(-12, -1)
-            items.push(dataDePrueba[dataDePrueba.length - 1])
+            const items = lista.data.slice(-12, -1)
+            items.push(lista.data[lista.data.length - 1])
             // console.log('PEPE', indice)
             setBeforeItems(items)
             setStart(2)
@@ -204,7 +207,7 @@ export default function List ({name, call}:Props) {
                         })
                     }
                     {
-                        dataDePrueba?.map((el:MiniCardInterface, index) => {
+                        lista?.data?.map((el:MiniCardInterface, index) => {
                             if(index == 0 || index % 6 == 0)  {
                                 return(
                                     <MiniCard key={index} data={el} first={true}/>
