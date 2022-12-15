@@ -1,4 +1,4 @@
-import style from './Landing.module.css';
+﻿import style from './Landing.module.css';
 import arrowIcon from '../../media/listArrow.svg'
 import React, { ChangeEvent, ChangeEventHandler, FormEvent, useState, useRef, useEffect, EventHandler } from 'react';
 import backgroundImage from '../../media/LandingBackground.jpg';
@@ -312,7 +312,7 @@ export default function Landing () {
             <div className={style.footerDiv}>
                 <div className={style.footerContent}>
                     <div>
-                        <span>¿Preguntas? Contáctanos con un email a asgonzales@gmail.com</span>
+                        <span>¿Preguntas? Contáctanos con un email a asgonzalesromani@gmail.com</span>
                     </div>
                     <div className={style.links}>
                         <div>
