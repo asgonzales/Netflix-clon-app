@@ -141,7 +141,7 @@ export default function Landing () {
                 <div className={style.getStarted}>
                     <h1>Películas y series ilimitadas y mucho más</h1>
                     <h4>Disfruta donde quieras. Cancela cuando quieras.</h4>
-                    <p>¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Netflix.</p>
+                    <p>¿Quieres ver MovieApp ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de MovieApp.</p>
                     <form onSubmit={e => submitHandler(e)} className={style.suscriptionForm}>
                         <div className={style.inputsDiv}>
                             <div ref={errorRef}>
@@ -150,8 +150,10 @@ export default function Landing () {
                             </div>
                             <div>
                                 <button type='submit'>
-                                    <span>Comenzar</span>
-                                    <img src={arrowIcon} alt="arrow" />
+                                    <Link className={style.startLink} to='/browse'>
+                                        <span>Comenzar</span>
+                                        <img src={arrowIcon} alt="arrow" />
+                                    </Link>
                                 </button>
                             </div>
                         </div>
@@ -285,7 +287,7 @@ export default function Landing () {
                     <span>¿Quieres ver Net</span>
                 </div>
                 <div className={style.registerBottom}>
-                    <p>¿Quieres ver Netflix ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Netflix.</p>
+                    <p>¿Quieres ver MovieApp ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de MovieApp.</p>
                     <form onSubmit={e => submitHandler(e)} className={style.suscriptionForm}>
                         <div className={style.inputsDiv}>
                             <div ref={errorRef}>
@@ -294,8 +296,10 @@ export default function Landing () {
                             </div>
                             <div>
                                 <button type='submit'>
-                                    <span>Comenzar</span>
-                                    <img src={arrowIcon} alt="arrow" />
+                                    <Link className={style.startLink} to='/browse'>
+                                        <span>Comenzar</span>
+                                        <img src={arrowIcon} alt="arrow" />
+                                    </Link>
                                 </button>
                             </div>
                         </div>
@@ -327,7 +331,7 @@ export default function Landing () {
                             <Link className={style.linkFooter} to=''>Cuenta</Link>
                             <Link className={style.linkFooter} to=''>Formas de ver</Link>
                             <Link className={style.linkFooter} to=''>Información corporativa</Link>
-                            <Link className={style.linkFooter} to=''>Solo en Netflix</Link>
+                            <Link className={style.linkFooter} to=''>Solo en MovieApp</Link>
                         </div>
                         <div>
                             <Link className={style.linkFooter} to=''>Prensa</Link>

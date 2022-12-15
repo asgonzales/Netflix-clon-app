@@ -248,20 +248,29 @@ select::after {
     /* color: green; */
     /* align-items: flex-start; */
 /* } */
+.startLink {
+    /* border: 1px solid green; */
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--textColor);
+    font-size: 1.6rem;
+}
 .inputsDiv > div:last-child > button {
     width: 100%;
     height: 100%;
     background-color: var(--redColor);
     border: none;
     margin: 0;
-    color: var(--textColor);
-    font-size: 1.6rem;
     display: flex;
     justify-content: center;
     align-items: center;
     /* border: 1px solid gray; */
 }
-.inputsDiv > div:last-child > button > img {
+.inputsDiv > div:last-child > button > .startLink > img {
     margin-left: .5rem;
     /* border: 1px solid white; */
     width: 10%;
