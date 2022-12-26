@@ -3,8 +3,17 @@
     min-height: 100vh;
     background-color: var(--backColor);
 }
-.lists {
+.listsDiv {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
     /* border: 1px solid white; */
     /* overflow: hidden; */
+}
+.listsDiv > div {
+    height: 10rem;
+    width: 100%;
+    /* border: 3px solid white; */
 }

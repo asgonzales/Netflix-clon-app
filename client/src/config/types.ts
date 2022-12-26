@@ -10,14 +10,14 @@ export interface homeMovie {
     }
 }
 
-export type categorieType = {
+export type categoryType = {
     id:number,
     name:string
 }
 export interface Categories {
     error:boolean
     loading:boolean
-    data: categorieType[]
+    data: categoryType[]
 }
 
 export interface MiniCardInterface {

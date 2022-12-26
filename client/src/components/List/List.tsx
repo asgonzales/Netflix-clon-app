@@ -1,17 +1,16 @@
-import { Action, AnyAction, AsyncThunkAction, AsyncThunkOptions, ThunkAction } from '@reduxjs/toolkit';
-// import { AsyncThunkConfig } from '@reduxjs/toolkit/dist';
-import { Dispatch, useEffect, useRef, useState } from 'react';
+import { AsyncThunkAction } from '@reduxjs/toolkit';
+import { useEffect, useRef, useState } from 'react';
 import { MiniCardInterface } from '../../config/types';
-import { AppDispatch, useAppDispatch, useAppSelector } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import MiniCard from '../MiniCard/MiniCard';
 import style from './List.module.css';
-// import DataDePrueba from './listadePrueba';
+import DataDePrueba from './listadePrueba';
 import leftArrowIcon from '../../media/listArrow.svg';
 import { Link } from 'react-router-dom'
 
 interface Props {
     name:string
-    call:AsyncThunkAction<any, void, any>
+    call:AsyncThunkAction<{name:string, data:any}, void, any>
 }
 
 
@@ -21,162 +20,145 @@ export default function List ({name, call}:Props) {
     const elements = 6
     const dispatch = useAppDispatch()
     const lista = useAppSelector(state => state.movies.lists[name])
-    // const [dataDePrueba, setDataDePrueba] = useState<MiniCardInterface[]>(DataDePrueba)
-    // const [extracted, setExtracted] = useState<MiniCardInterface[]>([])
-    const [indice, setIndice] = useState(0)
-    const pepe = useRef<HTMLDivElement>(null)
-    const pepePadre = useRef<HTMLDivElement>(null)
+    // const lista = {
+    //     data: DataDePrueba
+    // }
+    const [indice, setIndice] = useState(1)
+    const [subLists, setSubLists] = useState(1)
+    const listContent = useRef<HTMLDivElement>(null)
+    const listRef = useRef<HTMLDivElement>(null)
+    // const buttonLeftRef = useRef<HTMLButtonElement>(null)
+    const rigthButtonImageRef = useRef<HTMLImageElement>(null)
+    const leftButtonImageRef = useRef<HTMLImageElement>(null)
     const miniButtonsRef = useRef<HTMLDivElement>(null)
-    const buttonsRef = useRef<HTMLDivElement>(null)
+    // const buttonsRef = useRef<HTMLDivElement>(null)
     const [leftButtonHidden, setLeftButtonHidden] = useState(true)
-
-    // const [after, setAfer] = useState(false)
     const [afterItems, setAfterItems] = useState<MiniCardInterface[]>([])
+    const [showedItems, setShowedItems] = useState<MiniCardInterface[]>([])
     const [beforeItems, setBeforeItems] = useState<MiniCardInterface[]>([])
-    const [start, setStart] = useState(0)
-
+    // const [start, setStart] = useState(0)
     const titleRef = useRef<HTMLHeadingElement>(null)
+    // const listaprueba = DataDePrueba as MiniCardInterface[]
 
     useEffect(() => {
-        // console.log('asdsa')
         if(!lista) {
             dispatch(call)
         }
-        if(miniButtonsRef.current) {
-            miniButtonsRef.current.children[indice].className = style.miniButtonSelected
+        else {
+            setShowedItems(lista.data.slice(0, elements))
+            setAfterItems(lista.data.slice(elements * indice, elements + (elements * 1)))
+            setSubLists((lista.data.length / elements))
+            // console.log(DataDePrueba.slice(7, 13))
         }
-        // if(titleRef.current) {
-        //     titleRef.current.onmouseenter = () => {
-        //         if(titleRef.current) {
-        //             titleRef.current.children[0].className = style.spanShow
-        //         }
-        //     }
-        //     titleRef.current.onmouseleave = () => {
-        //         if(titleRef.current) {
-        //             titleRef.current.children[0].className = style.spanGone
-        //         }    
-        //     }
-        // }
-        // if(buttonsRef.current) {
-        //     buttonsRef.current.onmouseover = () => {
-        //         if(buttonsRef.current) {
-        //             buttonsRef.current.style.zIndex = '0'
-        //         }
-        //         if(miniButtonsRef.current) {
-        //             miniButtonsRef.current.style.visibility = 'visible'
-        //         }
-        //     }
-        //     buttonsRef.current.onmouseleave = () => {
-        //         if(buttonsRef.current) {
-        //             buttonsRef.current.style.zIndex = '1'
-        //         }
-        //         if(miniButtonsRef.current) {
-        //             miniButtonsRef.current.style.visibility = 'hidden'
-        //         }
-        //     }
-        // }
-    }, [])
-
+    }, [lista?.data.length])
+    
     useEffect(() => {
-        if(indice > elements - 1) {
-            // console.log('epep', after)
-            setAfterItems(lista.data.slice(0, 8))
-            // setAfer(true)
-        }
-        
-        if(indice == 1 && beforeItems.length < 1) {
-            const items = lista.data.slice(-12, -1)
-            items.push(lista.data[lista.data.length - 1])
-            // console.log('PEPE', indice)
-            setBeforeItems(items)
-            setStart(2)
-            setIndice(3)
-            if(pepe.current) {
-                pepe.current.style.transition = 'none'
-                pepe.current.style.transform = `translateX(${((215 * elements) + 24) * -(3)}px)`
+        if(miniButtonsRef.current) {
+            for(let i = 0; i < miniButtonsRef.current.children.length; i++) {
+                const buttonSelected = miniButtonsRef.current.children[i]
+                if(buttonSelected) buttonSelected.className = style.miniButton
             }
-            setLeftButtonHidden(false)
-        }
-        if(indice == 9) {
-            if(pepe.current) {
-                setIndice(start)
-                pepe.current.style.transition = 'none'
-                pepe.current.style.transform = `translateX(${((215 * elements) + 24) * - (start)}px)`
-            }
-        }
-        if(indice == 1 && beforeItems.length > 0) {
-            // console.log('PAREJA')
-            setIndice(8)
-            if(pepe.current) {
-                pepe.current.style.transition = 'none'
-                pepe.current.style.transform = `translateX(${((215 * elements) + 24) * - (8)}px)`
-            }
+
+            miniButtonsRef.current.children[indice - 1].className = style.miniButtonSelected
+
         }
     }, [indice])
-    
-
+    if(listRef.current) {
+        listRef.current.onmouseenter = () => {
+            if(miniButtonsRef.current) miniButtonsRef.current.style.visibility = 'visible'
+            if(leftButtonImageRef.current) leftButtonImageRef.current.style.visibility = 'visible'
+            if(rigthButtonImageRef.current) rigthButtonImageRef.current.style.visibility = 'visible'
+        }
+        listRef.current.onmouseleave = () => {
+            if(miniButtonsRef.current) miniButtonsRef.current.style.visibility = 'hidden'
+            if(leftButtonImageRef.current) leftButtonImageRef.current.style.visibility = 'hidden'
+            if(rigthButtonImageRef.current) rigthButtonImageRef.current.style.visibility = 'hidden'
+        }
+    }
     const moveRight = () => {
-        // console.log('DERECHA', indice)
-        if(pepe.current) {
-            pepe.current.style.transition = '1s'
-            pepe.current.style.transform = `translateX(${((215 * elements) + 24) * - (indice + 1)}px)`
-            pepe.current.ontransitionend = () => {
-                    if (pepe.current) {
-                        pepe.current.ontransitionend = null
-                    }
-                    
-                    //miniButtons
-                    if(miniButtonsRef.current) {
-                        // console.log(indice)
-                        if(indice == 8) {
-                            miniButtonsRef.current.children[indice < 2 ? indice : indice - 2].className = style.miniButton
-                            miniButtonsRef.current.children[0].className = style.miniButtonSelected
-                        }
-                        else {
-                            miniButtonsRef.current.children[indice < 2 ? indice : indice - 2].className = style.miniButton
-                            miniButtonsRef.current.children[indice < 2 ? indice + 1 : indice - 1].className = style.miniButtonSelected
-                        }
-                    }
+        const space = beforeItems.length === 0 ? ((215 * - afterItems.length) - 24) : (((215 * - afterItems.length * 2) - 48))
+        // const space = ((215 * - afterItems.length * 2) - 24)
+        if(listContent.current) {
+            listContent.current.ontransitionstart = () => {
+                setTimeout(() => {
+                    setShowedItems(afterItems)       
+                }, 900);
+            }
+            listContent.current.style.transition = '1s'
+            listContent.current.style.transform = `translateX(${space}px)`
+            listContent.current.ontransitionend = () => {
+                if(leftButtonHidden) setLeftButtonHidden(false)
+                setBeforeItems(showedItems)
+                if (listContent.current) {
+                    listContent.current.ontransitionend = null
+                    listContent.current.style.transition = '0s'
+                    listContent.current.style.transform = `translateX(${((215 * - afterItems.length) - 24)}px)`
+                }
+                if(indice === (subLists - 1)) {
+                    setAfterItems(lista.data.slice(0, elements))
                     setIndice(indice + 1)
                 }
+                else if(indice === subLists) {
+                    setIndice(1)
+                    setAfterItems(lista.data.slice(elements, elements * 2))
+                }
+                else {
+                    let firstElement = (elements * (indice + 1))
+                    let lastElement = (elements + (elements * (indice + 1)))
+                    setAfterItems(lista.data.slice(firstElement, lastElement))
+                    setIndice(indice + 1)
+                }
+            }
         }
-
     }
     
     const moveLeft = () => {
-        // console.log('IZQUIERDA', indice)
-        if(pepe.current) {
-            pepe.current.style.transition = '1s'
-            pepe.current.style.transform = `translateX(${((215 * elements) + 24) * -(indice - 1)}px)`
-            pepe.current.ontransitionend = () => {
-                if (pepe.current) {
-                    pepe.current.ontransitionend = null
-                    // console.log('AHORASI')
+        if(listContent.current) {
+            listContent.current.ontransitionstart = () => {
+                setTimeout(() => {
+                    setAfterItems(showedItems)
+                    setShowedItems(beforeItems)
+                }, 800)
+            }
+            listContent.current.style.transition = '1s'
+            listContent.current.style.transform = `translateX(0px)`
+            listContent.current.ontransitionend = () => {
+                if (listContent.current) {
+                    listContent.current.ontransitionend = null
+                    listContent.current.style.transition = '0s'
+                    listContent.current.style.transform = `translateX(${((215 * - afterItems.length) - 24)}px)`
                 }
+                if(indice === 2) {
+                    const items = lista.data.slice(-6, -1)
+                    items.push(lista.data[lista.data.length - 1])
+                    // setBeforeItems(items)
+                    setBeforeItems(items)
+                    setIndice(indice - 1)
+                }
+                else if(indice === 1){
 
-                //miniButtons
-                if(miniButtonsRef.current) {
-                    // console.log(indice)
-                    if(indice == 2) {
-                        miniButtonsRef.current.children[indice -2].className = style.miniButton
-                        miniButtonsRef.current.children[6].className = style.miniButtonSelected
-                    }
-                    else {
-                        miniButtonsRef.current.children[indice > 2 ? indice - 2 : indice].className = style.miniButton
-                        miniButtonsRef.current.children[indice > 2 ? indice - 3 : indice - 1].className = style.miniButtonSelected
-                    }
+                    let lastElement = elements * (indice - 2)
+                    let firstElement = lastElement - elements
+                    console.log(firstElement, lastElement)
+                    setBeforeItems(lista.data.slice(firstElement, lastElement))
+                    setIndice(subLists)
                 }
-                setIndice(indice - 1)
+                else {
+                    let lastElement = elements * (indice - 2)
+                    let firstElement = lastElement - elements
+                    console.log(firstElement, lastElement)
+                    setBeforeItems(lista.data.slice(firstElement, lastElement))
+                    setIndice(indice - 1)
+                }
             }
         }
     }
     return (
         <div className={style.ContList}>
-            {/* <h1>{name[0].toUpperCase() + name.slice(1)}</h1> */}
             <div className={`${style.listTitle} listTitle`}>
                 <Link to='' className={style.link}>
                     <h1 ref={titleRef}>
-                    {'Imaginative US TV Sci-Fi & Fantasy'}
+                    {name[0].toUpperCase() + name.slice(1)}
                         <span className={style.spanShow}>Explore All</span>
                         <div>
                             <img src={leftArrowIcon} alt="arrow" />
@@ -184,21 +166,8 @@ export default function List ({name, call}:Props) {
                     </h1>
                 </Link>
             </div>
-            <div className={style.list} ref={pepePadre}>
-                <div ref={buttonsRef} className={style.buttons}>
-                    <div ref={miniButtonsRef}>
-                        {miniButtons(7)}
-                    </div>
-                    <div>
-                        <button className={ leftButtonHidden ? style.leftButton : style.listButtons} onClick={moveLeft} >
-                            <img src={leftArrowIcon} alt="arrow" />
-                        </button>
-                        <button className={style.listButtons} onClick={moveRight} >
-                            <img src={leftArrowIcon} alt="arrow" />
-                        </button>
-                    </div>
-                </div>
-                <div className={style.contentList} ref={pepe}>
+            <div className={style.list} ref={listRef}>
+                <div className={style.contentList} ref={listContent}>
                     {
                         beforeItems.length > 0 && beforeItems.map((el:MiniCardInterface, index) => {
                             return (
@@ -207,13 +176,13 @@ export default function List ({name, call}:Props) {
                         })
                     }
                     {
-                        lista?.data?.map((el:MiniCardInterface, index) => {
-                            if(index == 0 || index % 6 == 0)  {
+                        showedItems.length > 0 && showedItems.map((el:MiniCardInterface, index) => {
+                            if(index === 0)  {
                                 return(
                                     <MiniCard key={index} data={el} first={true}/>
                                 )
                             }
-                            if(index % 6 == 5) {
+                            if(index === showedItems.length - 1) {
                                 return(
                                     <MiniCard key={index} data={el} last={true}/>
                                 )
@@ -231,7 +200,32 @@ export default function List ({name, call}:Props) {
                         })
                     }
                 </div>
+                <button
+                 className={ 
+                 leftButtonHidden ? 
+                 style.leftButtonHidden : 
+                 style.listButtonLeft} onClick={moveLeft}
+                >
+                    <img ref={leftButtonImageRef} src={leftArrowIcon} alt="arrow" />
+                </button>
+                <button className={style.listButtonRight} onClick={moveRight} >
+                    <img ref={rigthButtonImageRef} src={leftArrowIcon} alt="arrow" />
+                </button>
             </div>
+            <div ref={miniButtonsRef} className={style.miniButtons}>
+                {miniButtons(subLists)}
+            </div>
+            {/* <div ref={buttonsRef} className={style.buttons}> */}
+                    {/* <div> */}
+                        {/* <button className={style.listButtons} onClick={() => console.log(
+                            'Items anteriores', beforeItems,
+                            'Items mostrados', showedItems,
+                            'Items siguientes', afterItems,
+                            'indice', indice,
+                            'subLists', subLists
+                        )}>CLICKME</button> */}
+                    {/* </div> */}
+                {/* </div> */}
         </div>
     )
 }
@@ -239,6 +233,7 @@ export default function List ({name, call}:Props) {
 function miniButtons (cant:number) {
     const array = []
     for(let i = 0; i < cant; i++) {
+        if(i === 0) array.push(<button key={i} className={style.miniButtonSelected}></button>)
         array.push(<button key={i} className={style.miniButton}></button>)
     }
     return array

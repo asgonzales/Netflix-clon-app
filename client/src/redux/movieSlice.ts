@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from 'axios';
+import { createAsyncThunk, createSlice, PayloadActionCreator } from "@reduxjs/toolkit";
+import axios, { AxiosResponse } from 'axios';
 import { config } from "../config/config";
-import { CardList, Movies } from "../config/types";
+import { CardList, categoryType, Movies } from "../config/types";
 
 
 
@@ -72,6 +72,26 @@ export const getPopularMovies = createAsyncThunk(
     }
 )
 
+export const getMoviesByCategory = createAsyncThunk<{name:string, data: any}, any>(
+    'movies/getMoviesByCategory',
+    async (category:categoryType, thunkAPI) => {
+        try {
+            const response = await axios({
+                method: 'GET',
+                url: `${config.urlAPI}/movies/bycategory?genreId=${category.id}`
+            })
+            // const respuesta = {
+            // }
+            return {
+                name: category.name,
+                data: response.data.data
+            }
+        } catch (err:any) {
+            return thunkAPI.rejectWithValue(err.message)
+        }
+    }
+)
+
 //Reducer
 const movieSlice = createSlice({
     name:'movieSlice',
@@ -124,6 +144,31 @@ const movieSlice = createSlice({
                 name: 'Popular',
                 loading: false,
                 error: true,
+                data: []
+            }
+        })
+        //getMoviesByCategory
+        builder.addCase(getMoviesByCategory.pending, (state, action) => {
+            state.lists[action.meta.arg.name] = {
+                name: action.meta.arg.name,
+                loading: true,
+                error: false,
+                data: []
+            }
+        })
+        builder.addCase(getMoviesByCategory.fulfilled, (state, action) => {
+            state.lists[action.payload.name] = {
+                name: action.payload.name,
+                loading: false,
+                error: false,
+                data: action.payload.data
+            }
+        })
+        builder.addCase(getMoviesByCategory.rejected, (state, action) => {
+            state.lists[action.meta.arg.name] = {
+                name: action.meta.arg.name,
+                loading: false,
+                error: false,
                 data: []
             }
         })

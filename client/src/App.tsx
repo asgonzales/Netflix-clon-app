@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home/Home';
 import Landing from './pages/Landing/Landing';
+import { Test } from './pages/Test/Test';
 
 function App() {
   const { pathname } = useLocation()
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/browse' element={<Home />} />
+        <Route path='/test' element={<Test />} />
       </Routes>
       {/* <MiniCard /> */}
     </div>

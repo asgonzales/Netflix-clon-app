@@ -63,8 +63,8 @@ export default function MiniCard ({ data, first, last }:Props) {
         <div ref={miniCardRef} className={style.ContMiniCard} >
             <div className={`${style.Card}  ${first ? style.first : last ? style.last : ''}`}>
                 <div className={style.imagen}>
+                    <h1>{data.title}</h1>
                     <img src={data.image} alt="cover" />
-                    {/* <h1>{data.title}</h1> */}
                 </div>
                 <div className={style.texto}>
                     <div className={style.controls}>

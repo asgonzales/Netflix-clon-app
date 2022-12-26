@@ -1,22 +1,13 @@
 .ContList {
-    /* border: 1px solid red; */
-    margin-bottom: 5rem;
+    /* border: 2px solid red; */
+    /* margin-bottom: 5rem; */
     width: 100%;
-    height: 100%;
+    height: 10rem;
+    /* min-height: 10rem; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* justify-content: center; */
-    /* overflow-y: visible; */
-    /* overflow-x: hidden; */
-    /* overflow: hidden; */
-    /* overflow-x: hidden; */
-    /* overflow-y: auto; */
-    /* overflow-y: clip; */
-    /* position: static; */
-    /* margin-left: 55px; */
     position: relative;
-    /* overflow-y: clip; */
 }
 .link {
     /* border: 1px solid red; */
@@ -25,18 +16,19 @@
     text-decoration: none;
     /* width: 100%; */
     margin-left: 55px;
-    height: 100%;
+    /* height: 100%; */
     /* z-index: -5; */
 }
 .listTitle {
-    /* border: 1px solid blue; */
+    /* border: 1px solid green; */
     width: 100%;
     height: 20%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     pointer-events: all;
-    z-index: 1;
+    /* z-index: 1; */
+    /* background-color: transparent; */
 }
 /* .listTitle:hover { */
     /* z-index: 1; */
@@ -50,7 +42,9 @@
     font-size: 1.2rem;
     display: flex;
     align-items: center;
+    background-color: transparent;
     transition: all .5s ease;
+    /* display: none; */
 }
 .link > h1 > div {
     /* border: 1px solid green; */
@@ -112,32 +106,11 @@
     /* border: 1px solid blue; */
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
-    /* margin: 0 55px; */
-    height: 220%;
-    /* max-height: 220%; */
-    transform: translateY(30%);
-    /* overflow-y: visible; */
-    /* overflow-x: hidden; */
+    height: 80%;
     display: flex;
     align-items: center;
-    /* gap: 13px; */
-    overflow-x: hidden;
-    /* overflow-y: clip; */
-    /* overflow-y: visible; */
-    /* justify-content: space-evenly; */
-    /* margin-left: -55px; */
-    /* margin-left: 55px; */
-    margin-top: 5px;
-    /* pointer-events: none; */
-    z-index: 0;
-}
-/* .list:focus-within {
-    z-index: 5;
-} */
-.list:focus {
-    z-index: 1!;
+    overflow: hidden;
 }
 .list > div {
     display: flex;
@@ -150,63 +123,86 @@
     /* border: 1px solid green; */
     margin-left: 57px;
 }
-.buttons {
-    /* border: 1px solid green; */
+/* .buttons {
+    border: 1px solid white;
     position: absolute;
     width: 100%;
-    height: 31%;
-    /* pointer-events: none; */
-    /* margin-top: 5px; */
-    /* transform: translateY(30%); */
-    /* bottom: 5px; */
+    height: 100%;
+    bottom: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    /* background: transparent; */
-    /* visibility: hidden; */
-    /* z-index: 1; */
 }
-/* .buttons:hover {
-    pointer-events: none;
-} */
+.buttons:hover > div:first-child {
+    visibility: visible;
+}
+.buttons > div:first-child {
+    position: absolute;
+    top: -1rem;
+    right: 0;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 2;
+}
 .buttons > div:last-child {
-    /* background-color: red; */
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
-    /* pointer-events: auto; */
     justify-content: space-between;
+} */
+.miniButtons {
+    /* background-color: salmon; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20%;
+    margin-right: 55px;
+    visibility: hidden;
 }
 /* .pepepepepe {
     border: 1px solid green;
 } */
-.listButtons {
+.listButtonRight, .listButtonLeft {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     /* border: 1px solid red; */
     z-index: 1;
     height: 100%;
     width: 55px;
-    /* border: none; */
+    border: none;
     background-color: rgba(0, 0, 0, .2);
     transition: all .2s ease;
     cursor: pointer;
+    z-index: 5;
 }
-.listButtons > img {
+.listButtonLeft {
+    left: 0;
+}
+.listButtonRight > img, .listButtonLeft > img {
     /* border: 1px solid red; */
     width: 70%;
     height: 70%;
     object-fit: contain;
     filter: invert(1);
     visibility: hidden;
+    /* transition: all .2s ease; */
 }
-.buttons:hover > div:last-child > .listButtons > img {
+.listButtonRight:hover > img, .listButtonLeft:hover > img {
+    /* transition: all .2s ease; */
     visibility: visible;
 }
-.buttons > div:last-child > button:last-child > img {
+.listButtonRight > img {
     /* border: 1px solid blue; */
     transform: rotateY(180deg);
 }
+/* .listButtonLeft > img { */
+    /* transform: rotateY(180deg); */
+/* } */
 .leftButton {
     z-index: 1;
     height: 100%;
@@ -217,6 +213,9 @@
     cursor: pointer;
     visibility: hidden;
 }
+.leftButtonHidden {
+    display: none;
+}
 .leftButton > img {
     /* border: 1px solid red; */
     width: 70%;
@@ -225,25 +224,9 @@
     filter: invert(1);
     visibility: hidden;
 }
-.buttons > div:last-child > button:hover {
+.listButtonRight:hover {
     background-color: rgba(0, 0, 0, .5);
     /* background-color: black; */
-}
-.buttons:hover > div:first-child {
-    visibility: visible;
-}
-.buttons > div:first-child {
-    position: absolute;
-    top: -40px;
-    /* border: 1px solid  salmon; */
-    width: 100%;
-    right: 0;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    visibility: hidden;
-    /* margin-right: 57px; */
 }
 .buttons > div:first-child > button:last-child {
     margin-right: 55px;
@@ -255,7 +238,6 @@
     width: 10px;
     height: 2px;
     background-color: rgb(var(--greyColor));
-    background-color: rgb(var(--greyColor));
 }
 .miniButtonSelected {
     border: none;
@@ -264,7 +246,13 @@
     height: 2px;
     /* background-color: rgb(var(--greyColor)); */
     background-color: rgba(255, 255, 255, .5);
-
+}
+.contentList > div {
+    display: flex;
+    /* background-color: red; */
+    align-items: center;
+    /* justify-content: space-between; */
+    /* gap: 20px; */
 }
 @keyframes move {
     0% {
