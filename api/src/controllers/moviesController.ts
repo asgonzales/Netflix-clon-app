@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import axios from "axios";
 import { Category, MiniCard, RandomMovie, videoResponseType } from "../config/types";
-import { imageUrl, videoUrl } from "../config/config";
+import { smallImageUrl, bigImageUrl, videoUrl } from "../config/config";
 // import config from "../config/config";
 
 
@@ -50,7 +50,7 @@ export const getRandomMovie = async (_:Request, res:Response) => {
             id: selectedMovie.id,
             title: selectedMovie.title,
             description: selectedMovie.overview,
-            image: imageUrl + selectedMovie.backdrop_path,
+            image: bigImageUrl + selectedMovie.backdrop_path,
             video: videoUrl
         }
         
@@ -107,7 +107,7 @@ export const getPopularMovies = async (_:Request, res:Response) => {
         //Filtro los datos
         for(let i = 0; i < limit; i++) {
             const filter:MiniCard = {
-                image: 'https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png',
+                image: smallImageUrl + responses[i].backdrop_path,
                 genres: responses[i].genre_ids,
                 id: responses[i].id,
                 title: responses[i].title,
@@ -156,8 +156,9 @@ export const getMovieByCategory = async (req:Request, res:Response) => {
 
         //Filtro los datos
         for(let i = 0; i < limit; i++) {
+            console.log(smallImageUrl + responses[i].backdrop_path)
             const filter:MiniCard = {
-                image: 'https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png',
+                image: smallImageUrl + responses[i].backdrop_path,
                 genres: responses[i].genre_ids,
                 id: responses[i].id,
                 title: responses[i].title,

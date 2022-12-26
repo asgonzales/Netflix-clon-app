@@ -8,6 +8,7 @@ export const config = {
     CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:3000'
 }
 
-export const imageUrl = 'https://image.tmdb.org/t/p/original'
+export const smallImageUrl = 'https://image.tmdb.org/t/p/w500'
+export const bigImageUrl = 'https://image.tmdb.org/t/p/original'
 
 export const videoUrl = 'https://www.youtube.com/watch?v='
