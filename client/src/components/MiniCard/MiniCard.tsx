@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { getMovieCategories } from '../../redux/movieSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import style from './MiniCard.module.css';
+import ReactDOM from 'react-dom';
 import playIcon from '../../media/play.svg';
 import plusIcon from '../../media/plus.svg';
 import likeIcon from '../../media/like.svg';
@@ -17,12 +18,21 @@ interface Props {
     data:MiniCardInterface
     first?:boolean
     last?:boolean
+    position: {
+        top:number
+        left:number
+    }
+    close:() => void
+    ahora:string
     // onClick:void
 }
 
 
 
-export default function MiniCard ({ data, first, last }:Props) {
+export default function MiniCard ({ data, first, last, position, close, ahora }:Props) {
+    useEffect(() => {
+        console.log(position)
+    }, [])
     // const dispatch = useAppDispatch()
     // const data = useAppSelector(state => state.movies.lists?.popular)
     const categories = useAppSelector(state => state.movies.categories.data)
@@ -42,6 +52,9 @@ export default function MiniCard ({ data, first, last }:Props) {
                 }
             }
             miniCardRef.current.onmouseleave = () => {
+                setTimeout(() => {
+                    close()
+                }, 200)
                 // console.log('asdasdasds')
                 const titles = document.getElementsByClassName('listTitle')
                 // console.log(titles)
@@ -52,15 +65,21 @@ export default function MiniCard ({ data, first, last }:Props) {
                 }
             }
         }
+        console.log(position.top, position.left)
     }, [])
 
     const generos = data.genres
+
     const generosletras = generos.map(elmnt => {
         const find = categories.find(el => el.id === elmnt)
         return find?.name
     })
-    return (
-        <div ref={miniCardRef} className={style.ContMiniCard} >
+
+    return ReactDOM.createPortal(
+        <div ref={miniCardRef} className={style.ContMiniCard} style={{
+            top: position.top,
+            left: position.left
+        }}>
             <div className={`${style.Card}  ${first ? style.first : last ? style.last : ''}`}>
                 <div className={style.imagen}>
                     <h1>{data.title}</h1>
@@ -146,5 +165,5 @@ export default function MiniCard ({ data, first, last }:Props) {
                 </div>
             </div>
         </div>
-    )
+    , document.getElementById('modals')!)
 }

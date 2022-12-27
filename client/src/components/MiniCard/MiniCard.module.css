@@ -8,15 +8,16 @@
     cursor: pointer;
     /* transition: all 0.2s ease; */
     /* flex-shrink: 0; */
-    margin: 5px 2px;
+    /* margin: 5px 2px; */
     /* margin-left: 0; */
-    margin-right: 4px;
+    /* margin-right: 4px; */
     width: 213px;
     height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    /* background-color: white; */
+    position: absolute;
     /* z-index: 1; */
     /* border-radius: 5px; */
     /* overflow: hidden; */

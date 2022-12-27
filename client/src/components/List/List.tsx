@@ -7,6 +7,7 @@ import style from './List.module.css';
 import DataDePrueba from './listadePrueba';
 import leftArrowIcon from '../../media/listArrow.svg';
 import { Link } from 'react-router-dom'
+import PreviewCard from '../PreviewCard/PreviewCard';
 
 interface Props {
     name:string
@@ -39,6 +40,12 @@ export default function List ({name, call}:Props) {
     // const [start, setStart] = useState(0)
     const titleRef = useRef<HTMLHeadingElement>(null)
     // const listaprueba = DataDePrueba as MiniCardInterface[]
+    const [modalDiff, setModalDiff] = useState(false)
+    useEffect(() => {
+        if(beforeItems.length > 0) {
+            setModalDiff(true)
+        }
+    }, [beforeItems.length])
 
     useEffect(() => {
         if(!lista) {
@@ -153,6 +160,15 @@ export default function List ({name, call}:Props) {
             }
         }
     }
+    const consologeo = () => {
+        console.log(
+            'Items anteriores', beforeItems,
+            'Items mostrados', showedItems,
+            'Items siguientes', afterItems,
+            'indice', indice,
+            'subLists', subLists
+        )
+    }
     return (
         <div className={style.ContList}>
             <div className={`${style.listTitle} listTitle`}>
@@ -171,7 +187,8 @@ export default function List ({name, call}:Props) {
                     {
                         beforeItems.length > 0 && beforeItems.map((el:MiniCardInterface, index) => {
                             return (
-                                <MiniCard key={index} data={el} />
+                                // <MiniCard key={index} data={el} />
+                                <PreviewCard key={el.id} data={el} />
                             )
                         })
                     }
@@ -179,23 +196,27 @@ export default function List ({name, call}:Props) {
                         showedItems.length > 0 && showedItems.map((el:MiniCardInterface, index) => {
                             if(index === 0)  {
                                 return(
-                                    <MiniCard key={index} data={el} first={true}/>
+                                    // <MiniCard key={index} data={el} first={true}/>
+                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} />
                                 )
                             }
                             if(index === showedItems.length - 1) {
                                 return(
-                                    <MiniCard key={index} data={el} last={true}/>
+                                    // <MiniCard key={index} data={el} last={true}/>
+                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} />
                                 )
                             }
                             return (
-                                <MiniCard key={index} data={el} />
+                                // <MiniCard key={index} data={el} />
+                                <PreviewCard key={el.id} data={el} modalDiff={modalDiff} />
                             )
                         })
                     }
                     {
                         afterItems.length > 0 && afterItems.map((el:MiniCardInterface, index) => {
                             return(
-                                <MiniCard key={index} data={el} />
+                                // <MiniCard key={index} data={el} />
+                                <PreviewCard key={el.id} data={el} />
                             )
                         })
                     }
@@ -208,6 +229,13 @@ export default function List ({name, call}:Props) {
                 >
                     <img ref={leftButtonImageRef} src={leftArrowIcon} alt="arrow" />
                 </button>
+                <button style={{
+                    position:'absolute',
+                    top: 0,
+                    left: '50%',
+                    zIndex: 5
+                }}
+                onClick={consologeo}>ASD</button>
                 <button className={style.listButtonRight} onClick={moveRight} >
                     <img ref={rigthButtonImageRef} src={leftArrowIcon} alt="arrow" />
                 </button>

@@ -1,0 +1,22 @@
+.ContPreview {
+    width: 213px;
+    height: 120px;
+    background-color: white;
+    margin: 5px 4px 5px 2px;
+    position: relative;
+    /* position: absolute; */
+    /* margin-left: 4px; */
+}
+.ContPreview > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pepe {
+    position: absolute;
+    /* top: 0; */
+    /* left: 0; */
+    background-color: red;
+    width: 500px;
+    height: 500px;
+}
