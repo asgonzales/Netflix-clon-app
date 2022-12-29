@@ -37,7 +37,7 @@ export default function Home () {
                     categories.length > 0 && lists.map((el, index) => {
                         return(
                             <div key={index}>
-                                <List name={el.name} categoryToCall={el} />
+                                <List categoryToCall={el} />
                             </div>
                         )
                     })

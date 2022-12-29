@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { MiniCardInterface } from '../../config/types';
+import { MovieInfoInterface } from '../../config/types';
 import style from './PreviewCard.module.css';
 import MiniCard from '../MiniCard/MiniCard';
 
 
 interface Props {
-    data:MiniCardInterface
+    categoryBelong:string
+    data:MovieInfoInterface
     first?:boolean
     last?:boolean
     modalDiff?:boolean
@@ -39,7 +40,7 @@ interface Props {
 // }
 
 
-export default function PreviewCard ({data, modalDiff, first, last}:Props) {
+export default function PreviewCard ({ categoryBelong, data, modalDiff, first, last }:Props) {
 
     //Controlador del modal
     const [openPortal, setOpenPortal] = useState(false)
@@ -92,7 +93,7 @@ export default function PreviewCard ({data, modalDiff, first, last}:Props) {
         <div ref={previewCardRef} className={style.ContPreview}>
             <img src={data.image} alt={data.title} />
             {
-                openPortal && <MiniCard data={data} position={ {top: offsets.top, left: offsets.left + diff}} close={closePortal} first={first} last={last}/>
+                openPortal && <MiniCard categoryBelong={categoryBelong} previewData={data} position={ {top: offsets.top, left: offsets.left + diff}} close={closePortal} first={first} last={last}/>
             }
         </div>
     )

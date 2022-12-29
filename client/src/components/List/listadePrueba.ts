@@ -8,10 +8,10 @@
 //         rate:7
 //     },
 
-import { MiniCardInterface } from "../../config/types"
+import { MovieInfoInterface } from "../../config/types"
 
 // ]
-let listaDePrueba:MiniCardInterface[] = []
+let listaDePrueba:MovieInfoInterface[] = []
 for (let i = 0; i < 42; i++) {
     listaDePrueba.push({
         image:'not',

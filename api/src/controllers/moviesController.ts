@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import { Category, MiniCard, RandomMovie, videoResponseType } from "../config/types";
+import { Category, MiniCard, PreviewCard, RandomMovie, videoResponseType } from "../config/types";
 import { smallImageUrl, bigImageUrl, videoUrl } from "../config/config";
 // import config from "../config/config";
 
@@ -82,7 +82,7 @@ export const getRandomMovie = async (_:Request, res:Response) => {
 export const getPopularMovies = async (_:Request, res:Response) => {
     try {
         let responses:any = []
-        let filteredResponse:MiniCard[] = []
+        let filteredResponse:PreviewCard[] = []
         const limit = 42
 
         //Obtengo la lista de peliculas populares desde la API
@@ -106,13 +106,13 @@ export const getPopularMovies = async (_:Request, res:Response) => {
 
         //Filtro los datos
         for(let i = 0; i < limit; i++) {
-            const filter:MiniCard = {
+            const filter:PreviewCard = {
                 image: smallImageUrl + responses[i].backdrop_path,
-                genres: responses[i].genre_ids,
+                // genres: responses[i].genre_ids,
                 id: responses[i].id,
                 title: responses[i].title,
-                date: responses[i].release_date,
-                rate: responses[i].vote_average
+                // date: responses[i].release_date,
+                // rate: responses[i].vote_average
             }
             filteredResponse.push(filter)
         }
@@ -129,11 +129,11 @@ export const getPopularMovies = async (_:Request, res:Response) => {
     }
 }
 
-export const getMovieByCategory = async (req:Request, res:Response) => {
+export const getMoviesByCategory = async (req:Request, res:Response) => {
 
     const { genreId } = req.query
     let responses:any = []
-    let filteredResponse:MiniCard[] = []
+    let filteredResponse:PreviewCard[] = []
     const limit = 42
     try {
         const response = await axios({
@@ -157,13 +157,13 @@ export const getMovieByCategory = async (req:Request, res:Response) => {
         //Filtro los datos
         for(let i = 0; i < limit; i++) {
             console.log(smallImageUrl + responses[i].backdrop_path)
-            const filter:MiniCard = {
+            const filter:PreviewCard = {
                 image: smallImageUrl + responses[i].backdrop_path,
-                genres: responses[i].genre_ids,
+                // genres: responses[i].genre_ids,
                 id: responses[i].id,
                 title: responses[i].title,
-                date: responses[i].release_date,
-                rate: responses[i].vote_average
+                // date: responses[i].release_date,
+                // rate: responses[i].vote_average
             }
             filteredResponse.push(filter)
         }
@@ -176,5 +176,32 @@ export const getMovieByCategory = async (req:Request, res:Response) => {
         // })
     } catch (err:any) {
         res.status(400).json({error: err.message})
+    }
+}
+export const getMovieMinInfo = async (req:Request, res:Response) => {
+    try {
+        
+        const { id } = req.query
+        const response = await axios({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${id}?language=es-ES`
+        })
+
+        const movie:MiniCard = {
+            // id:response.data.id,
+            genres: response.data.genres.map((el:Category) => el.id),
+            date: response.data.release_date,
+            rate: response.data.vote_average
+        }
+
+        res.status(200).json({
+            status: 200,
+            data: movie
+        })
+    } catch (err:any) {
+        res.status(400).json({
+            status:400,
+            error:err.message
+        })
     }
 }

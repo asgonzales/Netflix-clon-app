@@ -19,18 +19,31 @@ export interface Categories {
     loading:boolean
     data: categoryType[]
 }
-
-export interface MiniCardInterface {
-    image:string
-    genres:number[]
+// export interface PreviewCardInterface {
+//     id:number
+//     title:string
+//     image:string
+// }
+// export interface MiniCardInterface {
+//     image?:string
+//     genres?:number[]
+//     id?:number
+//     title?:string
+//     date?:string
+//     rate?:number
+// }
+export interface MovieInfoInterface {
     id:number
     title:string
-    date:string
-    rate:number
+    image:string
+    genres?:number[]
+    date?:string
+    rate?:number
+
 }
 export interface CardList {
     name:string
-    data:MiniCardInterface[]
+    data:MovieInfoInterface[]
     loading:boolean
     error:boolean
 }
@@ -40,4 +53,9 @@ export interface Movies {
     lists:{
         [key:string]:CardList
     }
+}
+//Redux interfaces
+export interface getMovieInfoArgs {
+    categoryName:string
+    movieId:number
 }

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadActionCreator } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from 'axios';
 import { config } from "../config/config";
-import { CardList, categoryType, Movies } from "../config/types";
+import { CardList, categoryType, getMovieInfoArgs, Movies } from "../config/types";
 
 
 
@@ -91,6 +91,23 @@ export const getMoviesByCategory = createAsyncThunk<{name:string, data: any}, an
         }
     }
 )
+export const getMovieInfo = createAsyncThunk(
+    'movie/getMovieInfo',
+    async (arg:getMovieInfoArgs, thunkAPI) => {
+        try {
+            const response = await axios({
+                method: 'GET',
+                url: `http://localhost:3001/api/movies/info?id=${arg.movieId}`
+            })
+            return {
+                categoryName: arg.categoryName,
+                data: response.data
+            }
+        } catch (err:any) {
+            return thunkAPI.rejectWithValue(err.message)
+        }
+    }
+)
 
 //Reducer
 const movieSlice = createSlice({
@@ -170,6 +187,15 @@ const movieSlice = createSlice({
                 loading: false,
                 error: false,
                 data: []
+            }
+        })
+        //getMovieInfo
+        builder.addCase(getMovieInfo.fulfilled, (state, action) => {
+            const position = state.lists[action.payload.categoryName].data.findIndex(el => el.id === action.meta.arg.movieId)
+            const data = action.payload.data
+            state.lists[action.payload.categoryName].data[position] = {
+                ...state.lists[action.payload.categoryName].data[position],
+                ...data.data
             }
         })
     },

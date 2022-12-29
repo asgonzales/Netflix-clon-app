@@ -78,7 +78,7 @@ export default function Visualizer () {
                 <div className={style.down}>
                     {
                         listToCall.id !== -5 &&
-                        <List name={listToCall.name} categoryToCall={listToCall} />
+                        <List categoryToCall={listToCall} />
                     }
                 </div>
             </div>

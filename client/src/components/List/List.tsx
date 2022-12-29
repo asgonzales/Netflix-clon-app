@@ -1,6 +1,6 @@
-import { AsyncThunkAction } from '@reduxjs/toolkit';
+// import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { useEffect, useRef, useState } from 'react';
-import { categoryType, MiniCardInterface } from '../../config/types';
+import { categoryType, MovieInfoInterface } from '../../config/types';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 // import MiniCard from '../MiniCard/MiniCard';
 import style from './List.module.css';
@@ -11,7 +11,7 @@ import PreviewCard from '../PreviewCard/PreviewCard';
 import { getMoviesByCategory } from '../../redux/movieSlice';
 
 interface Props {
-    name:string
+    // name:string
     // call:AsyncThunkAction<{name:string, data:any}, void, any>
     categoryToCall:categoryType
 }
@@ -19,10 +19,10 @@ interface Props {
 
 
 
-export default function List ({name, categoryToCall}:Props) {
+export default function List ({ categoryToCall }:Props) {
     const elements = 6
     const dispatch = useAppDispatch()
-    const lista = useAppSelector(state => state.movies.lists[name])
+    const lista = useAppSelector(state => state.movies.lists[categoryToCall.name])
     const [indice, setIndice] = useState(1)
     const [subLists, setSubLists] = useState(1)
     const listContent = useRef<HTMLDivElement>(null)
@@ -31,9 +31,9 @@ export default function List ({name, categoryToCall}:Props) {
     const leftButtonImageRef = useRef<HTMLImageElement>(null)
     const miniButtonsRef = useRef<HTMLDivElement>(null)
     const [leftButtonHidden, setLeftButtonHidden] = useState(true)
-    const [afterItems, setAfterItems] = useState<MiniCardInterface[]>([])
-    const [showedItems, setShowedItems] = useState<MiniCardInterface[]>([])
-    const [beforeItems, setBeforeItems] = useState<MiniCardInterface[]>([])
+    const [afterItems, setAfterItems] = useState<MovieInfoInterface[]>([])
+    const [showedItems, setShowedItems] = useState<MovieInfoInterface[]>([])
+    const [beforeItems, setBeforeItems] = useState<MovieInfoInterface[]>([])
     const titleRef = useRef<HTMLHeadingElement>(null)
     const [modalDiff, setModalDiff] = useState(false)
     useEffect(() => {
@@ -166,7 +166,7 @@ export default function List ({name, categoryToCall}:Props) {
             <div className={`${style.listTitle} listTitle`}>
                 <Link to='' className={style.link}>
                     <h1 ref={titleRef}>
-                    {name[0].toUpperCase() + name.slice(1)}
+                    {categoryToCall.name[0].toUpperCase() + categoryToCall.name.slice(1)}
                         <span className={style.spanShow}>Explore All</span>
                         <div>
                             <img src={leftArrowIcon} alt="arrow" />
@@ -177,33 +177,33 @@ export default function List ({name, categoryToCall}:Props) {
             <div className={style.list} ref={listRef}>
                 <div className={style.contentList} ref={listContent}>
                     {
-                        beforeItems.length > 0 && beforeItems.map((el:MiniCardInterface, index) => {
+                        beforeItems.length > 0 && beforeItems.map((el:MovieInfoInterface, index) => {
                             return (
-                                <PreviewCard key={el.id} data={el} />
+                                <PreviewCard categoryBelong={categoryToCall.name} key={el.id} data={el} />
                             )
                         })
                     }
                     {
-                        showedItems.length > 0 && showedItems.map((el:MiniCardInterface, index) => {
+                        showedItems.length > 0 && showedItems.map((el:MovieInfoInterface, index) => {
                             if(index === 0)  {
                                 return(
-                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} first />
+                                    <PreviewCard categoryBelong={categoryToCall.name} key={el.id} data={el} modalDiff={modalDiff} first />
                                 )
                             }
                             if(index === showedItems.length - 1) {
                                 return(
-                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} last />
+                                    <PreviewCard categoryBelong={categoryToCall.name} key={el.id} data={el} modalDiff={modalDiff} last />
                                 )
                             }
                             return (
-                                <PreviewCard key={el.id} data={el} modalDiff={modalDiff} />
+                                <PreviewCard categoryBelong={categoryToCall.name} key={el.id} data={el} modalDiff={modalDiff} />
                             )
                         })
                     }
                     {
-                        afterItems.length > 0 && afterItems.map((el:MiniCardInterface, index) => {
+                        afterItems.length > 0 && afterItems.map((el:MovieInfoInterface, index) => {
                             return(
-                                <PreviewCard key={el.id} data={el} />
+                                <PreviewCard categoryBelong={categoryToCall.name} key={el.id} data={el} />
                             )
                         })
                     }
@@ -238,7 +238,7 @@ function miniButtons (cant:number, categoryId:number) {
     const array = []
     for(let i = 0; i < cant; i++) {
         if(i === 0) array.push(<button key={i} className={style.miniButtonSelected}></button>)
-        array.push(<button key={'categoryId' + i} className={style.miniButton}></button>)
+        array.push(<button key={`${categoryId}` + i} className={style.miniButton}></button>)
     }
     return array
 }
