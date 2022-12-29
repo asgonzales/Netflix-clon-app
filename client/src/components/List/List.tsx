@@ -1,45 +1,40 @@
 import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { useEffect, useRef, useState } from 'react';
-import { MiniCardInterface } from '../../config/types';
+import { categoryType, MiniCardInterface } from '../../config/types';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import MiniCard from '../MiniCard/MiniCard';
+// import MiniCard from '../MiniCard/MiniCard';
 import style from './List.module.css';
-import DataDePrueba from './listadePrueba';
+// import DataDePrueba from './listadePrueba';
 import leftArrowIcon from '../../media/listArrow.svg';
 import { Link } from 'react-router-dom'
 import PreviewCard from '../PreviewCard/PreviewCard';
+import { getMoviesByCategory } from '../../redux/movieSlice';
 
 interface Props {
     name:string
-    call:AsyncThunkAction<{name:string, data:any}, void, any>
+    // call:AsyncThunkAction<{name:string, data:any}, void, any>
+    categoryToCall:categoryType
 }
 
 
 
 
-export default function List ({name, call}:Props) {
+export default function List ({name, categoryToCall}:Props) {
     const elements = 6
     const dispatch = useAppDispatch()
     const lista = useAppSelector(state => state.movies.lists[name])
-    // const lista = {
-    //     data: DataDePrueba
-    // }
     const [indice, setIndice] = useState(1)
     const [subLists, setSubLists] = useState(1)
     const listContent = useRef<HTMLDivElement>(null)
     const listRef = useRef<HTMLDivElement>(null)
-    // const buttonLeftRef = useRef<HTMLButtonElement>(null)
     const rigthButtonImageRef = useRef<HTMLImageElement>(null)
     const leftButtonImageRef = useRef<HTMLImageElement>(null)
     const miniButtonsRef = useRef<HTMLDivElement>(null)
-    // const buttonsRef = useRef<HTMLDivElement>(null)
     const [leftButtonHidden, setLeftButtonHidden] = useState(true)
     const [afterItems, setAfterItems] = useState<MiniCardInterface[]>([])
     const [showedItems, setShowedItems] = useState<MiniCardInterface[]>([])
     const [beforeItems, setBeforeItems] = useState<MiniCardInterface[]>([])
-    // const [start, setStart] = useState(0)
     const titleRef = useRef<HTMLHeadingElement>(null)
-    // const listaprueba = DataDePrueba as MiniCardInterface[]
     const [modalDiff, setModalDiff] = useState(false)
     useEffect(() => {
         if(beforeItems.length > 0) {
@@ -49,13 +44,12 @@ export default function List ({name, call}:Props) {
 
     useEffect(() => {
         if(!lista) {
-            dispatch(call)
+            dispatch(getMoviesByCategory(categoryToCall))
         }
         else {
             setShowedItems(lista.data.slice(0, elements))
             setAfterItems(lista.data.slice(elements * indice, elements + (elements * 1)))
             setSubLists((lista.data.length / elements))
-            // console.log(DataDePrueba.slice(7, 13))
         }
     }, [lista?.data.length])
     
@@ -84,7 +78,6 @@ export default function List ({name, call}:Props) {
     }
     const moveRight = () => {
         const space = beforeItems.length === 0 ? ((215 * - afterItems.length) - 24) : (((215 * - afterItems.length * 2) - 48))
-        // const space = ((215 * - afterItems.length * 2) - 24)
         if(listContent.current) {
             listContent.current.ontransitionstart = () => {
                 setTimeout(() => {
@@ -138,7 +131,6 @@ export default function List ({name, call}:Props) {
                 if(indice === 2) {
                     const items = lista.data.slice(-6, -1)
                     items.push(lista.data[lista.data.length - 1])
-                    // setBeforeItems(items)
                     setBeforeItems(items)
                     setIndice(indice - 1)
                 }
@@ -160,15 +152,15 @@ export default function List ({name, call}:Props) {
             }
         }
     }
-    const consologeo = () => {
-        console.log(
-            'Items anteriores', beforeItems,
-            'Items mostrados', showedItems,
-            'Items siguientes', afterItems,
-            'indice', indice,
-            'subLists', subLists
-        )
-    }
+    // const consologeo = () => {
+    //     console.log(
+    //         'Items anteriores', beforeItems,
+    //         'Items mostrados', showedItems,
+    //         'Items siguientes', afterItems,
+    //         'indice', indice,
+    //         'subLists', subLists
+    //     )
+    // }
     return (
         <div className={style.ContList}>
             <div className={`${style.listTitle} listTitle`}>
@@ -187,7 +179,6 @@ export default function List ({name, call}:Props) {
                     {
                         beforeItems.length > 0 && beforeItems.map((el:MiniCardInterface, index) => {
                             return (
-                                // <MiniCard key={index} data={el} />
                                 <PreviewCard key={el.id} data={el} />
                             )
                         })
@@ -196,18 +187,15 @@ export default function List ({name, call}:Props) {
                         showedItems.length > 0 && showedItems.map((el:MiniCardInterface, index) => {
                             if(index === 0)  {
                                 return(
-                                    // <MiniCard key={index} data={el} first={true}/>
-                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} />
+                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} first />
                                 )
                             }
                             if(index === showedItems.length - 1) {
                                 return(
-                                    // <MiniCard key={index} data={el} last={true}/>
-                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} />
+                                    <PreviewCard key={el.id} data={el} modalDiff={modalDiff} last />
                                 )
                             }
                             return (
-                                // <MiniCard key={index} data={el} />
                                 <PreviewCard key={el.id} data={el} modalDiff={modalDiff} />
                             )
                         })
@@ -215,7 +203,6 @@ export default function List ({name, call}:Props) {
                     {
                         afterItems.length > 0 && afterItems.map((el:MiniCardInterface, index) => {
                             return(
-                                // <MiniCard key={index} data={el} />
                                 <PreviewCard key={el.id} data={el} />
                             )
                         })
@@ -229,40 +216,29 @@ export default function List ({name, call}:Props) {
                 >
                     <img ref={leftButtonImageRef} src={leftArrowIcon} alt="arrow" />
                 </button>
-                <button style={{
+                {/* <button style={{
                     position:'absolute',
                     top: 0,
                     left: '50%',
                     zIndex: 5
                 }}
-                onClick={consologeo}>ASD</button>
+                onClick={consologeo}>ASD</button> */}
                 <button className={style.listButtonRight} onClick={moveRight} >
                     <img ref={rigthButtonImageRef} src={leftArrowIcon} alt="arrow" />
                 </button>
             </div>
             <div ref={miniButtonsRef} className={style.miniButtons}>
-                {miniButtons(subLists)}
+                {miniButtons(subLists, categoryToCall.id)}
             </div>
-            {/* <div ref={buttonsRef} className={style.buttons}> */}
-                    {/* <div> */}
-                        {/* <button className={style.listButtons} onClick={() => console.log(
-                            'Items anteriores', beforeItems,
-                            'Items mostrados', showedItems,
-                            'Items siguientes', afterItems,
-                            'indice', indice,
-                            'subLists', subLists
-                        )}>CLICKME</button> */}
-                    {/* </div> */}
-                {/* </div> */}
         </div>
     )
 }
 
-function miniButtons (cant:number) {
+function miniButtons (cant:number, categoryId:number) {
     const array = []
     for(let i = 0; i < cant; i++) {
         if(i === 0) array.push(<button key={i} className={style.miniButtonSelected}></button>)
-        array.push(<button key={i} className={style.miniButton}></button>)
+        array.push(<button key={'categoryId' + i} className={style.miniButton}></button>)
     }
     return array
 }

@@ -21,6 +21,15 @@
     /* z-index: 1; */
     /* border-radius: 5px; */
     /* overflow: hidden; */
+    animation: born 1s ease;
+}
+@keyframes born {
+    0% {
+        filter: opacity(0);
+    }
+    100% {
+        filter: opacity(1);
+    }
 }
 /* medidas:
     normal: 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { getMovieCategories } from '../../redux/movieSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+// import { getMovieCategories } from '../../redux/movieSlice';
+import { useAppSelector } from '../../redux/store';
 import style from './MiniCard.module.css';
 import ReactDOM from 'react-dom';
 import playIcon from '../../media/play.svg';
@@ -10,8 +10,8 @@ import doubleLikeIcon from '../../media/doubleLike.svg';
 import downArrowIcon from '../../media/downArrow.svg';
 // import dotIcon from '../../media/dot.svg';
 
-import imagenPrueba from './pruebaCard.jpg';
-import fondoPrueba from './IMAGENDEPRUEBA.jpg';
+// import imagenPrueba from './pruebaCard.jpg';
+// import fondoPrueba from './IMAGENDEPRUEBA.jpg';
 import { MiniCardInterface } from '../../config/types';
 
 interface Props {
@@ -23,55 +23,29 @@ interface Props {
         left:number
     }
     close:() => void
-    ahora:string
-    // onClick:void
 }
 
 
 
-export default function MiniCard ({ data, first, last, position, close, ahora }:Props) {
-    useEffect(() => {
-        console.log(position)
-    }, [])
-    // const dispatch = useAppDispatch()
-    // const data = useAppSelector(state => state.movies.lists?.popular)
+export default function MiniCard ({ data, first, last, position, close }:Props) {
+
     const categories = useAppSelector(state => state.movies.categories.data)
     const miniCardRef = useRef<HTMLDivElement>(null)
+
     useEffect(() => {
-        // dispatch(getPopularMovies())
-        // dispatch(getMovieCategories())
         if(miniCardRef.current) {
-            miniCardRef.current.onmouseenter = () => {
-                // console.log('asdasd')
-                const titles = document.getElementsByClassName('listTitle')
-                // console.log(titles)
-                for(let i = 0; i < titles.length; i++) {
-                    const element = titles[i] as HTMLDivElement
-                    element.style.zIndex = '0'
-                    // console.log(element)
-                }
-            }
             miniCardRef.current.onmouseleave = () => {
                 setTimeout(() => {
                     close()
                 }, 200)
-                // console.log('asdasdasds')
-                const titles = document.getElementsByClassName('listTitle')
-                // console.log(titles)
-                for(let i = 0; i < titles.length; i++) {
-                    const element = titles[i] as HTMLDivElement
-                    element.style.zIndex = '1'
-                    // console.log(element)
-                }
             }
         }
-        console.log(position.top, position.left)
     }, [])
 
     const generos = data.genres
 
-    const generosletras = generos.map(elmnt => {
-        const find = categories.find(el => el.id === elmnt)
+    const generosletras = generos.map(elment => {
+        const find = categories.find(el => el.id === elment)
         return find?.name
     })
 

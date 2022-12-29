@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getHomeMovie, getPopularMovies } from "../../redux/movieSlice"
 import { useAppDispatch, useAppSelector } from "../../redux/store"
 import style from './Visualizer.module.css';
@@ -7,6 +7,7 @@ import playIcon from '../../media/play.svg';
 import infoIcon from '../../media/info.svg';
 import reloadIcon from '../../media/reload.svg';
 import List from "../List/List";
+import { categoryType } from "../../config/types";
 
 
 
@@ -14,10 +15,20 @@ import List from "../List/List";
 export default function Visualizer () {
     const dispatch = useAppDispatch()
     const movies = useAppSelector(state => state.movies)
+    const categories = useAppSelector(state => state.movies.categories.data)
+    const [listToCall, setListToCall] = useState<categoryType>({
+        id: -5,
+        name: 'none'
+    })
 
     useEffect(() => {
         dispatch(getHomeMovie())
     }, [])
+    useEffect(() => {
+        if(categories.length > 0) {
+            setListToCall(categories[Math.round(Math.random() * (categories.length - 1))])
+        }
+    }, [categories])
 
     return (
         <div className={style.ContVisualizer}>
@@ -65,8 +76,10 @@ export default function Visualizer () {
                     </div>
                 </div>
                 <div className={style.down}>
-                    <List name={'popular'} call={getPopularMovies()} />
-                    {/* <List name={'popular'} call={getPopularMovies()} /> */}
+                    {
+                        listToCall.id !== -5 &&
+                        <List name={listToCall.name} categoryToCall={listToCall} />
+                    }
                 </div>
             </div>
         </div>

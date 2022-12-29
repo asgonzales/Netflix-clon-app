@@ -1,11 +1,13 @@
 .ContPreview {
     width: 213px;
     height: 120px;
-    background-color: white;
+    /* background-color: white; */
     margin: 5px 4px 5px 2px;
     position: relative;
     /* position: absolute; */
     /* margin-left: 4px; */
+    border-radius: 3px;
+    overflow: hidden;
 }
 .ContPreview > img {
     width: 100%;
