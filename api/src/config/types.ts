@@ -12,6 +12,8 @@ export interface RandomMovie {
 }
 
 export type videoResponseType = {
+    id:number
+    name:string
     key:string,
     type:string
 }
@@ -27,4 +29,23 @@ export interface MiniCard {
     // title:string
     date:string
     rate:number
+}
+export interface BigCard {
+    language:string
+    description:string
+    country:string
+    status:string
+    cast: {
+        first: string[]
+        full: string[]
+    }
+    similar:similarMovieInterface[]
+    videos: videoResponseType[]
+}
+export interface similarMovieInterface {
+    id:number
+    image:string
+    title:string
+    date:string
+    description:string
 }

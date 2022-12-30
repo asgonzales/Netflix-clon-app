@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import { Category, MiniCard, PreviewCard, RandomMovie, videoResponseType } from "../config/types";
+import { BigCard, Category, MiniCard, PreviewCard, RandomMovie, similarMovieInterface, videoResponseType } from "../config/types";
 import { smallImageUrl, bigImageUrl, videoUrl } from "../config/config";
 // import config from "../config/config";
 
@@ -202,6 +202,79 @@ export const getMovieMinInfo = async (req:Request, res:Response) => {
         res.status(400).json({
             status:400,
             error:err.message
+        })
+    }
+}
+export const getMovieFullInfo = async (req:Request, res:Response) => {
+    try {
+        const { id } = req.query
+        const generalResponse = await axios({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${id}?language=es-ES`
+        })
+        //Get the cast
+        const castResponse = await axios({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${id}/credits?language=es-ES`
+        })
+        const fullCast:string[] = []
+        for(let i = 0; i < 10; i++) { //flter data
+            fullCast.push(castResponse.data.cast[i].name)
+        }
+        //Get similar movies
+        const similarMoviesResponse = await axios({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US`
+        })
+        const similarMovies:similarMovieInterface[] = []
+        for(let i = 0; i < 15; i++) { //filter data
+            const data:similarMovieInterface = {
+                id: similarMoviesResponse.data.results[i].id,
+                image: similarMoviesResponse.data.results[i].backdrop_path,
+                title: similarMoviesResponse.data.results[i].title,
+                description: similarMoviesResponse.data.results[i].overview,
+                date: similarMoviesResponse.data.results[i].release_date
+            }
+            similarMovies.push(data)
+        }
+        //Get videos of the movie
+        const videosResponse = await axios({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${id}/videos`
+        })
+        let videos:videoResponseType[] = [] //filter data
+        videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer'))
+        videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Teaser'))
+        videos = videos.map(el => {
+            return {
+                id: el.id,
+                name: el.name,
+                type: el.type,
+                key: videoUrl + el.key
+            }
+        })
+        //data => info
+        const movie:BigCard = {
+            language: generalResponse.data.original_language,
+            description: generalResponse.data.overview,
+            country: generalResponse.data.production_countries[0].name,
+            status: generalResponse.data.status,
+            cast: {
+                first: fullCast.slice(0, 5),
+                full: fullCast
+            },
+            similar: similarMovies,
+            videos
+        }
+        //Response
+        res.status(200).json({
+            status: 200,
+            data: movie
+        })
+    } catch (err:any) {
+        res.status(400).json({
+            status: 400,
+            error: err.message
         })
     }
 }
