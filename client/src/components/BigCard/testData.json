@@ -1,0 +1,158 @@
+{
+    "image": "https://image.tmdb.org/t/p/w500/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg",
+    "id": 76600,
+    "title": "Avatar: The Way of Water",
+    "genres": [
+      878,
+      12,
+      28
+    ],
+    "date": "2022-12-14",
+    "rate": 7.776,
+    "language": "en",
+    "description": "Ambientada más de una década después de los acontecimientos de la primera película, 'Avatar: The Way of Water' empieza contando la historia de la familia Sully (Jake, Neytiri y sus hijos), los problemas que los persiguen, lo que tienen que hacer para mantenerse a salvo, las batallas que libran para seguir con vida y las tragedias que sufren.",
+    "country": "United States of America",
+    "status": "Released",
+    "cast": {
+        "first": [
+            "Sam Worthington",
+            "Zoe Saldaña",
+            "Sigourney Weaver",
+            "Britain Dalton",
+            "Stephen Lang"
+        ],
+        "full": [
+            "Sam Worthington",
+            "Zoe Saldaña",
+            "Sigourney Weaver",
+            "Britain Dalton",
+            "Stephen Lang",
+            "Jack Champion",
+            "Cliff Curtis",
+            "Kate Winslet",
+            "Joel David Moore",
+            "CCH Pounder"
+        ]
+    },
+    "similar": [
+        {
+            "id": 24150,
+            "image": "/4UiNo0vUAKLgO9xq1JKYsGQ9avo.jpg",
+            "title": "Halloween II",
+            "description": "Laurie Strode struggles to come to terms with her brother Michael's deadly return to Haddonfield, Illinois. Meanwhile, Michael prepares for another reunion with his sister.",
+            "date": "2009-08-28"
+        },
+        {
+            "id": 28260,
+            "image": "/gsmZfshUTp5n76oZqKxQdwlAZgb.jpg",
+            "title": "Return of the Living Dead III",
+            "description": "Having recently witnessed the horrific results of a top secret project to bring the dead back to life, a distraught teenager performs the operation on his girlfriend after she's killed in a motorcycle accident.",
+            "date": "1993-10-01"
+        },
+        {
+            "id": 25018,
+            "image": "/33CsT3hNMJZZLXgBOeVJNz991Zk.jpg",
+            "title": "Leatherface: The Texas Chainsaw Massacre III",
+            "description": "Two college students driving coast to coast are lured off the main highway and onto a deserted Texas road. Here they are stalked by the menacing Leatherface and his demented family...a bizarre cannibalistic clan with blood on their hands and a feast on their minds. The students’ only chance for escape is a survivalist with enough firepower to blast Leatherface and the rest of the grisly predators to hell. A depraved shocker of intense terror from the gruesome beginning to the bloody finish.",
+            "date": "1990-01-12"
+        },
+        {
+            "id": 27310,
+            "image": "/e7Imdzy2E6ODQZi7Vld8Rpgc7jf.jpg",
+            "title": "The Marine 2",
+            "description": "Rebels seize control of the hotel where a Marine sniper and his wife are staying. Can he save the day?",
+            "date": "2009-12-29"
+        },
+        {
+            "id": 31947,
+            "image": "/naYXUQJ3I9FUVL2as8QToEeMO8e.jpg",
+            "title": "King Kong Lives",
+            "description": "After falling from the Twin Towers, Kong lies in a coma for ten years. When his heart begins to fail, scientists engineer an artificial heart, and a giant female ape is captured to serve as a source for a blood transfusion. When Kong awakens following his heart transplant, he senses the nearby presence of the female ape and the two escape to wreak havoc together.",
+            "date": "1986-12-19"
+        },
+        {
+            "id": 27585,
+            "image": "/kgUhrJSLesy71iDf1x5Ab94HnEv.jpg",
+            "title": "Rabbit Hole",
+            "description": "Life for a happy couple is turned upside down after their young son dies in an accident.",
+            "date": "2010-12-16"
+        },
+        {
+            "id": 33196,
+            "image": "/pMgVSiUBe5tGFlVf0wVJQeelOhL.jpg",
+            "title": "Tidal Wave",
+            "description": "On Haeundae Beach, a guilt-ridden fisherman takes care of a woman whose father accidentally got killed. A scientist reunites with his ex-wife and a daughter who doesn't even remember his face. And a poor rescue worker falls in love with a rich city girl. When they all find out a gigantic tsunami will hit the beach, they realize they only have 10 minutes to escape.",
+            "date": "2009-06-06"
+        },
+        {
+            "id": 39148,
+            "image": "/1R9xxxweS2se0pbcLToYZPXVbtv.jpg",
+            "title": "Dragon Ball: The Path to Power",
+            "description": "A retelling of Dragon Ball's origin with a different take on the meeting of Goku, Bulma, and Kame-Sen'nin. It also retells the Red Ribbon Army story; but this time they find Goku rather than Goku finding them.",
+            "date": "1996-03-04"
+        },
+        {
+            "id": 31646,
+            "image": "/fa7Az2ZWeQTPbZjS5aoEaGIcnvl.jpg",
+            "title": "Piranha II: The Spawning",
+            "description": "A scuba diving instructor, her biochemist boyfriend, and her police chief ex-husband try to link a series of bizarre deaths to a mutant strain of piranha fish whose lair is a sunken freighter ship off a Caribbean island resort.",
+            "date": "1982-08-14"
+        },
+        {
+            "id": 38408,
+            "image": "/4M4LoAKQnW76qmt9aXhbIpO5VMf.jpg",
+            "title": "Life As We Know It",
+            "description": "After a distastrous first date for caterer Holly and network sports director Messer, all they have is common is a dislike for each other and their love for their goddaughter Sophie. But when they suddenly become all Sophie has in this world, Holly and Messer must set their differences aside. Juggling careers and social calendars, they'll have to find common ground while living under the same roof.",
+            "date": "2010-10-02"
+        },
+            {
+            "id": 36912,
+            "image": "/deL3YJtsB1ZrQhXvHiOjPiC9xtx.jpg",
+            "title": "The Sting II",
+            "description": "Hooker and Gondorf pull a con on Macalinski, an especially nasty mob boss with the help of Veronica, a new grifter. They convince this new victim that Hooker is a somewhat dull boxer who is tired of taking dives for Gondorf. There is a ringer. Lonigan, their victim from the first movie, is setting them up to take the fall.",
+            "date": "1983-02-18"
+        },
+        {
+            "id": 38582,
+            "image": "/cVwPmOixrOwUU2m657U82aarG9S.jpg",
+            "title": "Godzilla vs. Mechagodzilla",
+            "description": "An Okinawan prophecy that foretells the destruction of the Earth is seeming fulfilled when Godzilla emerges to return to his destructive roots. But not all is what it seems after Godzilla breaks his ally Anguirus's jaw. Matters are further complicated when a second Godzilla emerges, revealing the doppelgänger as a mechanical weapon.",
+            "date": "1974-03-20"
+        },
+        {
+            "id": 38700,
+            "image": "/4J1Vu6oGzt60fakP4delEPDqEhI.jpg",
+            "title": "Bad Boys for Life",
+            "description": "Marcus and Mike are forced to confront new threats, career changes, and midlife crises as they join the newly created elite team AMMO of the Miami police department to take down the ruthless Armando Armas, the vicious leader of a Miami drug cartel.",
+            "date": "2020-01-15"
+        },
+        {
+            "id": 38322,
+            "image": "/9pamTKugDIa1YQD8k280au3NVKd.jpg",
+            "title": "Big Mommas: Like Father, Like Son",
+            "description": "FBI agent Malcolm Turner and his 17-year-old son, Trent, go undercover at an all-girls performing arts school after Trent witnesses a murder. Posing as Big Momma and Charmaine, they must find the murderer before he finds them.",
+            "date": "2011-02-16"
+        },
+        {
+            "id": 38055,
+            "image": "/waIZRQ9mw497jmN0mAQOS5b4oR3.jpg",
+            "title": "Megamind",
+            "description": "Bumbling supervillain Megamind finally defeats his nemesis, the superhero Metro Man. But without a hero, he loses all purpose and must find new meaning to his life.",
+            "date": "2010-10-28"
+        }
+    ],
+    "videos": [
+        {
+            "id": "637c3a8971083a00e30de792",
+            "name": "New Trailer",
+            "type": "Trailer",
+            "key": "https://www.youtube.com/watch?v=o5F8MOz_IDw"
+        },
+        {
+            "id": "63a3469625a536007f3a9975",
+            "name": "#1 Movie",
+            "type": "Teaser",
+            "key": "https://www.youtube.com/watch?v=qtVobvo7AVo"
+        }
+    ]
+  }

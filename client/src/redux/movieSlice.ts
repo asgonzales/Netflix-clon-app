@@ -97,12 +97,26 @@ export const getMovieInfo = createAsyncThunk(
         try {
             const response = await axios({
                 method: 'GET',
-                url: `http://localhost:3001/api/movies/info?id=${arg.movieId}`
+                url: `${config.urlAPI}/movies/info?id=${arg.movieId}`
             })
             return {
                 categoryName: arg.categoryName,
                 data: response.data
             }
+        } catch (err:any) {
+            return thunkAPI.rejectWithValue(err.message)
+        }
+    }
+)
+export const getMovieFullInfo = createAsyncThunk(
+    'movie/getMovieFullInfo',
+    async (arg:getMovieInfoArgs, thunkAPI) => {
+        try {
+            const response = await axios({
+                method: 'GET',
+                url: `${config.urlAPI}/movies/fullinfo?id=${arg.movieId}`
+            })
+            return response.data.data
         } catch (err:any) {
             return thunkAPI.rejectWithValue(err.message)
         }
@@ -191,6 +205,15 @@ const movieSlice = createSlice({
         })
         //getMovieInfo
         builder.addCase(getMovieInfo.fulfilled, (state, action) => {
+            const position = state.lists[action.payload.categoryName].data.findIndex(el => el.id === action.meta.arg.movieId)
+            const data = action.payload.data
+            state.lists[action.payload.categoryName].data[position] = {
+                ...state.lists[action.payload.categoryName].data[position],
+                ...data.data
+            }
+        })
+        //getMovieFullInfo
+        builder.addCase(getMovieFullInfo.fulfilled, (state, action) => {
             const position = state.lists[action.payload.categoryName].data.findIndex(el => el.id === action.meta.arg.movieId)
             const data = action.payload.data
             state.lists[action.payload.categoryName].data[position] = {

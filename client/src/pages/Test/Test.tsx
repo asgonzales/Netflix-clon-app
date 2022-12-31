@@ -17,9 +17,9 @@ export function Test () {
 
     return(
         <div className={style.ContTest}>
-            <div>
-                <BigCard />
-            </div>
+            {/* <div> */}
+                <BigCard id={76600} categoryBelong={'Ciencia ficción'} />
+            {/* </div> */}
         </div>
     )
 }
