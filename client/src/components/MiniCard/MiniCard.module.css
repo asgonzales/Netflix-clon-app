@@ -157,20 +157,20 @@
     gap: 10px;
 }
 .controls > div {
-    border: 2px solid rgba(255, 255, 255, .5);
-    border-radius: 50px;
-    width: 40px;
-    height: 80%;
+    /* border: 2px solid rgba(255, 255, 255, .5); */
+    /* border-radius: 50px; */
+    width: 45px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255, 255, 255, .07);
+    /* background-color: rgba(255, 255, 255, .07); */
     /* position: absolute; */
     /* filter: opacity(.6); */
 }
-.controls > div:hover {
-    border: 2px solid white;
-}
+/* .controls > div:hover { */
+    /* border: 2px solid white; */
+/* } */
 .controls > div > img {
     /* margin-left: 2px; */
     width: 50%;
@@ -181,9 +181,13 @@
 }
 .controls > div:first-child {
     /* filter: opacity(1); */
+    border-radius: 50%;
+    width: 40px;
     margin-left: 1rem;
     /* background-color: var(--textColor); */
     background-color: white;
+    transition: all .2s ease;
+    border: 2px solid rgba(255, 255, 255, .5);
 }
 .controls > div:first-child > img {
     filter: invert(0);
@@ -198,8 +202,7 @@
 /* .controls > div:nth-child(3):hover {
     border: 1px solid red;
 } */
-.likes {
-    /* border: 1px solid red; */
+/* .likes {
     position: absolute;
     width: 140px;
     height: 55px;
@@ -215,9 +218,8 @@
     transition: all .5s ease;
     background-color: var(--backColor);
     box-shadow: 0 0 15px 1px black;
-}
-.likes > div {
-    /* border: 1px solid green; */
+} */
+/* .likes > div {
     width: 27%;
     height: 65%;
     border-radius: 100px;
@@ -241,7 +243,7 @@
     filter: opacity(1);
     visibility: visible;
     transition-delay: .2s;
-}
+} */
 .controls > div:nth-child(3):hover > .likes{
     filter: opacity(1);
     transform: scale(1);
@@ -254,8 +256,7 @@
     margin-left: auto;
     /* align-self: flex-end; */
 }
-.popup {
-    /* border: 1px solid red; */
+/* .popup {
     position: absolute;
     top: -2.4rem;
     background-color: var(--textColor);
@@ -270,23 +271,19 @@
     filter: opacity(0);
     visibility: hidden;
     transition: all 0.2s ease;
-    /* z-index: 5; */
 }
 .popup > div {
-    /* border: 1px solid red; */
-    /* border-radius: 0 0 2px 0; */
     width: 17px;
     height: 17px;
     position: absolute;
     bottom: -7px;
     transform: rotateZ(45deg);
     background-color: var(--textColor);
-}
+} */
 .controls > div:hover > .popup {
     filter: opacity(1);
     visibility: visible;
     transition-delay: .2s;
-    /* z-index: 20; */
 }
 .firstLine {
     /* border: 1px solid white; */

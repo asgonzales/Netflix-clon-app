@@ -107,22 +107,22 @@
     width: 100%;
 }
 .playButton {
-    /* padding: .9rem 2.8rem; */
+    /* border: 1px solid; */
     height: 60%;
     width: 24%;
-    margin: 10px 0;
-    background-color: transparent;
-    background-color: var(--textColor);
-    border: none;
-    border-radius: 5px;
+    /* margin: 10px 0; */
+    /* background-color: transparent; */
+    /* background-color: var(--textColor); */
+    /* border: none; */
+    /* border-radius: 5px; */
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    font-size: 1.2vw;
-    font-family: 'Noto Sans';
-    font-weight: 600;
+    /* font-size: 1.2vw; */
+    /* font-family: 'Noto Sans'; */
+    /* font-weight: 600; */
 }
-.playButton > img {
+/* .playButton > img {
     width: 20%;
 }
 .playButton:hover {
@@ -133,7 +133,7 @@
     outline: 2px solid white;
     outline-offset: 2px;
     filter: opacity(.8);
-}
+} */
 .infoButton {
     /* padding: .9rem 2.8rem; */
     margin: 10px 0;

@@ -3,11 +3,11 @@ import { getHomeMovie, getPopularMovies } from "../../redux/movieSlice"
 import { useAppDispatch, useAppSelector } from "../../redux/store"
 import style from './Visualizer.module.css';
 import imagendeprueba from './IMAGENDEPRUEBA2.jpg';
-import playIcon from '../../media/play.svg';
 import infoIcon from '../../media/info.svg';
 import reloadIcon from '../../media/reload.svg';
 import List from "../List/List";
 import { categoryType } from "../../config/types";
+import PlayButton from "../Buttons/PlayButton/PlayButton";
 
 
 
@@ -50,10 +50,11 @@ export default function Visualizer () {
                                 <p className={style.texto}>{movies.homeMovie.data?.description}</p>
                             </div>
                             <div className={style.buttons}>
-                                <button className={style.playButton}>
-                                    <img src={playIcon} alt="play Icon" />
-                                    Play
-                                </button>
+                                <div className={style.playButton}>
+                                    {/* <img src={playIcon} alt="play Icon" /> */}
+                                    {/* Play */}
+                                    <PlayButton />  
+                                </div>
                                 <button className={style.infoButton}>
                                     <img src={infoIcon} alt="info icon" />
                                     More Info

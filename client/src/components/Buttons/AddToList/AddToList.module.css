@@ -1,0 +1,23 @@
+.ContAddToList {
+    border: 2px solid rgba(255, 255, 255, .5);
+    /* border: 1px solid green; */
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, .07);
+    position: relative;
+}
+.ContAddToList:hover {
+    border: 2px solid white;
+}
+.ContAddToList > img {
+    /* margin-left: 2px; */
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    filter: invert(1);
+    /* border: 1px solid green; */
+}

@@ -4,16 +4,15 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import style from './MiniCard.module.css';
 import ReactDOM from 'react-dom';
 import playIcon from '../../media/play.svg';
-import plusIcon from '../../media/plus.svg';
-import likeIcon from '../../media/like.svg';
-import doubleLikeIcon from '../../media/doubleLike.svg';
-import downArrowIcon from '../../media/downArrow.svg';
 // import dotIcon from '../../media/dot.svg';
 
 // import imagenPrueba from './pruebaCard.jpg';
 // import fondoPrueba from './IMAGENDEPRUEBA.jpg';
 import { MovieInfoInterface } from '../../config/types';
 import { getMovieInfo } from '../../redux/movieSlice';
+import LikeButton from '../Buttons/Like/Like';
+import AddToList from '../Buttons/AddToList/AddToList';
+import MoreInfo from '../Buttons/MoreInfo/MoreInfo';
 
 interface Props {
     categoryBelong:string
@@ -84,49 +83,13 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
                             <img src={playIcon} alt="play" />
                         </div>
                         <div>
-                            <img src={plusIcon} alt="Plus" />
-                            <div className={style.popup}>
-                                <span>Add to My List</span>
-                                <div className={style.popupArrow}>
-                                </div>
-                            </div>
+                            <AddToList />
                         </div>
                         <div>
-                            <img src={likeIcon} alt="Like" />
-                            <div className={style.likes}>
-                                <div>
-                                    <img src={likeIcon} alt="dislke" />
-                                    <div className={style.popup}>
-                                        <span>Not for me</span>
-                                        <div className={style.popupArrow}>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src={likeIcon} alt="like" />
-                                    <div className={style.popup}>
-                                        <span>I like this</span>
-                                        <div className={style.popupArrow}>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src={doubleLikeIcon} alt="love" />
-                                    <div className={style.popup}>
-                                        <span>Love this!</span>
-                                        <div className={style.popupArrow}>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <LikeButton />
                         </div>
                         <div>
-                            <img src={downArrowIcon} alt="More" />
-                            <div className={style.popup}>
-                                <span>More info</span>
-                                <div className={style.popupArrow}>
-                                </div>
-                            </div>
+                            <MoreInfo />
                         </div>
                     </div>
                     <div className={style.firstLine}>
