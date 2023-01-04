@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MovieInfoInterface, SimilarCardInterface } from '../../config/types';
+import { MovieInfoInterface, SimilarCardInterface, TrailerCardInterface } from '../../config/types';
 import { getMovieFullInfo } from '../../redux/movieSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import style from './BigCard.module.css';
@@ -11,6 +11,7 @@ import LikeButton from '../Buttons/Like/Like';
 import arrowIcon from '../../media/listArrow.svg';
 import PopUp from '../Buttons/PopUp/PopUp';
 import SimilarCard from '../SimilarCard/SimilarCard';
+import TrailerCard from '../TrailerCard/TrailerCard';
 
 interface BigCardProps {
     categoryBelong?:string
@@ -112,7 +113,7 @@ export default function BigCard ({categoryBelong, id, previewData}:BigCardProps)
                 <div className={style.infoDiv}>
                     <div className={style.infoLeft}>
                         <div className={style.infoStats}>
-                            <span>{movieInfo.rate}</span>
+                            <span>{+movieInfo.rate.toFixed(0) * 10}% Match</span>
                             <span>{movieInfo.date}</span>
                             <span>{movieInfo.language}</span>
                             <span ref={countryRef} >
@@ -142,20 +143,32 @@ export default function BigCard ({categoryBelong, id, previewData}:BigCardProps)
                 </div>
                 <div className={style.similarDiv}>
                     <h2>More Like This</h2>
-                        <div ref={similarDivRef}>
-                            {
-                                movieInfo.similar.map((el:SimilarCardInterface) => {
-                                    return(
-                                        <SimilarCard data={el} />
-                                    )
-                                })
-                            }
-                            <div ref={shadowDivRef} className={style.moreShadow}>
-                            </div>
+                    <div ref={similarDivRef}>
+                        {
+                            movieInfo.similar.map((el:SimilarCardInterface) => {
+                                return(
+                                    <SimilarCard data={el} />
+                                )
+                            })
+                        }
+                        <div ref={shadowDivRef} className={style.moreShadow}>
                         </div>
+                    </div>
                     <button ref={moreButtonRef} className={style.moreButton} onClick={similarDivHandle}>
-                        <img src={arrowIcon} alt="" />
+                        <img src={arrowIcon} alt="arrow" />
                     </button>
+                </div>
+                <div className={style.trailersDiv}>
+                    <h2>{'Trailer & More'}</h2>
+                    <div>
+                        {
+                            movieInfo.videos.map((el:TrailerCardInterface) => {
+                                return(
+                                    <TrailerCard data={el} title={movieInfo.title} />
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </div>

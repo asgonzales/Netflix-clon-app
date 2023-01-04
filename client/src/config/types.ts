@@ -66,3 +66,9 @@ export interface SimilarCardInterface {
     description:string
     date:string
 }
+export interface TrailerCardInterface {
+    id:string
+    name:string
+    type:string
+    key:string
+}

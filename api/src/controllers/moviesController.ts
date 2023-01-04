@@ -51,7 +51,7 @@ export const getRandomMovie = async (_:Request, res:Response) => {
             title: selectedMovie.title,
             description: selectedMovie.overview,
             image: bigImageUrl + selectedMovie.backdrop_path,
-            video: videoUrl
+            video: ''
         }
         
         //Obtener video de la pelicula seleccionada
@@ -60,7 +60,7 @@ export const getRandomMovie = async (_:Request, res:Response) => {
             url: `https://api.themoviedb.org/3/movie/${finalMovie.id}/videos`
         })
         if (videoResponse.data.results.length > 0) {
-            finalMovie.video = finalMovie.video + videoResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer').key
+            finalMovie.video = videoResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer').key
         }
         else {
             finalMovie.video = 'false'
@@ -251,7 +251,7 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
                 id: el.id,
                 name: el.name,
                 type: el.type,
-                key: videoUrl + el.key
+                key: el.key
             }
         })
         //data => info

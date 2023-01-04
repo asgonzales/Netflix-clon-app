@@ -151,13 +151,13 @@
             "id": "637c3a8971083a00e30de792",
             "name": "New Trailer",
             "type": "Trailer",
-            "key": "https://www.youtube.com/watch?v=o5F8MOz_IDw"
+            "key": "o5F8MOz_IDw"
         },
         {
             "id": "63a3469625a536007f3a9975",
             "name": "#1 Movie",
             "type": "Teaser",
-            "key": "https://www.youtube.com/watch?v=qtVobvo7AVo"
+            "key": "qtVobvo7AVo"
         }
     ]
   }

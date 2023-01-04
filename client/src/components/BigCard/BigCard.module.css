@@ -25,6 +25,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 50px;
     /* justify-content: flex-start; */
 }
 .imageDiv {
@@ -187,13 +188,14 @@
 }
 .infoRight > div {
     border: 1px solid red;
-    width: 100%;
+    width: calc(100% - .5rem - 50px);
     font-family: 'Noto Sans';
     font-weight: 300;
     color: var(--textColor);
     font-size: .9rem;
     text-align: left;
     margin-left: .5rem;
+    margin-right: 50px;
 }
 .infoRight > div:first-of-type {
     margin-top: 20px;
@@ -281,3 +283,25 @@
 /* .similarDiv > div > div:first-child {
     margin-left: 50px;
 } */
+.trailersDiv {
+    width: 100%;
+    max-height: 600px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.trailersDiv > h2 {
+    align-self: flex-start;
+    font-family: 'Noto Sans';
+    color: var(--textColor);
+    margin-left: 50px;
+}
+.trailersDiv > div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 15px;
+    width: calc(100% - 100px);
+    margin: 0 50px
+}
