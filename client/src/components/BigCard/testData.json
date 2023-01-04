@@ -1,4 +1,5 @@
 {
+    "imgHD": "https://image.tmdb.org/t/p/original/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg",
     "image": "https://image.tmdb.org/t/p/w500/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg",
     "id": 76600,
     "title": "Avatar: The Way of Water",
@@ -11,9 +12,13 @@
     "rate": 7.776,
     "language": "en",
     "description": "Ambientada más de una década después de los acontecimientos de la primera película, 'Avatar: The Way of Water' empieza contando la historia de la familia Sully (Jake, Neytiri y sus hijos), los problemas que los persiguen, lo que tienen que hacer para mantenerse a salvo, las batallas que libran para seguir con vida y las tragedias que sufren.",
-    "country": "United States of America",
+    "country": {
+        "name": "United States of America",
+        "iso": "US"
+        },
     "status": "Released",
     "cast": {
+        "director": "James Cameron",
         "first": [
             "Sam Worthington",
             "Zoe Saldaña",
@@ -36,109 +41,109 @@
     },
     "similar": [
         {
-            "id": 24150,
-            "image": "/4UiNo0vUAKLgO9xq1JKYsGQ9avo.jpg",
-            "title": "Halloween II",
-            "description": "Laurie Strode struggles to come to terms with her brother Michael's deadly return to Haddonfield, Illinois. Meanwhile, Michael prepares for another reunion with his sister.",
-            "date": "2009-08-28"
+            "id": 290859,
+            "image": "https://image.tmdb.org/t/p/w500/a6cDxdwaQIFjSkXf7uskg78ZyTq.jpg",
+            "title": "Terminator: Dark Fate",
+            "description": "Decades after Sarah Connor prevented Judgment Day, a lethal new Terminator is sent to eliminate the future leader of the resistance. In a fight to save mankind, battle-hardened Sarah Connor teams up with an unexpected ally and an enhanced super soldier to stop the deadliest Terminator yet.",
+            "date": "2019-10-23"
         },
         {
-            "id": 28260,
-            "image": "/gsmZfshUTp5n76oZqKxQdwlAZgb.jpg",
-            "title": "Return of the Living Dead III",
-            "description": "Having recently witnessed the horrific results of a top secret project to bring the dead back to life, a distraught teenager performs the operation on his girlfriend after she's killed in a motorcycle accident.",
-            "date": "1993-10-01"
+            "id": 302349,
+            "image": "https://image.tmdb.org/t/p/w500/kEY6RjklHdwJfg5Wxnu20aAc618.jpg",
+            "title": "Iron Sky: The Coming Race",
+            "description": "Twenty Nine years after the events of Iron Sky, the former Nazi Moonbase has become the last refuge of mankind. Earth was devastated by a nuclear war, but buried deep under the wasteland lies a power that could save the last of humanity - or destroy it once and for all. An old enemy leads our heroes on an adventure into the Hollow Earth. To save humanity, they must fight the Vril, an ancient shapeshifting reptilian race and their army of dinosaurs.",
+            "date": "2019-01-25"
         },
         {
-            "id": 25018,
-            "image": "/33CsT3hNMJZZLXgBOeVJNz991Zk.jpg",
-            "title": "Leatherface: The Texas Chainsaw Massacre III",
-            "description": "Two college students driving coast to coast are lured off the main highway and onto a deserted Texas road. Here they are stalked by the menacing Leatherface and his demented family...a bizarre cannibalistic clan with blood on their hands and a feast on their minds. The students’ only chance for escape is a survivalist with enough firepower to blast Leatherface and the rest of the grisly predators to hell. A depraved shocker of intense terror from the gruesome beginning to the bloody finish.",
-            "date": "1990-01-12"
+            "id": 324852,
+            "image": "https://image.tmdb.org/t/p/w500/ftRkFtAGuHngHnLiOxktq0aCVMF.jpg",
+            "title": "Despicable Me 3",
+            "description": "Gru and his wife Lucy must stop former '80s child star Balthazar Bratt from achieving world domination.",
+            "date": "2017-06-15"
         },
         {
-            "id": 27310,
-            "image": "/e7Imdzy2E6ODQZi7Vld8Rpgc7jf.jpg",
-            "title": "The Marine 2",
-            "description": "Rebels seize control of the hotel where a Marine sniper and his wife are staying. Can he save the day?",
-            "date": "2009-12-29"
+            "id": 331446,
+            "image": "https://image.tmdb.org/t/p/w500/wz9GW2xNzbpfjr3Tc5rKdGuPD49.jpg",
+            "title": "Sharknado 3: Oh Hell No!",
+            "description": "The sharks take bite out of the East Coast when the sharknado hits Washington, D.C. and Orlando, Florida.",
+            "date": "2015-07-22"
         },
         {
-            "id": 31947,
-            "image": "/naYXUQJ3I9FUVL2as8QToEeMO8e.jpg",
-            "title": "King Kong Lives",
-            "description": "After falling from the Twin Towers, Kong lies in a coma for ten years. When his heart begins to fail, scientists engineer an artificial heart, and a giant female ape is captured to serve as a source for a blood transfusion. When Kong awakens following his heart transplant, he senses the nearby presence of the female ape and the two escape to wreak havoc together.",
-            "date": "1986-12-19"
+            "id": 299534,
+            "image": "https://image.tmdb.org/t/p/w500/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+            "title": "Avengers: Endgame",
+            "description": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store.",
+            "date": "2019-04-24"
         },
         {
-            "id": 27585,
-            "image": "/kgUhrJSLesy71iDf1x5Ab94HnEv.jpg",
-            "title": "Rabbit Hole",
-            "description": "Life for a happy couple is turned upside down after their young son dies in an accident.",
-            "date": "2010-12-16"
+            "id": 298250,
+            "image": "https://image.tmdb.org/t/p/w500/gnqSZVyZyZggPeCevB0fUAkIHa.jpg",
+            "title": "Jigsaw",
+            "description": "Dead bodies begin to turn up all over the city, each meeting their demise in a variety of grisly ways. All investigations begin to point the finger at deceased killer John Kramer.",
+            "date": "2017-10-26"
         },
         {
-            "id": 33196,
-            "image": "/pMgVSiUBe5tGFlVf0wVJQeelOhL.jpg",
-            "title": "Tidal Wave",
-            "description": "On Haeundae Beach, a guilt-ridden fisherman takes care of a woman whose father accidentally got killed. A scientist reunites with his ex-wife and a daughter who doesn't even remember his face. And a poor rescue worker falls in love with a rich city girl. When they all find out a gigantic tsunami will hit the beach, they realize they only have 10 minutes to escape.",
-            "date": "2009-06-06"
+            "id": 345887,
+            "image": "https://image.tmdb.org/t/p/w500/z7noaCJ4KtmhwHw7QcNtnMMo4Qy.jpg",
+            "title": "The Equalizer 2",
+            "description": "Robert McCall, who serves an unflinching justice for the exploited and oppressed, embarks on a relentless, globe-trotting quest for vengeance when a long-time girl friend is murdered.",
+            "date": "2018-07-19"
         },
         {
-            "id": 39148,
-            "image": "/1R9xxxweS2se0pbcLToYZPXVbtv.jpg",
-            "title": "Dragon Ball: The Path to Power",
-            "description": "A retelling of Dragon Ball's origin with a different take on the meeting of Goku, Bulma, and Kame-Sen'nin. It also retells the Red Ribbon Army story; but this time they find Goku rather than Goku finding them.",
-            "date": "1996-03-04"
+            "id": 323675,
+            "image": "https://image.tmdb.org/t/p/w500/cnunxkfoeEgOGoYPsvGxIBrzf2F.jpg",
+            "title": "Ride Along 2",
+            "description": "As his wedding day approaches, Ben heads to Miami with his soon-to-be brother-in-law James to bring down a drug dealer who's supplying the dealers of Atlanta with product.",
+            "date": "2016-01-14"
         },
         {
-            "id": 31646,
-            "image": "/fa7Az2ZWeQTPbZjS5aoEaGIcnvl.jpg",
-            "title": "Piranha II: The Spawning",
-            "description": "A scuba diving instructor, her biochemist boyfriend, and her police chief ex-husband try to link a series of bizarre deaths to a mutant strain of piranha fish whose lair is a sunken freighter ship off a Caribbean island resort.",
-            "date": "1982-08-14"
+            "id": 308531,
+            "image": "https://image.tmdb.org/t/p/w500/41objfan7PDTBG5MFXQl4ownQzJ.jpg",
+            "title": "Teenage Mutant Ninja Turtles: Out of the Shadows",
+            "description": "After supervillain Shredder escapes custody, he joins forces with mad scientist Baxter Stockman and two dimwitted henchmen, Bebop and Rocksteady, to unleash a diabolical plan to take over the world. As the Turtles prepare to take on Shredder and his new crew, they find themselves facing an even greater evil with similar intentions: the notorious Krang.",
+            "date": "2016-06-01"
         },
         {
-            "id": 38408,
-            "image": "/4M4LoAKQnW76qmt9aXhbIpO5VMf.jpg",
-            "title": "Life As We Know It",
-            "description": "After a distastrous first date for caterer Holly and network sports director Messer, all they have is common is a dislike for each other and their love for their goddaughter Sophie. But when they suddenly become all Sophie has in this world, Holly and Messer must set their differences aside. Juggling careers and social calendars, they'll have to find common ground while living under the same roof.",
-            "date": "2010-10-02"
-        },
-            {
-            "id": 36912,
-            "image": "/deL3YJtsB1ZrQhXvHiOjPiC9xtx.jpg",
-            "title": "The Sting II",
-            "description": "Hooker and Gondorf pull a con on Macalinski, an especially nasty mob boss with the help of Veronica, a new grifter. They convince this new victim that Hooker is a somewhat dull boxer who is tired of taking dives for Gondorf. There is a ringer. Lonigan, their victim from the first movie, is setting them up to take the fall.",
-            "date": "1983-02-18"
+            "id": 344041,
+            "image": "https://image.tmdb.org/t/p/w500/lIH9Fho3q3xK44ztlHbD28YE3Vz.jpg",
+            "title": "Standoff",
+            "description": "A troubled veteran gets a chance at redemption by protecting a girl from an assassin after she witnesses a murder. Holding a shotgun with a single shell, he engages in physical and psychological warfare in a desperate fight for the girl's life.",
+            "date": "2016-01-04"
         },
         {
-            "id": 38582,
-            "image": "/cVwPmOixrOwUU2m657U82aarG9S.jpg",
-            "title": "Godzilla vs. Mechagodzilla",
-            "description": "An Okinawan prophecy that foretells the destruction of the Earth is seeming fulfilled when Godzilla emerges to return to his destructive roots. But not all is what it seems after Godzilla breaks his ally Anguirus's jaw. Matters are further complicated when a second Godzilla emerges, revealing the doppelgänger as a mechanical weapon.",
-            "date": "1974-03-20"
+            "id": 287948,
+            "image": "https://image.tmdb.org/t/p/w500/mFK2bOh8uGGEtoAL24abyTq3Woc.jpg",
+            "title": "The Transporter Refueled",
+            "description": "The fast-paced action movie is again set in the criminal underworld in France, where Frank Martin is known as The Transporter, because he is the best driver and mercenary money can buy. In this installment, he meets Anna and they attempt to take down a group of ruthless Russian human traffickers who also have kidnapped Frank’s father.",
+            "date": "2015-09-02"
         },
         {
-            "id": 38700,
-            "image": "/4J1Vu6oGzt60fakP4delEPDqEhI.jpg",
-            "title": "Bad Boys for Life",
-            "description": "Marcus and Mike are forced to confront new threats, career changes, and midlife crises as they join the newly created elite team AMMO of the Miami police department to take down the ruthless Armando Armas, the vicious leader of a Miami drug cartel.",
-            "date": "2020-01-15"
+            "id": 336843,
+            "image": "https://image.tmdb.org/t/p/w500/zgcL0xaHxXVvrV1Fu1ZSKoTk0MH.jpg",
+            "title": "Maze Runner: The Death Cure",
+            "description": "Thomas leads his group of escaped Gladers on their final and most dangerous mission yet. To save their friends, they must break into the legendary Last City, a WCKD-controlled labyrinth that may turn out to be the deadliest maze of all. Anyone who makes it out alive will get answers to the questions the Gladers have been asking since they first arrived in the maze.",
+            "date": "2018-01-10"
         },
         {
-            "id": 38322,
-            "image": "/9pamTKugDIa1YQD8k280au3NVKd.jpg",
-            "title": "Big Mommas: Like Father, Like Son",
-            "description": "FBI agent Malcolm Turner and his 17-year-old son, Trent, go undercover at an all-girls performing arts school after Trent witnesses a murder. Posing as Big Momma and Charmaine, they must find the murderer before he finds them.",
-            "date": "2011-02-16"
+            "id": 268896,
+            "image": "https://image.tmdb.org/t/p/w500/oMaj75G2WFw66xI1TREg1hrToSg.jpg",
+            "title": "Pacific Rim: Uprising",
+            "description": "It has been ten years since The Battle of the Breach and the oceans are still, but restless. Vindicated by the victory at the Breach, the Jaeger program has evolved into the most powerful global defense force in human history. The PPDC now calls upon the best and brightest to rise up and become the next generation of heroes when the Kaiju threat returns.",
+            "date": "2018-03-21"
         },
         {
-            "id": 38055,
-            "image": "/waIZRQ9mw497jmN0mAQOS5b4oR3.jpg",
-            "title": "Megamind",
-            "description": "Bumbling supervillain Megamind finally defeats his nemesis, the superhero Metro Man. But without a hero, he loses all purpose and must find new meaning to his life.",
-            "date": "2010-10-28"
+            "id": 296099,
+            "image": "https://image.tmdb.org/t/p/w500/w0JzcX0UO2CUgQnO2kt2qtRQSMP.jpg",
+            "title": "Vacation",
+            "description": "Hoping to bring his family closer together and to recreate his childhood vacation for his own kids, a grown up Rusty Griswold takes his wife and their two sons on a cross-country road trip to the coolest theme park in America, Walley World. Needless to say, things don't go quite as planned.",
+            "date": "2015-07-28"
+        },
+        {
+            "id": 288158,
+            "image": "https://image.tmdb.org/t/p/w500/4qd3DjdLHetJMR7wKA9ufK6eG9j.jpg",
+            "title": "The Woman in Black 2: Angel of Death",
+            "description": "40 years after the first haunting at Eel Marsh House, a group of children evacuated from WWII London arrive, awakening the house's darkest inhabitant.",
+            "date": "2014-12-30"
         }
     ],
     "videos": [

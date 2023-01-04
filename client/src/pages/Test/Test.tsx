@@ -19,11 +19,11 @@ export function Test () {
 
     return(
         <div className={style.ContTest}>
-            <div>
+            {/* <div> */}
                 <BigCard id={76600} categoryBelong={'Ciencia ficción'} />
                 {/* <LikeButton /> */}
                 {/* <AddToList /> */}
-            </div>
+            {/* </div> */}
         </div>
     )
 }

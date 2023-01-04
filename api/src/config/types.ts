@@ -31,13 +31,18 @@ export interface MiniCard {
     rate:number
 }
 export interface BigCard {
+    imgHD:string
     language:string
     description:string
-    country:string
+    country: {
+        name:string
+        iso:string
+    }
     status:string
     cast: {
         first: string[]
         full: string[]
+        director:string
     }
     similar:similarMovieInterface[]
     videos: videoResponseType[]

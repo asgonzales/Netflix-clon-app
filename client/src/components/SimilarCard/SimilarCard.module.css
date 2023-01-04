@@ -1,0 +1,95 @@
+.ContSimilarCard {
+    /* border: 1px solid red; */
+    height: 350px;
+    width: 240px;
+    border-radius: 5px;
+    /* overflow: hidden; */
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    cursor: pointer;
+}
+/* .ContSimilarCard > div { */
+    /* border: 1px solid green; */
+/* } */
+.imageDiv {
+    width: 100%;
+    height: 38%;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    position: relative;
+}
+.imageDiv > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.imageDiv:hover > div {
+    filter: opacity(1);
+}
+.imageDiv > div {
+    /* border: 1px solid white; */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    filter: opacity(0);
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease;
+}
+.imageDiv > div > div {
+    width: 45px;
+    height: 45px;
+}
+.detailDiv {
+    background-color: #2e2e2f;
+    width: 100%;
+    height: 62%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+}
+.up {
+    /* border: 1px solid white; */
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.up > span {
+    margin-left: 15px;
+    align-self: flex-end;
+    font-family: 'Noto Sans';
+    color: var(--textColor);
+}
+.up > div {
+    /* border: 1px solid red; */
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+}
+.description {
+    /* border: 1px solid white; */
+    height: 70%;
+    margin: 0 15px 15px 15px;
+    font-size: .8rem;
+    font-family: 'Noto Sans';
+    color: var(--textColor);
+    overflow: hidden;
+    text-align: left;
+    /* white-space: nowrap; */
+    position: relative;
+}
+.description > div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /* border: 1px solid white; */
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, #2e2e2f, transparent, transparent)
+}

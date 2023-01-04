@@ -217,6 +217,7 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
             method: 'GET',
             url: `https://api.themoviedb.org/3/movie/${id}/credits?language=es-ES`
         })
+        const director = castResponse.data.crew?.find((el:any) => el.job === 'Director')?.name || null
         const fullCast:string[] = []
         for(let i = 0; i < 10; i++) { //flter data
             fullCast.push(castResponse.data.cast[i].name)
@@ -230,7 +231,7 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
         for(let i = 0; i < 15; i++) { //filter data
             const data:similarMovieInterface = {
                 id: similarMoviesResponse.data.results[i].id,
-                image: similarMoviesResponse.data.results[i].backdrop_path,
+                image: smallImageUrl + similarMoviesResponse.data.results[i].backdrop_path,
                 title: similarMoviesResponse.data.results[i].title,
                 description: similarMoviesResponse.data.results[i].overview,
                 date: similarMoviesResponse.data.results[i].release_date
@@ -255,11 +256,16 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
         })
         //data => info
         const movie:BigCard = {
+            imgHD: bigImageUrl + generalResponse.data.backdrop_path,
             language: generalResponse.data.original_language,
             description: generalResponse.data.overview,
-            country: generalResponse.data.production_countries[0].name,
+            country: {
+                name: generalResponse.data.production_countries[0].name,
+                iso: Object.values(generalResponse.data.production_countries[0])[0] as string
+            },
             status: generalResponse.data.status,
             cast: {
+                director,
                 first: fullCast.slice(0, 5),
                 full: fullCast
             },

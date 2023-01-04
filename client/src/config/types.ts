@@ -59,3 +59,10 @@ export interface getMovieInfoArgs {
     categoryName:string
     movieId:number
 }
+export interface SimilarCardInterface {
+    id:number
+    image:string
+    title:string
+    description:string
+    date:string
+}
