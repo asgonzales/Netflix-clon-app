@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import axios from "axios";
 import { BigCard, Category, MiniCard, PreviewCard, RandomMovie, similarMovieInterface, videoResponseType } from "../config/types";
-import { smallImageUrl, bigImageUrl, videoUrl } from "../config/config";
+import { smallImageUrl, bigImageUrl } from "../config/config";
 // import config from "../config/config";
 
 
@@ -206,8 +206,9 @@ export const getMovieMinInfo = async (req:Request, res:Response) => {
     }
 }
 export const getMovieFullInfo = async (req:Request, res:Response) => {
-    try {
         const { id } = req.query
+        console.log(id)
+    try {
         const generalResponse = await axios({
             method: 'GET',
             url: `https://api.themoviedb.org/3/movie/${id}?language=es-ES`
@@ -278,6 +279,7 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
             data: movie
         })
     } catch (err:any) {
+        console.log('ERROR API', err.message)
         res.status(400).json({
             status: 400,
             error: err.message

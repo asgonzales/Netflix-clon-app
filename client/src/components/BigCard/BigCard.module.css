@@ -1,25 +1,30 @@
 .ContBigCard {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100vh;
     position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     /* justify-content: center; */
     overflow-y: scroll;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, .5);
 }
 .bigCardContent {
+    background-color: var(--backColor);
     /* top: 20px; */
-    border: 1px solid green;
+    /* border: 1px solid green; */
     border-radius: 10px;
     overflow: hidden;
     position: absolute;
     top: 30px;
     min-height: 500px;
-    width: 60%;
+    width: 62%;
     /* padding: 1rem; */
     min-width: 670px;
     display: flex;
@@ -29,7 +34,7 @@
     /* justify-content: flex-start; */
 }
 .imageDiv {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     height: 480px;
     position: relative;
@@ -52,7 +57,7 @@
     align-items: center;
 }
 .movieControls {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     width: 50%;
     height: 100%;
     /* top: 0; */
@@ -95,7 +100,7 @@
     width: 28%;
 }
 .cardControls {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     /* position: absolute; */
     /* right: 0; */
     width: 50%;
@@ -115,6 +120,10 @@
     align-items: center;
     justify-content: center;
     filter: opacity(.9);
+    cursor:pointer;
+}
+.closeButton:active {
+    outline: 3px solid white;
 }
 .closeButton > img {
     width: 80%;
@@ -124,8 +133,9 @@
     transform: rotateZ(45deg);
 }
 .infoDiv {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     width: 100%;
+    
     /* height: 200px; */
     height: 220px;
     display: flex;
@@ -133,7 +143,7 @@
     justify-content: center;
 }
 .infoLeft {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 65%;
     height: 100%;
     display: flex;
@@ -141,7 +151,7 @@
     align-items: center;
 }
 .infoRight {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 35%;
     height: 100%;
     display: flex;
@@ -153,7 +163,7 @@
 .infoStats {
     width: 100%;
     height: 30%;
-    border:  1px solid green;
+    /* border:  1px solid green; */
     color: var(--textColor);
     font-family: 'Noto Sans';
     display: flex;
@@ -176,7 +186,7 @@
 .description{
     width: 100%;
     height: 70%;
-    border:  1px solid green;
+    /* border:  1px solid green; */
     color: var(--textColor);
     text-align: left;
     font-family: 'Noto Sans';
@@ -187,7 +197,7 @@
     margin-right: 10px;
 }
 .infoRight > div {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: calc(100% - .5rem - 50px);
     font-family: 'Noto Sans';
     font-weight: 300;
@@ -304,4 +314,32 @@
     gap: 15px;
     width: calc(100% - 100px);
     margin: 0 50px
+}
+.aboutDiv {
+    /* border: 1px solid red; */
+    width: calc(100% - 100px);
+    margin: 0 50px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    font-family: 'Noto Sans';
+    color: var(--textColor);
+    font-size: .9rem;
+}
+.aboutDiv > div {
+    width: 100%;
+    /* border: 1px solid white; */
+    /* text-align: left; */
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+}
+.aboutDiv > div > span {
+    width: 100%;
+    /* border: 1px solid green; */
+    text-align: left;
+}
+.aboutDiv > div > span > span:first-child {
+    color: rgba(255, 255, 255, .5);
 }

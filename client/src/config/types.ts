@@ -39,7 +39,21 @@ export interface MovieInfoInterface {
     genres?:number[]
     date?:string
     rate?:number
-
+    imgHD?:string
+    language?:string
+    description?:string
+    country?: {
+        name:string
+        iso:string
+    }
+    status?:string
+    cast?: {
+        director:string
+        first:string[]
+        full:string[]
+    }
+    similar?:SimilarCardInterface[]
+    videos?:TrailerCardInterface[]
 }
 export interface CardList {
     name:string

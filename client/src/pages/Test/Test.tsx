@@ -20,7 +20,7 @@ export function Test () {
     return(
         <div className={style.ContTest}>
             {/* <div> */}
-                <BigCard id={76600} categoryBelong={'Ciencia ficción'} />
+                {/* <BigCard  categoryBelong={'Ciencia ficción'} /> */}
                 {/* <LikeButton /> */}
                 {/* <AddToList /> */}
             {/* </div> */}

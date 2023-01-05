@@ -1,6 +1,6 @@
 .ContTrailerCard {
     /* border: 1px solid red; */
-    height: 200px;
+    height: 240px;
     width: 240px;
 }
 /* .ContTrailerCard > div { */
@@ -8,11 +8,13 @@
 /* } */
 .videoDiv {
     width: 100%;
-    height: 70%;
+    height: 57%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
     /* pointer-events: none; */
 }
 .video {
@@ -51,4 +53,8 @@
     height: 30%;
     font-family: 'Noto Sans';
     color: var(--textColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
 }

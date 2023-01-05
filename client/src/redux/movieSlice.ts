@@ -116,7 +116,10 @@ export const getMovieFullInfo = createAsyncThunk(
                 method: 'GET',
                 url: `${config.urlAPI}/movies/fullinfo?id=${arg.movieId}`
             })
-            return response.data.data
+            return {
+                categoryName: arg.categoryName,
+                data: response.data.data
+            }
         } catch (err:any) {
             return thunkAPI.rejectWithValue(err.message)
         }
@@ -214,12 +217,16 @@ const movieSlice = createSlice({
         })
         //getMovieFullInfo
         builder.addCase(getMovieFullInfo.fulfilled, (state, action) => {
+            console.log('redux', action.payload.categoryName)
             const position = state.lists[action.payload.categoryName].data.findIndex(el => el.id === action.meta.arg.movieId)
             const data = action.payload.data
             state.lists[action.payload.categoryName].data[position] = {
                 ...state.lists[action.payload.categoryName].data[position],
-                ...data.data
+                ...data
             }
+        })
+        builder.addCase(getMovieFullInfo.rejected, (state, action) => {
+            console.log(action.error)
         })
     },
 })

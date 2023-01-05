@@ -13,6 +13,7 @@ import { getMovieInfo } from '../../redux/movieSlice';
 import LikeButton from '../Buttons/Like/Like';
 import AddToList from '../Buttons/AddToList/AddToList';
 import MoreInfo from '../Buttons/MoreInfo/MoreInfo';
+import BigCard from '../BigCard/BigCard';
 
 interface Props {
     categoryBelong:string
@@ -29,11 +30,12 @@ interface Props {
 
 
 export default function MiniCard ({ categoryBelong, previewData, first, last, position, close }:Props) {
-
+    // let pepe = false
     const dispatch = useAppDispatch()
     const categories = useAppSelector(state => state.movies.categories.data)
     const minicardInfo = useAppSelector(state => state.movies.lists[categoryBelong].data.find(el => el.id === previewData.id))
     const miniCardRef = useRef<HTMLDivElement>(null)
+    const [bigCardModal, setBigCardModal] = useState(false)
 
     useEffect(() => {
         dispatch(getMovieInfo({
@@ -41,15 +43,19 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
             movieId: previewData.id
         }))
     }, [])
+
     useEffect(() => {
         if(miniCardRef.current) {
             miniCardRef.current.onmouseleave = () => {
-                setTimeout(() => {
-                    close()
-                }, 200)
+                const children = document.getElementById('bigCardModals')
+                if( children && children.children.length == 0) {
+                    setTimeout(() => {
+                        close()
+                    }, 300)
+                }
             }
         }
-    }, [])
+    }, [bigCardModal])
 
     const [categoriesBelong, setCategoriesBelong] = useState<string[]>([])
     
@@ -67,11 +73,17 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
         }
     }, [minicardInfo?.date])
 
+    const openBigCard = () => {
+        setBigCardModal(true)
+    }
+    const closeBigCard = () => {
+        setBigCardModal(false)
+    }
     return ReactDOM.createPortal(
         <div ref={miniCardRef} className={style.ContMiniCard} style={{
             top: position.top,
             left: position.left
-        }}>
+        }} >
             <div className={`${style.Card}  ${first ? style.first : last ? style.last : ''}`}>
                 <div className={style.imagen}>
                     <h1>{minicardInfo?.title}</h1>
@@ -88,7 +100,7 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
                         <div>
                             <LikeButton />
                         </div>
-                        <div>
+                        <div onClick={openBigCard}>
                             <MoreInfo />
                         </div>
                     </div>
@@ -120,6 +132,9 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
                     </div>
                 </div>
             </div>
+            {
+                bigCardModal && <BigCard categoryBelong={categoryBelong} previewData={previewData} close={closeBigCard} closeParent={close}/>
+            }
         </div>
     , document.getElementById('modals')!)
 }
