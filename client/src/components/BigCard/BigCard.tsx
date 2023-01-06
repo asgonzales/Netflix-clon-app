@@ -45,6 +45,10 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
                 setCountryPopUp(false)
             }
         }
+        document.body.style.overflowY = 'hidden'
+        return function out () {
+            document.body.style.overflowY = 'scroll'
+        }
     }, [])
     const similarDivHandle = () => {
         setSimilarDivController(!similarDivController)
