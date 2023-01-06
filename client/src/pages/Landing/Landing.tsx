@@ -10,113 +10,24 @@ import { Link } from 'react-router-dom';
 
 
 export default function Landing () {
-    const [inputFocus, setInputFocus] = useState(false)
-    const labelRef = useRef<HTMLLabelElement>(null)
-    const inputRef = useRef<HTMLInputElement>(null)
-    const errorRef = useRef<HTMLDivElement>(null)
-    const errorSpanRef = useRef<HTMLSpanElement>(null)
-    const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const [email, setEmail] = useState('')
 
     document.title = 'MovieApp'
-    const inputOnFocus = () => setInputFocus(true)
-    const inputOnBlur = () => {
-        if(inputRef.current) {
-            setInputFocus(inputRef.current.value !== '' ? true : false)
-        }
-    }
-
-    useEffect(() => {
-        if( inputFocus) {
-            // console.log('asdasd')
-            if(labelRef.current) {
-                labelRef.current.className = style.labelWritten
-            }
-        }
-        else {
-            if(labelRef.current) {
-                labelRef.current.className = style.label
-            }
-        }
-    }, [inputFocus])
-
-    const inputHandler = (e:ChangeEvent<HTMLInputElement>) => {
-        if(e.target.value !== '' || inputFocus) {
-            if(labelRef.current) {
-                labelRef.current.className = style.labelWritten
-            }
-        }
-        else {
-            if(labelRef.current) {
-                labelRef.current.className = style.label
-            }
-        }
-        if(e.target.value.length < 5 || !emailRE.test(e.target.value)) {
-            if(errorRef.current) {
-                errorRef.current.className = style.errorFound
-            }
-            if(errorSpanRef.current) {
-                errorSpanRef.current.hidden = false
-                if(e.target.value.length < 5) {
-                    errorSpanRef.current.innerText = 'El email es obligatorio.'
-                }
-                else {
-                    errorSpanRef.current.innerText = 'Escribe una dirección de email válida.'
-                }
-            }
-        }
-        else {
-            if(errorRef.current) {
-                errorRef.current.className = ''
-            }
-            if(errorSpanRef.current) {
-                errorSpanRef.current.hidden = true
-            }
-            setEmail(e.target.value)
-        }
-    }
-
-    const submitHandler = (e:FormEvent) => {
-        e.preventDefault()
-        if(email !== '') {
-            console.log(email)
-        }
-    }   
-
+    
     const expandQuestion = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const expandendDivs = document.getElementsByClassName(style.expanded)
-        // console.log('uno', pepe[0].className)
         const div = e.target as HTMLDivElement
         const actual = div.parentElement?.children[1].className
-        // div.className = style.pepe
-        // console.log('PRE CAMBIO', div.parentElement?.children[1].className)
         for(let i = 0; i < expandendDivs.length; i++) {
             expandendDivs[i].className = style.expand
-            // console.log('asdasda', pepe[1])
         }
-        // console.log('POST CAMBIO', div.parentElement?.children[1].className)
         if(div.parentElement) {
-            // console.log(div.parentElement)
-            // console.log(div.parentElement.children)
             if(actual == style.expand) {
                 div.parentElement.children[1].className = style.expanded
-                // console.log('cambio a expanded', div.parentElement.children[1].className)
             }
             else {
                     div.parentElement.children[1].className = style.expand
-                    // console.log('cambio a expand', div.parentElement.children[1].className)
             }
-            // if(div.parentElement.children[1].className == style.expanded) {
-                
-            // }
-            // console.log(div.parentElement.children[1].className)
-            // console.log(div.parentElement.children[1].className)
         }
-        // console.log('CLASE', div.className)
-        // if(div.className == style.expanded) {
-        //     div.className = style.expand
-        // }
-        // conole.log(div.parentElement?.children[1]?.className)
     }
 
     return (
@@ -142,25 +53,7 @@ export default function Landing () {
                     <h1>Películas y series ilimitadas y mucho más</h1>
                     <h4>Disfruta donde quieras. Cancela cuando quieras.</h4>
                     <p>¿Quieres ver MovieApp ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de MovieApp.</p>
-                    <form onSubmit={e => submitHandler(e)} className={style.suscriptionForm}>
-                        <div className={style.inputsDiv}>
-                            <div ref={errorRef}>
-                                <input ref={inputRef} className={style.input} type="text" onChange={e => inputHandler(e)} onFocus={inputOnFocus} onBlur={inputOnBlur} />
-                                <label ref={labelRef} className={style.label} >Email</label>
-                            </div>
-                            <div>
-                                <button type='submit'>
-                                    <Link className={style.startLink} to='/browse'>
-                                        <span>Comenzar</span>
-                                        <img src={arrowIcon} alt="arrow" />
-                                    </Link>
-                                </button>
-                            </div>
-                        </div>
-                        <div className={style.errorDiv}>
-                            <span ref={errorSpanRef} hidden>El email es obligatorio.</span>
-                        </div>
-                    </form>
+                    <InputBox />
                 </div>
             </div>
             <div className={style.cards}>
@@ -288,25 +181,7 @@ export default function Landing () {
                 </div>
                 <div className={style.registerBottom}>
                     <p>¿Quieres ver MovieApp ya? Ingresa tu email para crear una cuenta o reiniciar tu membresía de MovieApp.</p>
-                    <form onSubmit={e => submitHandler(e)} className={style.suscriptionForm}>
-                        <div className={style.inputsDiv}>
-                            <div ref={errorRef}>
-                                <input ref={inputRef} className={style.input} type="text" onChange={e => inputHandler(e)} onFocus={inputOnFocus} onBlur={inputOnBlur} />
-                                <label ref={labelRef} className={style.label} >Email</label>
-                            </div>
-                            <div>
-                                <button type='submit'>
-                                    <Link className={style.startLink} to='/browse'>
-                                        <span>Comenzar</span>
-                                        <img src={arrowIcon} alt="arrow" />
-                                    </Link>
-                                </button>
-                            </div>
-                        </div>
-                        <div className={style.errorDiv}>
-                            <span ref={errorSpanRef} hidden>El email es obligatorio.</span>
-                        </div>
-                    </form>
+                    <InputBox />
                 </div>
             </div>
             <div className={style.footerDiv}>
@@ -352,5 +227,101 @@ export default function Landing () {
                 </div>
             </div>
         </div>
+    )
+}
+function InputBox () {
+    const labelRef = useRef<HTMLLabelElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
+    const errorRef = useRef<HTMLDivElement>(null)
+    const errorSpanRef = useRef<HTMLSpanElement>(null)
+    const emailRE = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const [email, setEmail] = useState('')
+    const [inputFocus, setInputFocus] = useState(false)
+
+    const inputOnFocus = () => setInputFocus(true)
+
+    const inputOnBlur = () => {
+        if(inputRef.current) {
+            setInputFocus(inputRef.current.value !== '' ? true : false)
+        }
+    }
+
+    useEffect(() => {
+        if( inputFocus) {
+            // console.log('asdasd')
+            if(labelRef.current) {
+                labelRef.current.className = style.labelWritten
+            }
+        }
+        else {
+            if(labelRef.current) {
+                labelRef.current.className = style.label
+            }
+        }
+    }, [inputFocus])
+
+    const submitHandler = (e:FormEvent) => {
+        e.preventDefault()
+        if(email !== '') {
+            console.log(email)
+        }
+    }   
+
+    const inputHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        if(e.target.value !== '' || inputFocus) {
+            if(labelRef.current) {
+                labelRef.current.className = style.labelWritten
+            }
+        }
+        else {
+            if(labelRef.current) {
+                labelRef.current.className = style.label
+            }
+        }
+        if(e.target.value.length < 5 || !emailRE.test(e.target.value)) {
+            if(errorRef.current) {
+                errorRef.current.className = style.errorFound
+            }
+            if(errorSpanRef.current) {
+                errorSpanRef.current.hidden = false
+                if(e.target.value.length < 5) {
+                    errorSpanRef.current.innerText = 'El email es obligatorio.'
+                }
+                else {
+                    errorSpanRef.current.innerText = 'Escribe una dirección de email válida.'
+                }
+            }
+        }
+        else {
+            if(errorRef.current) {
+                errorRef.current.className = ''
+            }
+            if(errorSpanRef.current) {
+                errorSpanRef.current.hidden = true
+            }
+            setEmail(e.target.value)
+        }
+    }
+
+    return(
+        <form onSubmit={e => submitHandler(e)} className={style.suscriptionForm}>
+            <div className={style.inputsDiv}>
+                <div ref={errorRef}>
+                    <input ref={inputRef} className={style.input} type="text" onChange={e => inputHandler(e)} onFocus={inputOnFocus} onBlur={inputOnBlur} />
+                    <label ref={labelRef} className={style.label} >Email</label>
+                </div>
+                <div>
+                    <button type='submit'>
+                        <Link className={style.startLink} to='/browse'>
+                            <span>Comenzar</span>
+                            <img src={arrowIcon} alt="arrow" />
+                        </Link>
+                    </button>
+                </div>
+            </div>
+            <div className={style.errorDiv}>
+                <span ref={errorSpanRef} hidden>El email es obligatorio.</span>
+            </div>
+        </form>
     )
 }
