@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { MovieInfoInterface } from '../../config/types';
 import style from './PreviewCard.module.css';
 import MiniCard from '../MiniCard/MiniCard';
-
+import defaultImage from '../../media/defaultImage.jpg';
 
 interface Props {
     categoryBelong:string
@@ -91,7 +91,7 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
 
     return(
         <div ref={previewCardRef} className={style.ContPreview}>
-            <img src={data.image} alt={data.title} />
+            <img src={data.image.includes('null') ? defaultImage : data.image} alt={data.title} />
             {
                 openPortal && <MiniCard categoryBelong={categoryBelong} previewData={data} position={ {top: offsets.top, left: offsets.left + diff}} close={closePortal} first={first} last={last}/>
             }

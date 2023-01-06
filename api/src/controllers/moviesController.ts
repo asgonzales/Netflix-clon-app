@@ -265,14 +265,22 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
             videos = []
         }
         //data => info
+        const country = {
+            name: '',
+            iso: ''
+        }
+        if(generalResponse.data.production_countries.length > 0) {
+            const countryName = generalResponse.data.production_countries[0]?.name
+            const countryIso = generalResponse.data.production_countries && Object.values(generalResponse.data.production_countries) && Object.values(generalResponse.data.production_countries[0])[0] as string
+            if(countryName.length > 0) country.name = countryName
+            if(countryIso.length > 0) country.iso = countryIso
+        }
+
         const movie:BigCard = {
             imgHD: bigImageUrl + generalResponse.data.backdrop_path,
             language: generalResponse.data.original_language,
             description: generalResponse.data.overview,
-            country: {
-                name: generalResponse.data.production_countries[0].name,
-                iso: Object.values(generalResponse.data.production_countries[0])[0] as string
-            },
+            country,
             status: generalResponse.data.status,
             cast: {
                 director,

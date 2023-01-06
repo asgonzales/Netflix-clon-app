@@ -13,6 +13,7 @@ import PopUp from '../Buttons/PopUp/PopUp';
 import SimilarCard from '../SimilarCard/SimilarCard';
 import TrailerCard from '../TrailerCard/TrailerCard';
 import ReactDOM from 'react-dom';
+import defaultImage from '../../media/defaultImage.jpg';
 
 interface BigCardProps {
     categoryBelong:string
@@ -120,7 +121,7 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
             {/* <button onClick={() => console.log(movieInfo)}>presioname prro</button> */}
             <div className={style.bigCardContent}>
                 <div className={style.imageDiv}>
-                    <img src={movieInfo?.imgHD} alt={movieInfo?.title} />
+                    <img src={movieInfo?.imgHD?.includes('null') ? defaultImage : movieInfo?.imgHD} alt={movieInfo?.title} />
                     <div className={style.shadow}>
                         <div className={style.movieControls}>
                             <h2>{movieInfo?.title}</h2>

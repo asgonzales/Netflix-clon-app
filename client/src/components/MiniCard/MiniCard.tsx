@@ -14,7 +14,7 @@ import LikeButton from '../Buttons/Like/Like';
 import AddToList from '../Buttons/AddToList/AddToList';
 import MoreInfo from '../Buttons/MoreInfo/MoreInfo';
 import BigCard from '../BigCard/BigCard';
-
+import defaultImage from '../../media/defaultImage.jpg'
 interface Props {
     categoryBelong:string
     previewData:MovieInfoInterface
@@ -31,6 +31,7 @@ interface Props {
 
 export default function MiniCard ({ categoryBelong, previewData, first, last, position, close }:Props) {
     // let pepe = false
+    
     const dispatch = useAppDispatch()
     const categories = useAppSelector(state => state.movies.categories.data)
     const minicardInfo = useAppSelector(state => state.movies.lists[categoryBelong].data.find(el => el.id === previewData.id))
@@ -87,7 +88,7 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
             <div className={`${style.Card}  ${first ? style.first : last ? style.last : ''}`}>
                 <div className={style.imagen}>
                     <h1>{minicardInfo?.title}</h1>
-                    <img src={minicardInfo?.image} alt="cover" />
+                    <img src={minicardInfo?.image.includes('null')? defaultImage : minicardInfo?.image} alt="cover" />
                 </div>
                 <div className={style.texto}>
                     <div className={style.controls}>
