@@ -220,7 +220,8 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
         })
         const director = castResponse.data.crew?.find((el:any) => el.job === 'Director')?.name || null
         const fullCast:string[] = []
-        for(let i = 0; i < 10; i++) { //flter data
+        const maxCast = castResponse.data.cast.length > 10 ? 10 : castResponse.data.cast.length
+        for(let i = 0; i < maxCast ; i++) { //flter data
             fullCast.push(castResponse.data.cast[i].name)
         }
         //Get similar movies
@@ -240,21 +241,29 @@ export const getMovieFullInfo = async (req:Request, res:Response) => {
             similarMovies.push(data)
         }
         //Get videos of the movie
-        const videosResponse = await axios({
-            method: 'GET',
-            url: `https://api.themoviedb.org/3/movie/${id}/videos`
-        })
         let videos:videoResponseType[] = [] //filter data
-        videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer'))
-        videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Teaser'))
-        videos = videos.map(el => {
-            return {
-                id: el.id,
-                name: el.name,
-                type: el.type,
-                key: el.key
-            }
-        })
+        try {
+            const videosResponse = await axios({
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${id}/videos`
+            })
+            let video = videosResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer')
+            if(video) videos.push(video)
+            video = videosResponse.data.results.find((el:videoResponseType) => el.type === 'Teaser')
+            if(video) videos.push(video)
+            // videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer'))
+            // videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Teaser'))
+            videos = videos.map(el => {
+                return {
+                    id: el.id,
+                    name: el.name,
+                    type: el.type,
+                    key: el.key
+                }
+            })
+        } catch (err) {
+            videos = []
+        }
         //data => info
         const movie:BigCard = {
             imgHD: bigImageUrl + generalResponse.data.backdrop_path,
