@@ -15,6 +15,7 @@
     filter: opacity(0);
     visibility: hidden;
     transition: all 0.2s ease;
+    z-index: 10;
 }
 .ContPopUp > div {
     /* border: 1px solid red; */

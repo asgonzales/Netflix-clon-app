@@ -182,18 +182,21 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
                         <img src={arrowIcon} alt="arrow" />
                     </button>
                 </div>
-                <div className={style.trailersDiv}>
-                    <h2>{'Trailer & More'}</h2>
-                    <div>
-                        {
-                            movieInfo?.videos?.map((el:TrailerCardInterface) => {
-                                return(
-                                    <TrailerCard data={el} title={movieInfo?.title} />
-                                )
-                            })
-                        }
+                {
+                    movieInfo && movieInfo.videos && movieInfo?.videos?.length > 0 &&
+                    <div className={style.trailersDiv}>
+                        <h2>{'Trailer & More'}</h2>
+                        <div>
+                            {
+                                movieInfo?.videos?.map((el:TrailerCardInterface) => {
+                                    return(
+                                        <TrailerCard data={el} title={movieInfo?.title} />
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
+                }
                 <div className={style.aboutDiv}>
                     <h2>About {movieInfo?.title}</h2>
                     <div>
