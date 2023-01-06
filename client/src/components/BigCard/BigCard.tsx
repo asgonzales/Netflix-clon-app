@@ -36,6 +36,7 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
     const shadowDivRef = useRef<HTMLDivElement>(null)
     const moreButtonRef = useRef<HTMLButtonElement>(null)
     const [similarDivController, setSimilarDivController] = useState(false)
+    const cardContent = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if(countryRef.current) {
             countryRef.current.onmouseenter = () => {
@@ -109,9 +110,13 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
         close()
         closeParent()
     }
+    const seeMore = () => {
+        if(cardContent.current)
+        cardContent.current.scrollTo(0, cardContent.current.scrollHeight)
+    }
 
     return ReactDOM.createPortal(
-        <div className={style.ContBigCard}>
+        <div ref={cardContent} className={style.ContBigCard}>
             {/* <button onClick={() => console.log(movieInfo)}>presioname prro</button> */}
             <div className={style.bigCardContent}>
                 <div className={style.imageDiv}>
@@ -157,7 +162,7 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
                     <div className={style.infoRight}>
                         <div>
                             <span>Cast: </span>
-                            <span>{movieInfo?.cast?.first.join(', ')}, more</span>
+                            <span>{movieInfo?.cast?.first.join(', ')}, <span onClick={seeMore}>more</span></span>
                         </div>
                         <div>
                             <span>Genres: </span>

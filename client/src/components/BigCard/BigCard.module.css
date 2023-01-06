@@ -14,6 +14,7 @@
     overflow-y: scroll;
     z-index: 10;
     background-color: rgba(0, 0, 0, .5);
+    scroll-behavior: smooth;
 }
 .bigCardContent {
     background-color: var(--backColor);
@@ -159,6 +160,10 @@
     align-items: center;
     align-items: flex-start;
     gap: 20px
+}
+.infoRight > div > span > span:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 .infoStats {
     width: 100%;
