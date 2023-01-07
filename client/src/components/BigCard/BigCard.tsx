@@ -14,6 +14,7 @@ import SimilarCard from '../SimilarCard/SimilarCard';
 import TrailerCard from '../TrailerCard/TrailerCard';
 import ReactDOM from 'react-dom';
 import defaultImage from '../../media/defaultImage.jpg';
+import YouTube from 'react-youtube';
 
 interface BigCardProps {
     categoryBelong:string
@@ -38,6 +39,8 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
     const moreButtonRef = useRef<HTMLButtonElement>(null)
     const [similarDivController, setSimilarDivController] = useState(false)
     const cardContent = useRef<HTMLDivElement>(null)
+    const [videoShow, setVideoShow] = useState(false)
+
     useEffect(() => {
         if(countryRef.current) {
             countryRef.current.onmouseenter = () => {
@@ -116,12 +119,37 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
         cardContent.current.scrollTo(0, cardContent.current.scrollHeight)
     }
 
+    //Video Handle
+    const opts = {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          showinfo: 0,
+          modestbranding: 1,
+          frameborder: 0
+        },
+      };
+    const showVideo = () => {
+        setTimeout(() => {
+            setVideoShow(true)
+        }, 4000)
+    }
+    const hideVideo = () => {
+        setVideoShow(false)
+    }
+
     return ReactDOM.createPortal(
         <div ref={cardContent} className={style.ContBigCard}>
             {/* <button onClick={() => console.log(movieInfo)}>presioname prro</button> */}
             <div className={style.bigCardContent}>
                 <div className={style.imageDiv}>
-                    <img src={movieInfo?.imgHD?.includes('null') ? defaultImage : movieInfo?.imgHD} alt={movieInfo?.title} />
+                    <img src={movieInfo?.imgHD ? (movieInfo?.imgHD?.includes('null') ? defaultImage : movieInfo?.imgHD) : movieInfo?.image} alt={movieInfo?.title} />
+                    {
+                        movieInfo?.video &&
+                        <YouTube onReady={showVideo} onEnd={hideVideo} opts={opts} videoId={movieInfo?.video} className={ videoShow ? style.video : style.videoHidden} />
+                    }
                     <div className={style.shadow}>
                         <div className={style.movieControls}>
                             <h2>{movieInfo?.title}</h2>

@@ -83,6 +83,12 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
         previewCardRef.current.onmouseenter = () => {
             setOpenPortal(true)
         }
+        previewCardRef.current.onmouseleave = () => {
+            const children = document.getElementById('miniCardModal')
+                if( children && children.children.length == 0) {
+                    setOpenPortal(false)
+                }
+        }
     }
 
     const closePortal = () => {

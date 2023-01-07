@@ -29,6 +29,7 @@ export interface MiniCard {
     // title:string
     date:string
     rate:number
+    video:string
 }
 export interface BigCard {
     imgHD:string

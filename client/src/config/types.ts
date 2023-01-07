@@ -36,6 +36,7 @@ export interface MovieInfoInterface {
     id:number
     title:string
     image:string
+    video:string
     genres?:number[]
     date?:string
     rate?:number

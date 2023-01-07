@@ -19,7 +19,8 @@ for (let i = 0; i < 42; i++) {
         id:57,
         title: `${i + 1}`,
         date:'10-05-20000',
-        rate:7
+        rate:7,
+        video: ''
     })
 }
 export default listaDePrueba

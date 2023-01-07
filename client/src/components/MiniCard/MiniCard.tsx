@@ -15,6 +15,7 @@ import AddToList from '../Buttons/AddToList/AddToList';
 import MoreInfo from '../Buttons/MoreInfo/MoreInfo';
 import BigCard from '../BigCard/BigCard';
 import defaultImage from '../../media/defaultImage.jpg'
+import YouTube from 'react-youtube';
 interface Props {
     categoryBelong:string
     previewData:MovieInfoInterface
@@ -37,6 +38,7 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
     const minicardInfo = useAppSelector(state => state.movies.lists[categoryBelong].data.find(el => el.id === previewData.id))
     const miniCardRef = useRef<HTMLDivElement>(null)
     const [bigCardModal, setBigCardModal] = useState(false)
+    const [videoShow, setVideoShow] = useState(false)
 
     useEffect(() => {
         dispatch(getMovieInfo({
@@ -56,7 +58,7 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
                 }
             }
         }
-    }, [bigCardModal])
+    }, [])
 
     const [categoriesBelong, setCategoriesBelong] = useState<string[]>([])
     
@@ -80,8 +82,29 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
     const closeBigCard = () => {
         setBigCardModal(false)
     }
+
+    //Video Handle
+    const opts = {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          showinfo: 0,
+          modestbranding: 1,
+          frameborder: 0
+        },
+      };
+    const showVideo = () => {
+        setTimeout(() => {
+            setVideoShow(true)
+        }, 4000)
+    }
+    const hideVideo = () => {
+        setVideoShow(false)
+    }
     return ReactDOM.createPortal(
-        <div ref={miniCardRef} className={style.ContMiniCard} style={{
+        <div id='miniCardModal' ref={miniCardRef} className={style.ContMiniCard} style={{
             top: position.top,
             left: position.left
         }} >
@@ -89,6 +112,10 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
                 <div className={style.imagen}>
                     <h1>{minicardInfo?.title}</h1>
                     <img src={minicardInfo?.image.includes('null')? defaultImage : minicardInfo?.image} alt="cover" />
+                    {
+                        minicardInfo?.video && !bigCardModal &&
+                        <YouTube onReady={showVideo} onEnd={hideVideo} opts={opts} videoId={minicardInfo.video} className={ videoShow ? style.video : style.videoHidden} />
+                    }
                 </div>
                 <div className={style.texto}>
                     <div className={style.controls}>

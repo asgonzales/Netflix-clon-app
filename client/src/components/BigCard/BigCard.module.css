@@ -47,6 +47,48 @@
     object-fit: cover;
     position: relative;
 }
+.video {
+    /* background-color: red; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s ease;
+    /* z-index: 0; */
+    /* filter: opacity(1); */
+    pointer-events: none;
+    transition: all 1s ease;
+    animation: bornVideo 1s linear;
+    background-color: black;
+}
+.videoHidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* z-index: 0; */
+    filter: opacity(0);
+    transition: all 1s ease;
+    /* animation: bornVideo 2s linear; */
+}
+@keyframes bornVideo {
+    0% {
+        filter: opacity(0)
+    }
+    100% {
+        filter: opacity(1);
+    }
+}
 .shadow {
     position:absolute;
     top: 0;

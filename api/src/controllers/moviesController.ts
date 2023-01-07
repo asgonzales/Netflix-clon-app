@@ -187,11 +187,38 @@ export const getMovieMinInfo = async (req:Request, res:Response) => {
             url: `https://api.themoviedb.org/3/movie/${id}?language=es-ES`
         })
 
+        //Get videos of the movie
+        let video = '' 
+        try {
+            const videosResponse = await axios({
+                method: 'GET',
+                url: `https://api.themoviedb.org/3/movie/${id}/videos`
+            })
+            let videoObject = videosResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer')
+            if(videoObject) video = videoObject.key
+            if(video === '') {
+                videoObject = videosResponse.data.results.find((el:videoResponseType) => el.type === 'Teaser')
+                if(videoObject) video = videoObject.key
+            }
+            // videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Trailer'))
+            // videos.push(videosResponse.data.results.find((el:videoResponseType) => el.type === 'Teaser'))
+            // videos = videos.map(el => {
+            //     return {
+            //         id: el.id,
+            //         name: el.name,
+            //         type: el.type,
+            //         key: el.key
+            //     }
+            // })
+        } catch (err) {
+            video = ''
+        }
         const movie:MiniCard = {
             // id:response.data.id,
             genres: response.data.genres.map((el:Category) => el.id),
             date: response.data.release_date,
-            rate: response.data.vote_average
+            rate: response.data.vote_average,
+            video
         }
 
         res.status(200).json({
