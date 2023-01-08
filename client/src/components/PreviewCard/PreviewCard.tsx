@@ -54,6 +54,9 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
 
     const previewCardRef = useRef<HTMLDivElement>(null)
 
+    const miniCardRef = useRef<HTMLDivElement>(null)
+    const [isFocus, setIsFocus] = useState(true)
+
     
     const acumulativeOffset = (element:HTMLDivElement) => { //Acumulador de posiciones relativas
         let top = 0, left = 0;
@@ -81,25 +84,38 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
     //Apertura del modal
     if(previewCardRef.current) { 
         previewCardRef.current.onmouseenter = () => {
-            setOpenPortal(true)
+            console.log('ENTRO AL PREVIEW')
+            // setTimeout(() => {
+                // if(isFocus) {
+                setOpenPortal(true)
+                // }
+            // }, 500)
         }
-        previewCardRef.current.onmouseleave = () => {
-            const children = document.getElementById('miniCardModal')
-                if( children && children.children.length == 0) {
-                    setOpenPortal(false)
-                }
-        }
+        // previewCardRef.current.onmouseleave = () => {
+            // const children = document.getElementById('miniCardModal')
+                // if( children && children.children.length == 0) {
+                    // console.log(openPortal)
+                    // if(!openPortal) {
+                    //     console.log('ENTRO EN SALIDA DE PREVIEW')
+                        // setOpenPortal(false)
+
+                    // } 
+                // }
+        // }
     }
+    // useEffect(() => {
+    //     console.log('FOCUS', isFocus)
+    // }, [isFocus])
 
     const closePortal = () => {
         setOpenPortal(false)
     }
-
     return(
-        <div ref={previewCardRef} className={style.ContPreview}>
+        <div ref={previewCardRef} className={style.ContPreview} >
             <img src={data.image.includes('null') ? defaultImage : data.image} alt={data.title} />
             {
-                openPortal && <MiniCard categoryBelong={categoryBelong} previewData={data} position={ {top: offsets.top, left: offsets.left + diff}} close={closePortal} first={first} last={last}/>
+                openPortal && 
+                <MiniCard ref={miniCardRef} categoryBelong={categoryBelong} previewData={data} position={ {top: offsets.top, left: offsets.left + diff}} close={closePortal} first={first} last={last}/>
             }
         </div>
     )
