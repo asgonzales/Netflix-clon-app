@@ -26,7 +26,7 @@ interface Props {
         left:number
     }
     close:() => void
-    ref:React.RefObject<HTMLDivElement>
+    // ref:React.RefObject<HTMLDivElement>
 }
 
 
@@ -166,7 +166,7 @@ export default function MiniCard ({ categoryBelong, previewData, first, last, po
                     <img src={minicardInfo?.image.includes('null')? defaultImage : minicardInfo?.image} alt="cover" />
                     {
                         minicardInfo?.video && !bigCardModal &&
-                        <YouTube onReady={showVideo} onEnd={hideVideo} opts={opts} videoId={minicardInfo.video} className={ videoShow ? style.video : style.videoHidden} />
+                        <YouTube onPlay={showVideo} onEnd={hideVideo} opts={opts} videoId={minicardInfo.video} className={ videoShow ? style.video : style.videoHidden} />
                     }
                 </div>
                 <div ref={textoRef} className={style.texto}>

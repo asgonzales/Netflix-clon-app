@@ -148,7 +148,7 @@ export default function BigCard ({categoryBelong, previewData, close, closeParen
                     <img src={movieInfo?.imgHD ? (movieInfo?.imgHD?.includes('null') ? defaultImage : movieInfo?.imgHD) : movieInfo?.image} alt={movieInfo?.title} />
                     {
                         movieInfo?.video &&
-                        <YouTube onReady={showVideo} onEnd={hideVideo} opts={opts} videoId={movieInfo?.video} className={ videoShow ? style.video : style.videoHidden} />
+                        <YouTube onPlay={showVideo} onEnd={hideVideo} opts={opts} videoId={movieInfo?.video} className={ videoShow ? style.video : style.videoHidden} />
                     }
                     <div className={style.shadow}>
                         <div className={style.movieControls}>

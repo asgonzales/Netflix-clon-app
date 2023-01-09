@@ -54,7 +54,7 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
 
     const previewCardRef = useRef<HTMLDivElement>(null)
 
-    const miniCardRef = useRef<HTMLDivElement>(null)
+    // const miniCardRef = useRef<HTMLDivElement>(null)
     const [isFocus, setIsFocus] = useState(true)
 
     
@@ -115,7 +115,7 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
             <img src={data.image.includes('null') ? defaultImage : data.image} alt={data.title} />
             {
                 openPortal && 
-                <MiniCard ref={miniCardRef} categoryBelong={categoryBelong} previewData={data} position={ {top: offsets.top, left: offsets.left + diff}} close={closePortal} first={first} last={last}/>
+                <MiniCard categoryBelong={categoryBelong} previewData={data} position={ {top: offsets.top, left: offsets.left + diff}} close={closePortal} first={first} last={last}/>
             }
         </div>
     )
