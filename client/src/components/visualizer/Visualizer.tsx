@@ -8,6 +8,7 @@ import reloadIcon from '../../media/reload.svg';
 import List from "../List/List";
 import { categoryType } from "../../config/types";
 import PlayButton from "../Buttons/PlayButton/PlayButton";
+import YouTube from "react-youtube";
 
 
 
@@ -16,6 +17,7 @@ export default function Visualizer () {
     const dispatch = useAppDispatch()
     const movies = useAppSelector(state => state.movies)
     const categories = useAppSelector(state => state.movies.categories.data)
+    const [videoShow, setVideoShow] = useState(false)
     const [listToCall, setListToCall] = useState<categoryType>({
         id: -5,
         name: 'none'
@@ -30,11 +32,32 @@ export default function Visualizer () {
         }
     }, [categories])
 
+    //Video Handle
+    const opts = {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+        autoplay: 1,
+        controls: 0,
+        showinfo: 0,
+        modestbranding: 1,
+        frameborder: 0
+        },
+    };
+    const showVideo = () => {
+        setTimeout(() => {
+            setVideoShow(true)
+        }, 4000)
+    }
+    const hideVideo = () => {
+        setVideoShow(false)
+    }
     return (
         <div className={style.ContVisualizer}>
             <div className={style.imgCont}>
                 {/* <img src={imagendeprueba} alt="background movie" /> */}
                 <img src={movies.homeMovie.data?.image} alt="background movie" />
+                <YouTube onPlay={showVideo} onEnd={hideVideo} opts={opts} className={ videoShow ? style.video : style.videoHidden}  videoId={movies.homeMovie.data.video} />
             </div>
             <div className={style.shadow}> 
                 <div className={style.up}>
