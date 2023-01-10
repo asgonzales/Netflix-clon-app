@@ -309,6 +309,9 @@ function InputBox () {
                 <div ref={errorRef}>
                     <input ref={inputRef} className={style.input} type="text" onChange={e => inputHandler(e)} onFocus={inputOnFocus} onBlur={inputOnBlur} />
                     <label ref={labelRef} className={style.label} >Email</label>
+                    <div className={style.errorDiv}>
+                        <span ref={errorSpanRef} hidden>El email es obligatorio.</span>
+                    </div>
                 </div>
                 <div>
                     <button type='submit'>
@@ -318,9 +321,6 @@ function InputBox () {
                         </Link>
                     </button>
                 </div>
-            </div>
-            <div className={style.errorDiv}>
-                <span ref={errorSpanRef} hidden>El email es obligatorio.</span>
             </div>
         </form>
     )
