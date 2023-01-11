@@ -12,10 +12,32 @@ import { categoryType } from '../../config/types';
 
 
 export default function Home () {
+    function debounce<Params extends any[]>(
+        func: (...args: Params) => any,
+        timeout: number,
+      ): (...args: Params) => void {
+        let timer: NodeJS.Timeout
+        return (...args: Params) => {
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            func(...args)
+          }, timeout)
+        }
+      }
+    window.addEventListener('resize', debounce(() => {
+        if(window.outerWidth > 1200) {
+            setIsMobile(false)
+        }
+        else {
+            setIsMobile(true)
+        }
+    }, 500))
 
     const dispatch = useAppDispatch()
     const categories = useAppSelector(state => state.movies.categories.data)
     const [lists, setLists] = useState<categoryType[]>([])
+    const [isMobile, setIsMobile] = useState(false)
+
     document.title = 'Home - MovieApp'
     useEffect(() => {
         if(categories.length === 0) {
@@ -31,7 +53,10 @@ export default function Home () {
 
     return (
         <div className={style.ContHome}>
-            <Visualizer />
+            {
+                !isMobile &&
+                <Visualizer />
+            }
             <div className={style.listsDiv}>
                 {
                     categories.length > 0 && lists.map((el, index) => {

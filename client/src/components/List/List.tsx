@@ -20,6 +20,50 @@ interface Props {
 
 
 export default function List ({ categoryToCall }:Props) {
+    //Responsive
+    const [isMobile, setIsMobile] = useState(false)
+    // const [elements, setElements] = useState(6)
+    const [cardWidth, setCardWidth] = useState(14.8)
+    // const [documentWidth, setDocumentWidth] = useState(document.body.clientWidth)
+    function debounce<Params extends any[]>(
+        func: (...args: Params) => any,
+        timeout: number,
+      ): (...args: Params) => void {
+        let timer: NodeJS.Timeout
+        return (...args: Params) => {
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            func(...args)
+          }, timeout)
+        }
+      }
+    window.addEventListener('resize', debounce(() => {
+        // setDocumentWidth(window.outerWidth)
+        // console.log(window.outerWidth)
+        // if(window.outerWidth < 576) {
+        //     setElements(2)
+        //     setCardWidth(45)
+        //     setIsMobile(true)
+        // }
+        // if(window.outerWidth > 576) {
+        //     setElements(3)
+        //     setCardWidth(31)
+        //     setIsMobile(true)
+        // }
+        if(window.outerWidth > 1200) {
+            // setElements(4)
+            // setCardWidth(14.8)
+            setIsMobile(false)
+        }
+        else {
+            setIsMobile(true)
+        }
+    }, 500))
+    useEffect(() => {
+        console.log('ISMOBILE', isMobile)
+    }, [])
+    // end Responsive
+
     const elements = 6
     const dispatch = useAppDispatch()
     const lista = useAppSelector(state => state.movies.lists[categoryToCall.name])
@@ -47,9 +91,14 @@ export default function List ({ categoryToCall }:Props) {
             dispatch(getMoviesByCategory(categoryToCall))
         }
         else {
-            setShowedItems(lista.data.slice(0, elements))
-            setAfterItems(lista.data.slice(elements * indice, elements + (elements * 1)))
-            setSubLists((lista.data.length / elements))
+            // if(isMobile) {
+            //     setShowedItems(lista.data.slice(0, elements))
+            // }
+            // else {
+                setShowedItems(lista.data.slice(0, elements))
+                setAfterItems(lista.data.slice(elements * indice, elements + (elements * 1)))
+                setSubLists((lista.data.length / elements))
+            // }
         }
     }, [lista?.data.length])
     
@@ -66,9 +115,9 @@ export default function List ({ categoryToCall }:Props) {
     }, [indice])
     if(listRef.current) {
         listRef.current.onmouseenter = () => {
-            if(miniButtonsRef.current) miniButtonsRef.current.style.visibility = 'visible'
-            if(leftButtonImageRef.current) leftButtonImageRef.current.style.visibility = 'visible'
-            if(rigthButtonImageRef.current) rigthButtonImageRef.current.style.visibility = 'visible'
+            if(miniButtonsRef.current) miniButtonsRef.current.style.visibility = isMobile ? 'hidden': 'visible'
+            if(leftButtonImageRef.current) leftButtonImageRef.current.style.visibility = isMobile ? 'hidden': 'visible'
+            if(rigthButtonImageRef.current) rigthButtonImageRef.current.style.visibility = isMobile ? 'hidden': 'visible'
         }
         listRef.current.onmouseleave = () => {
             if(miniButtonsRef.current) miniButtonsRef.current.style.visibility = 'hidden'
@@ -76,8 +125,16 @@ export default function List ({ categoryToCall }:Props) {
             if(rigthButtonImageRef.current) rigthButtonImageRef.current.style.visibility = 'hidden'
         }
     }
+    const getVW = (percent:number):number => {
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        const res = ((percent * w) / 100)
+        return Math.trunc(res);
+    }
     const moveRight = () => {
-        const space = beforeItems.length === 0 ? ((215 * - afterItems.length) - 24) : (((215 * - afterItems.length * 2) - 48))
+        // const remToPx = (rem:number):number => {
+        //     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        // }
+        const space = beforeItems.length === 0 ? ((getVW(cardWidth) * afterItems.length)) + (elements * 6) : (((getVW(cardWidth) * afterItems.length * 2)) + (elements * 6) * 2)
         if(listContent.current) {
             listContent.current.ontransitionstart = () => {
                 setTimeout(() => {
@@ -85,14 +142,14 @@ export default function List ({ categoryToCall }:Props) {
                 }, 900);
             }
             listContent.current.style.transition = '1s'
-            listContent.current.style.transform = `translateX(${space}px)`
+            listContent.current.style.transform = `translateX(-${space}px)`
             listContent.current.ontransitionend = () => {
                 if(leftButtonHidden) setLeftButtonHidden(false)
                 setBeforeItems(showedItems)
                 if (listContent.current) {
                     listContent.current.ontransitionend = null
                     listContent.current.style.transition = '0s'
-                    listContent.current.style.transform = `translateX(${((215 * - afterItems.length) - 24)}px)`
+                    listContent.current.style.transform = `translateX(-${((getVW(cardWidth) * afterItems.length)) + (elements * 6)}px)`
                 }
                 if(indice === (subLists - 1)) {
                     setAfterItems(lista.data.slice(0, elements))
@@ -113,6 +170,7 @@ export default function List ({ categoryToCall }:Props) {
     }
     
     const moveLeft = () => {
+        // const clientWidth = document.body.clientWidth
         if(listContent.current) {
             listContent.current.ontransitionstart = () => {
                 setTimeout(() => {
@@ -126,7 +184,7 @@ export default function List ({ categoryToCall }:Props) {
                 if (listContent.current) {
                     listContent.current.ontransitionend = null
                     listContent.current.style.transition = '0s'
-                    listContent.current.style.transform = `translateX(${((215 * - afterItems.length) - 24)}px)`
+                    listContent.current.style.transform = `translateX(-${((getVW(cardWidth) * afterItems.length)) + (elements * 6)}px)`
                 }
                 if(indice === 2) {
                     const items = lista.data.slice(-6, -1)
@@ -152,15 +210,6 @@ export default function List ({ categoryToCall }:Props) {
             }
         }
     }
-    // const consologeo = () => {
-    //     console.log(
-    //         'Items anteriores', beforeItems,
-    //         'Items mostrados', showedItems,
-    //         'Items siguientes', afterItems,
-    //         'indice', indice,
-    //         'subLists', subLists
-    //     )
-    // }
     return (
         <div className={style.ContList}>
             <div className={`${style.listTitle} listTitle`}>

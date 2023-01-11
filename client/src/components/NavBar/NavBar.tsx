@@ -1,6 +1,6 @@
 import style from './NavBar.module.css';
 import { Link, NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import brandLogo from '../../media/Banner.png';
 
 
@@ -9,7 +9,30 @@ import brandLogo from '../../media/Banner.png';
 
 
 export default function NavBar () {
+    function debounce<Params extends any[]>(
+        func: (...args: Params) => any,
+        timeout: number,
+      ): (...args: Params) => void {
+        let timer: NodeJS.Timeout
+        return (...args: Params) => {
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            func(...args)
+          }, timeout)
+        }
+      }
+    window.addEventListener('resize', debounce(() => {
+        if(window.outerWidth > 768) {
+            setIsMobile(false)
+        }
+        else {
+            setIsMobile(true)
+        }
+    }, 500))
 
+    const [isMobile, setIsMobile] = useState(false)
+    const [openMobileMenu, setOpenMobileMenu] = useState(false)
+    const openMobileMenuRef = useRef<HTMLDivElement>(null)
     const [navBarScroll, setNavBarScroll] = useState(false)
     const changeBackground = () => {
         if(window.scrollY > 0) setNavBarScroll(true)
@@ -19,27 +42,71 @@ export default function NavBar () {
         window.addEventListener('scroll', changeBackground)
     })
 
+    const openMobileMenuController = () => {
+        if(openMobileMenu) {
+            if(openMobileMenuRef.current) {
+                openMobileMenuRef.current.style.transition = '.2s'
+                openMobileMenuRef.current.style.transform = 'translateX(-100%)'
+                setTimeout(() => {
+                    setOpenMobileMenu(false)
+                }, 200)
+            }
+        }
+        else setOpenMobileMenu(true)
+    }
 
-    return (
-        <div className={navBarScroll ? style.ContNavBarScroll : style.ContNavBar}>
-            <div className={style.links}>
+    if(isMobile) {
+        return (
+            <div className={navBarScroll ? style.ContNavBarScroll : style.ContNavBar}>
+            <div onClick={openMobileMenuController} className={style.menu}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
                 <Link to='/browse' className={style.homeImageLink}>
                     <img src={brandLogo} alt="logo" />
-                    {/* <button onClick={ () => console.log(window.scrollY)}>OA</button> */}
                 </Link>
-                <NavLink to='/browse' className={({isActive}) => isActive ? style.linkActive : style.link}>
-                    Home
-                </NavLink>
-                <NavLink to='/series' className={({isActive}) => isActive ? style.linkActive : style.link}>
-                    TV Shows
-                </NavLink>
-                <NavLink to='/movies' className={({isActive}) => isActive ? style.linkActive : style.link}>
-                    Movies
-                </NavLink>
-            </div>
-            <div className={style.userMenu}>
-
-            </div>
+                {
+                    openMobileMenu &&
+                    <div className={style.contLinks}>
+                        <div ref={openMobileMenuRef} className={style.links}>
+                            <NavLink to='/browse' className={({isActive}) => isActive ? style.linkActive : style.link}>
+                                Home
+                            </NavLink>
+                            <NavLink to='/series' className={({isActive}) => isActive ? style.linkActive : style.link}>
+                                TV Shows
+                            </NavLink>
+                            <NavLink to='/movies' className={({isActive}) => isActive ? style.linkActive : style.link}>
+                                Movies
+                            </NavLink>
+                        </div>
+                    </div>
+                }
         </div>
-    )
+        )
+    }
+    else {
+        return (
+            <div className={navBarScroll ? style.ContNavBarScroll : style.ContNavBar}>
+                <div className={style.links}>
+                    <Link to='/browse' className={style.homeImageLink}>
+                        <img src={brandLogo} alt="logo" />
+                    </Link>
+                    <NavLink to='/browse' className={({isActive}) => isActive ? style.linkActive : style.link}>
+                        Home
+                    </NavLink>
+                    <NavLink to='/series' className={({isActive}) => isActive ? style.linkActive : style.link}>
+                        TV Shows
+                    </NavLink>
+                    <NavLink to='/movies' className={({isActive}) => isActive ? style.linkActive : style.link}>
+                        Movies
+                    </NavLink>
+                </div>
+                <div className={style.userMenu}>
+    
+                </div>
+            </div>
+        )
+    }
+
 }

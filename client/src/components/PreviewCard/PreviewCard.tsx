@@ -12,34 +12,6 @@ interface Props {
     modalDiff?:boolean
 }
 
-
-// interface modalProps {
-//     top:number
-//     left:number
-//     close:() => void
-// }
-// function Portal ({top, left, close}:modalProps) {
-
-//     const portalRef = useRef<HTMLDivElement>(null)
-//     useEffect(() => {
-//         if(portalRef.current) {
-//             portalRef.current.onmouseenter = () => {
-//                 console.log('entré')
-//             }
-//             portalRef.current.onmouseleave = () => {
-//                 console.log('sali')
-//                 close()
-//             }
-//         }
-//     }, [])
-//     return ReactDOM.createPortal(
-//         <div ref={portalRef} className={style.pepe}  style={{position: 'absolute', top: top, left: left}}>
-//             <h1>Ola soy el portal</h1>
-//         </div>
-//     , document.getElementById('modals')!)
-// }
-
-
 export default function PreviewCard ({ categoryBelong, data, modalDiff, first, last }:Props) {
 
     //Controlador del modal
@@ -53,10 +25,6 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
     const [diff, setDiff] = useState(0)
 
     const previewCardRef = useRef<HTMLDivElement>(null)
-
-    // const miniCardRef = useRef<HTMLDivElement>(null)
-    const [isFocus, setIsFocus] = useState(true)
-
     
     const acumulativeOffset = (element:HTMLDivElement) => { //Acumulador de posiciones relativas
         let top = 0, left = 0;
@@ -71,11 +39,20 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
         }
     };
 
+    const getVW = (percent:number):number => {
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        const res = ((percent * w) / 100)
+        return Math.trunc(res);
+    }
+    const remTopx = (rem:number):number => {
+        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    }
+
     useEffect(() => {
         if(previewCardRef.current) {
             setOffsets(acumulativeOffset(previewCardRef.current))
             if(modalDiff) {
-                const pepe = ((215 * -6) -24) //Formula donde 6 es la cantidad de cards renderizadas
+                const pepe = ((getVW(14.8) * - 6) - 36) //Formula donde 6 es la cantidad de cards renderizadas, 36 es el gap de la lista (6) por la cantidad de cartas mostradas
                 setDiff(pepe)
             }
         }
@@ -84,29 +61,9 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
     //Apertura del modal
     if(previewCardRef.current) { 
         previewCardRef.current.onmouseenter = () => {
-            console.log('ENTRO AL PREVIEW')
-            // setTimeout(() => {
-                // if(isFocus) {
                 setOpenPortal(true)
-                // }
-            // }, 500)
         }
-        // previewCardRef.current.onmouseleave = () => {
-            // const children = document.getElementById('miniCardModal')
-                // if( children && children.children.length == 0) {
-                    // console.log(openPortal)
-                    // if(!openPortal) {
-                    //     console.log('ENTRO EN SALIDA DE PREVIEW')
-                        // setOpenPortal(false)
-
-                    // } 
-                // }
-        // }
     }
-    // useEffect(() => {
-    //     console.log('FOCUS', isFocus)
-    // }, [isFocus])
-
     const closePortal = () => {
         setOpenPortal(false)
     }
