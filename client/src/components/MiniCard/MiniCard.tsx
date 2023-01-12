@@ -1,13 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-// import { getMovieCategories } from '../../redux/movieSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import style from './MiniCard.module.css';
 import ReactDOM from 'react-dom';
 import playIcon from '../../media/play.svg';
-// import dotIcon from '../../media/dot.svg';
-
-// import imagenPrueba from './pruebaCard.jpg';
-// import fondoPrueba from './IMAGENDEPRUEBA.jpg';
 import { MovieInfoInterface } from '../../config/types';
 import { getMovieInfo } from '../../redux/movieSlice';
 import LikeButton from '../Buttons/Like/Like';
@@ -16,6 +11,7 @@ import MoreInfo from '../Buttons/MoreInfo/MoreInfo';
 import BigCard from '../BigCard/BigCard';
 import defaultImage from '../../media/defaultImage.jpg'
 import YouTube from 'react-youtube';
+import { categoriesInCommon } from '../../functions';
 interface Props {
     categoryBelong:string
     previewData:MovieInfoInterface
@@ -26,105 +22,48 @@ interface Props {
         left:number
     }
     close:() => void
-    // ref:React.RefObject<HTMLDivElement>
 }
 
 
 
 export default function MiniCard ({ categoryBelong, previewData, first, last, position, close }:Props) {
-    // let pepe = false
-    
     const dispatch = useAppDispatch()
     const categories = useAppSelector(state => state.movies.categories.data)
     const minicardInfo = useAppSelector(state => state.movies.lists[categoryBelong].data.find(el => el.id === previewData.id))
     const miniCardRef = useRef<HTMLDivElement>(null)
     const [bigCardModal, setBigCardModal] = useState(false)
     const [videoShow, setVideoShow] = useState(false)
-    // const [pepe, setPepe] = useState(false)
+    const [categoriesBelong, setCategoriesBelong] = useState<string[]>([])
 
     const textoRef = useRef<HTMLDivElement>(null)
-    // const papaya = useState(null)
 
     if(miniCardRef.current) {
-        // miniCardRef.current.onmouseover = () => {
-        //     setPepe(true)
-        //     console.log('ONMOSEOVERpepe')
-            
-        // }
         miniCardRef.current.onmouseleave = () => {
-            // const children = document.getElementById('bigCardModals')
-            if( !isBigCardOpen()) {
-                // console.log('ENTRO EN SALIDA DE MINICARD')
+            if(!isBigCardOpen()) {
                 setTimeout(() => {
                     close()
                 }, 300)
             }
         }
     }
-    // useEffect(() => {
-    //     console.log(textoRef.current?.matches(':hover'))
-    // }, [textoRef.current?.matches(':hover')])
-    // console.log(textoRef.current.matches(':hover'))
-    // const run = () => {
-    //     setPepe(true)
-    //     console.log('seteado')
-    // }
-    // useEffect(() => {
-    //     if(textoRef.current) {
-    //         textoRef.current.ontransitionrun = () => {
-    //             run()
-    //             console.log('asadasdasdasd', pepe)
-    //         }
-    //         textoRef.current.ontransitionend = () => {
-    //             console.log('OEOE AL FINAL DELA ANMIACION', pepe)
-    //         }
-    //     }
-    // }, [textoRef.current])
-    // useEffect(() => {
-    //     console.log('PEPE:', pepe)
-    // }, [pepe])
-    // const peep = miniCardRef.current?.getElementsByClassName(style.texto)[0] as HTMLDivElement
-    // useEffect(() => {
-    //     if(miniCardRef.current) {
-    //         if(peep.style.overflow === 'visible') setPepe(true)
-    //         console.log(peep)
-            
-    //     }
-    // }, [peep.style.overflow])
+
     useEffect(() => {
-        // setPepe(true)
         dispatch(getMovieInfo({
             categoryName: categoryBelong,
             movieId: previewData.id
         }))
         setTimeout(() => {
             if(textoRef.current) {
-                // console.log('ALTURA', textoRef.current.offsetHeight)
-                // console.log('CIERRE', bigCardModal)
-                if(textoRef.current.offsetHeight === 0 && !isBigCardOpen()) {
-                    close()
-                }
+                if(textoRef.current.offsetHeight === 0 && !isBigCardOpen()) close()
             }
-
         }, 2000)
     }, [])
 
-    // useEffect(() => {
-    // }, [])
-
-    const [categoriesBelong, setCategoriesBelong] = useState<string[]>([])
     
     useEffect(() => {
         if(minicardInfo && minicardInfo.date) {
             const categoriesStored = minicardInfo?.genres
-            if(categoriesStored) {
-                const categoriesInCommon:string[] = categoriesStored.map(elment => {
-                    const find = categories.find(el => el.id === elment)
-                    if(find) return find.name
-                    else return ''
-                })
-                setCategoriesBelong(categoriesInCommon)
-            }
+            if(categoriesStored) setCategoriesBelong(categoriesInCommon(categoriesStored, categories))
         }
     }, [minicardInfo?.date])
 

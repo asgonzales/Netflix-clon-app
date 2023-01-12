@@ -1,5 +1,4 @@
 import style from './AddToList.module.css';
-
 import plusIcon from '../../../media/plus.svg';
 import PopUp from '../PopUp/PopUp';
 import { useEffect, useRef, useState } from 'react';
@@ -30,11 +29,6 @@ export default function AddToList() {
         <div ref={divRef} className={style.ContAddToList}>
             <img src={plusIcon} alt="Plus" />
             <PopUp message='Add to My List' active={popUpController} />
-            {/* <div className={style.popup}>
-                <span>Add to My List</span>
-                <div className={style.popupArrow}>
-                </div>
-            </div> */}
         </div>
     )
 }

@@ -34,11 +34,9 @@ export default function PopUp({message, active}:PopUpInterface) {
 
     return (
         <div ref={popupRef} className={style.ContPopUp}>
-            {/* <div className={style.popup}> */}
-                <span>{message}</span>
-                <div>
-                </div>
-            {/* </div> */}
+            <span>{message}</span>
+            <div>
+            </div>
         </div>
     )
 }

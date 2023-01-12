@@ -1,6 +1,6 @@
 ﻿import style from './Landing.module.css';
 import arrowIcon from '../../media/listArrow.svg'
-import React, { ChangeEvent, ChangeEventHandler, FormEvent, useState, useRef, useEffect, EventHandler } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useRef, useEffect } from 'react';
 import backgroundImage from '../../media/LandingBackground.jpg';
 import banner from '../../media/Banner.png';
 import plusIcon from '../../media/plus.svg';
@@ -17,16 +17,14 @@ export default function Landing () {
         const expandendDivs = document.getElementsByClassName(style.expanded)
         const div = e.target as HTMLDivElement
         const actual = div.parentElement?.children[1].className
+
         for(let i = 0; i < expandendDivs.length; i++) {
             expandendDivs[i].className = style.expand
         }
+
         if(div.parentElement) {
-            if(actual == style.expand) {
-                div.parentElement.children[1].className = style.expanded
-            }
-            else {
-                    div.parentElement.children[1].className = style.expand
-            }
+            if(actual == style.expand) div.parentElement.children[1].className = style.expanded
+            else div.parentElement.children[1].className = style.expand
         }
     }
 
@@ -239,7 +237,6 @@ function InputBox () {
     const [inputFocus, setInputFocus] = useState(false)
 
     const inputOnFocus = () => setInputFocus(true)
-
     const inputOnBlur = () => {
         if(inputRef.current) {
             setInputFocus(inputRef.current.value !== '' ? true : false)
@@ -248,15 +245,10 @@ function InputBox () {
 
     useEffect(() => {
         if( inputFocus) {
-            // console.log('asdasd')
-            if(labelRef.current) {
-                labelRef.current.className = style.labelWritten
-            }
+            if(labelRef.current) labelRef.current.className = style.labelWritten
         }
-        else {
-            if(labelRef.current) {
-                labelRef.current.className = style.label
-            }
+        else if(labelRef.current) {
+            labelRef.current.className = style.label
         }
     }, [inputFocus])
 
@@ -269,40 +261,26 @@ function InputBox () {
 
     const inputHandler = (e:ChangeEvent<HTMLInputElement>) => {
         if(e.target.value !== '' || inputFocus) {
-            if(labelRef.current) {
-                labelRef.current.className = style.labelWritten
-            }
+            if(labelRef.current) labelRef.current.className = style.labelWritten
         }
-        else {
-            if(labelRef.current) {
-                labelRef.current.className = style.label
-            }
-        }
+        else if(labelRef.current) labelRef.current.className = style.label
+
         if(e.target.value.length < 5 || !emailRE.test(e.target.value)) {
-            if(errorRef.current) {
-                errorRef.current.className = style.errorFound
-            }
+            if(errorRef.current) errorRef.current.className = style.errorFound
+
             if(errorSpanRef.current) {
                 errorSpanRef.current.hidden = false
-                if(e.target.value.length < 5) {
-                    errorSpanRef.current.innerText = 'El email es obligatorio.'
-                }
-                else {
-                    errorSpanRef.current.innerText = 'Escribe una dirección de email válida.'
-                }
+                if(e.target.value.length < 5) errorSpanRef.current.innerText = 'El email es obligatorio.'
+                else errorSpanRef.current.innerText = 'Escribe una dirección de email válida.'
             }
         }
         else {
-            if(errorRef.current) {
-                errorRef.current.className = ''
-            }
-            if(errorSpanRef.current) {
-                errorSpanRef.current.hidden = true
-            }
+            if(errorRef.current) errorRef.current.className = ''
+
+            if(errorSpanRef.current) errorSpanRef.current.hidden = true
             setEmail(e.target.value)
         }
     }
-
     return(
         <form onSubmit={e => submitHandler(e)} className={style.suscriptionForm}>
             <div className={style.inputsDiv}>

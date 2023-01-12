@@ -2,6 +2,8 @@ import style from './NavBar.module.css';
 import { Link, NavLink } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import brandLogo from '../../media/Banner.png';
+import { debounce } from '../../functions';
+
 
 
 
@@ -9,18 +11,11 @@ import brandLogo from '../../media/Banner.png';
 
 
 export default function NavBar () {
-    function debounce<Params extends any[]>(
-        func: (...args: Params) => any,
-        timeout: number,
-      ): (...args: Params) => void {
-        let timer: NodeJS.Timeout
-        return (...args: Params) => {
-          clearTimeout(timer)
-          timer = setTimeout(() => {
-            func(...args)
-          }, timeout)
-        }
-      }
+    const [isMobile, setIsMobile] = useState(false)
+    const [openMobileMenu, setOpenMobileMenu] = useState(false)
+    const openMobileMenuRef = useRef<HTMLDivElement>(null)
+    const [navBarScroll, setNavBarScroll] = useState(false)
+
     window.addEventListener('resize', debounce(() => {
         if(window.outerWidth > 768) {
             setIsMobile(false)
@@ -30,17 +25,20 @@ export default function NavBar () {
         }
     }, 500))
 
-    const [isMobile, setIsMobile] = useState(false)
-    const [openMobileMenu, setOpenMobileMenu] = useState(false)
-    const openMobileMenuRef = useRef<HTMLDivElement>(null)
-    const [navBarScroll, setNavBarScroll] = useState(false)
     const changeBackground = () => {
         if(window.scrollY > 0) setNavBarScroll(true)
         else setNavBarScroll(false)
     }
+    
     useEffect(() => {
         window.addEventListener('scroll', changeBackground)
-    })
+        if(window.outerWidth > 768) {
+            setIsMobile(false)
+        }
+        else {
+            setIsMobile(true)
+        }
+    }, [])
 
     const openMobileMenuController = () => {
         if(openMobileMenu) {

@@ -1,5 +1,4 @@
 import style from './Like.module.css';
-
 import likeIcon from '../../../media/like.svg';
 import doubleLikeIcon from '../../../media/doubleLike.svg';
 import PopUp from '../PopUp/PopUp';
@@ -54,29 +53,14 @@ export default function LikeButton() {
             <div className={style.likes}>
                 <div ref={dislikeRef} >
                     <img src={likeIcon} alt="dislke" />
-                    {/* <div className={style.popup}>
-                        <span>Not for me</span>
-                        <div className={style.popupArrow}>
-                        </div>
-                    </div> */}
                     <PopUp message='Not for me' active={dislikePopUp} />
                 </div>
                 <div ref={likeRef} >
                     <img src={likeIcon} alt="like" />
-                    {/* <div className={style.popup}>
-                        <span>I like this</span>
-                        <div className={style.popupArrow}>
-                        </div>
-                    </div> */}
                     <PopUp message='I like this' active={likePopUp} />
                 </div>
                 <div ref={loveRef} >
                     <img src={doubleLikeIcon} alt="love" />
-                    {/* <div className={style.popup}>
-                        <span>Love this!</span>
-                        <div className={style.popupArrow}>
-                        </div>
-                    </div> */}
                     <PopUp message='Love this!' active={lovePopUp} />
                 </div>
             </div>

@@ -1,8 +1,6 @@
 import style from './MoreInfo.module.css';
 import { useEffect, useRef, useState } from 'react';
 import PopUp from '../PopUp/PopUp';
-
-
 import downArrowIcon from '../../../media/downArrow.svg';
 
 
@@ -28,11 +26,6 @@ export default function () {
     return (
         <div ref={divRef} className={style.ContMoreInfo}>
             <img src={downArrowIcon} alt="More" />
-                            {/* <div className={style.popup}>
-                                <span>More info</span>
-                                <div className={style.popupArrow}>
-                                </div>
-                            </div> */}
             <PopUp message='More info' active={popUpController} />
         </div>
     )

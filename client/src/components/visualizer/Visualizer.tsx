@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { getHomeMovie, getPopularMovies } from "../../redux/movieSlice"
+import { getHomeMovie } from "../../redux/movieSlice"
 import { useAppDispatch, useAppSelector } from "../../redux/store"
 import style from './Visualizer.module.css';
-import imagendeprueba from './IMAGENDEPRUEBA2.jpg';
 import infoIcon from '../../media/info.svg';
 import reloadIcon from '../../media/reload.svg';
 import List from "../List/List";
@@ -26,11 +25,10 @@ export default function Visualizer () {
     useEffect(() => {
         dispatch(getHomeMovie())
     }, [])
+
     useEffect(() => {
-        if(categories.length > 0) {
-            setListToCall(categories[Math.round(Math.random() * (categories.length - 1))])
-        }
-    }, [categories])
+        if(categories.length > 0) setListToCall(categories[Math.round(Math.random() * (categories.length - 1))])
+    }, [categories.length])
 
     //Video Handle
     const opts = {
@@ -55,7 +53,6 @@ export default function Visualizer () {
     return (
         <div className={style.ContVisualizer}>
             <div className={style.imgCont}>
-                {/* <img src={imagendeprueba} alt="background movie" /> */}
                 <img src={movies.homeMovie.data?.image} alt="background movie" />
                 <YouTube onPlay={showVideo} onEnd={hideVideo} opts={opts} className={ videoShow ? style.video : style.videoHidden}  videoId={movies.homeMovie.data.video} />
             </div>
@@ -74,8 +71,6 @@ export default function Visualizer () {
                             </div>
                             <div className={style.buttons}>
                                 <div className={style.playButton}>
-                                    {/* <img src={playIcon} alt="play Icon" /> */}
-                                    {/* Play */}
                                     <PlayButton />  
                                 </div>
                                 <button className={style.infoButton}>

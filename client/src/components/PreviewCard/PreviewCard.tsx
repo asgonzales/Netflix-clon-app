@@ -3,6 +3,7 @@ import { MovieInfoInterface } from '../../config/types';
 import style from './PreviewCard.module.css';
 import MiniCard from '../MiniCard/MiniCard';
 import defaultImage from '../../media/defaultImage.jpg';
+import { getVW } from '../../functions';
 
 interface Props {
     categoryBelong:string
@@ -39,14 +40,7 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
         }
     };
 
-    const getVW = (percent:number):number => {
-        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        const res = ((percent * w) / 100)
-        return Math.trunc(res);
-    }
-    const remTopx = (rem:number):number => {
-        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-    }
+    
 
     useEffect(() => {
         if(previewCardRef.current) {
@@ -61,7 +55,7 @@ export default function PreviewCard ({ categoryBelong, data, modalDiff, first, l
     //Apertura del modal
     if(previewCardRef.current) { 
         previewCardRef.current.onmouseenter = () => {
-                setOpenPortal(true)
+            setOpenPortal(true)
         }
     }
     const closePortal = () => {

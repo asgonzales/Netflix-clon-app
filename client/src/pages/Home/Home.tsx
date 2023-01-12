@@ -2,9 +2,10 @@ import style from './Home.module.css';
 import Visualizer from '../../components/visualizer/Visualizer';
 import { useEffect, useState } from 'react';
 import List from '../../components/List/List';
-import { getMovieCategories, getMoviesByCategory, getPopularMovies } from '../../redux/movieSlice';
+import { getMovieCategories } from '../../redux/movieSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { categoryType } from '../../config/types';
+import { debounce, isMobileDevice } from '../../functions';
 
 
 
@@ -12,41 +13,23 @@ import { categoryType } from '../../config/types';
 
 
 export default function Home () {
-    function debounce<Params extends any[]>(
-        func: (...args: Params) => any,
-        timeout: number,
-      ): (...args: Params) => void {
-        let timer: NodeJS.Timeout
-        return (...args: Params) => {
-          clearTimeout(timer)
-          timer = setTimeout(() => {
-            func(...args)
-          }, timeout)
-        }
-      }
-    window.addEventListener('resize', debounce(() => {
-        if(window.outerWidth > 1200) {
-            setIsMobile(false)
-        }
-        else {
-            setIsMobile(true)
-        }
-    }, 500))
-
     const dispatch = useAppDispatch()
     const categories = useAppSelector(state => state.movies.categories.data)
     const [lists, setLists] = useState<categoryType[]>([])
     const [isMobile, setIsMobile] = useState(false)
-
-    document.title = 'Home - MovieApp'
+    
     useEffect(() => {
-        if(categories.length === 0) {
-            dispatch(getMovieCategories())
-        }
-        else {
-            setLists(callLists(5, categories))
-        }
-        
+        document.title = 'Home - MovieApp'
+        setIsMobile(isMobileDevice())
+    }, [])
+
+    window.addEventListener('resize', debounce(() => {
+        setIsMobile(isMobileDevice())
+    }, 500))
+
+    useEffect(() => {
+        if(categories.length === 0) dispatch(getMovieCategories())
+        else setLists(callLists(5, categories))
     }, [categories.length])
 
 
@@ -77,23 +60,17 @@ function callLists (q:number, categories:categoryType[]):categoryType[] {
     let i = 0
     while (i < q) {
         const option = categories[Math.round(Math.random() * (categories.length - 1))]
-        // console.log('Inicio', selectedCategories)
         if(i === 0) {
             selectedCategories.push(option)
             i++
-            // console.log('I igual a cero', selectedCategories)
         }
         else {
-            // i = 99
-            // console.log('Vuelta numero ', i, selectedCategories)
             const ids = selectedCategories.map(el => el.id )
             if(!ids.includes(option.id)) {
                     selectedCategories.push(option)
                     i++
-                    // console.log('Push en la vuelta numero', i, selectedCategories)
                 }
             }
         }
-        // console.log('FIN FUNCION')
     return selectedCategories
 }

@@ -17,7 +17,6 @@ export default function TrailerCard ({data, title}:TrailerCardProps) {
 
     const opts = {
         playerVars: {
-            // https://developers.google.com/youtube/player_parameters
             autoplay: 0,
             controls: 0,
             frameborder: 0,
@@ -29,14 +28,7 @@ export default function TrailerCard ({data, title}:TrailerCardProps) {
     return (
         <div className={style.ContTrailerCard}>
             <div className={style.videoDiv}>
-                {/* <div className={style.videoYotubeDiv}> */}
-                    <YouTube videoId={data.key} className={style.video} opts={opts} />
-                {/* </div> */}
-                {/* <div className={style.playButtonDiv}>
-                    <div>
-                        <MiniPlay />
-                    </div>
-                </div> */}
+                <YouTube videoId={data.key} className={style.video} opts={opts} />
             </div>
             <div className={style.titleDiv}>
                 <span>{data.type}: {title}</span>

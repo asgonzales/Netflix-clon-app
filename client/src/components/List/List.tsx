@@ -1,18 +1,14 @@
-// import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { useEffect, useRef, useState } from 'react';
 import { categoryType, MovieInfoInterface } from '../../config/types';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-// import MiniCard from '../MiniCard/MiniCard';
 import style from './List.module.css';
-// import DataDePrueba from './listadePrueba';
 import leftArrowIcon from '../../media/listArrow.svg';
 import { Link } from 'react-router-dom'
 import PreviewCard from '../PreviewCard/PreviewCard';
 import { getMoviesByCategory } from '../../redux/movieSlice';
+import { debounce, getVW, isMobileDevice } from '../../functions';
 
 interface Props {
-    // name:string
-    // call:AsyncThunkAction<{name:string, data:any}, void, any>
     categoryToCall:categoryType
 }
 
@@ -20,50 +16,7 @@ interface Props {
 
 
 export default function List ({ categoryToCall }:Props) {
-    //Responsive
-    const [isMobile, setIsMobile] = useState(false)
-    // const [elements, setElements] = useState(6)
-    const [cardWidth, setCardWidth] = useState(14.8)
-    // const [documentWidth, setDocumentWidth] = useState(document.body.clientWidth)
-    function debounce<Params extends any[]>(
-        func: (...args: Params) => any,
-        timeout: number,
-      ): (...args: Params) => void {
-        let timer: NodeJS.Timeout
-        return (...args: Params) => {
-          clearTimeout(timer)
-          timer = setTimeout(() => {
-            func(...args)
-          }, timeout)
-        }
-      }
-    window.addEventListener('resize', debounce(() => {
-        // setDocumentWidth(window.outerWidth)
-        // console.log(window.outerWidth)
-        // if(window.outerWidth < 576) {
-        //     setElements(2)
-        //     setCardWidth(45)
-        //     setIsMobile(true)
-        // }
-        // if(window.outerWidth > 576) {
-        //     setElements(3)
-        //     setCardWidth(31)
-        //     setIsMobile(true)
-        // }
-        if(window.outerWidth > 1200) {
-            // setElements(4)
-            // setCardWidth(14.8)
-            setIsMobile(false)
-        }
-        else {
-            setIsMobile(true)
-        }
-    }, 500))
-    useEffect(() => {
-        console.log('ISMOBILE', isMobile)
-    }, [])
-    // end Responsive
-
+    
     const elements = 6
     const dispatch = useAppDispatch()
     const lista = useAppSelector(state => state.movies.lists[categoryToCall.name])
@@ -80,25 +33,28 @@ export default function List ({ categoryToCall }:Props) {
     const [beforeItems, setBeforeItems] = useState<MovieInfoInterface[]>([])
     const titleRef = useRef<HTMLHeadingElement>(null)
     const [modalDiff, setModalDiff] = useState(false)
+    //Responsive
+    const [isMobile, setIsMobile] = useState(false)
+    const [cardWidth, setCardWidth] = useState(14.8)
+
     useEffect(() => {
-        if(beforeItems.length > 0) {
-            setModalDiff(true)
-        }
+          setIsMobile(isMobileDevice())
+          window.addEventListener('resize', debounce(() => {
+              setIsMobile(isMobileDevice())
+          }, 500))
+      }, [])
+    // end Responsive
+
+    useEffect(() => {
+        if(beforeItems.length > 0) setModalDiff(true)
     }, [beforeItems.length])
 
     useEffect(() => {
-        if(!lista) {
-            dispatch(getMoviesByCategory(categoryToCall))
-        }
+        if(!lista) dispatch(getMoviesByCategory(categoryToCall))
         else {
-            // if(isMobile) {
-            //     setShowedItems(lista.data.slice(0, elements))
-            // }
-            // else {
-                setShowedItems(lista.data.slice(0, elements))
-                setAfterItems(lista.data.slice(elements * indice, elements + (elements * 1)))
-                setSubLists((lista.data.length / elements))
-            // }
+            setShowedItems(lista.data.slice(0, elements))
+            setAfterItems(lista.data.slice(elements * indice, elements + (elements * 1)))
+            setSubLists((lista.data.length / elements))
         }
     }, [lista?.data.length])
     
@@ -108,11 +64,10 @@ export default function List ({ categoryToCall }:Props) {
                 const buttonSelected = miniButtonsRef.current.children[i]
                 if(buttonSelected) buttonSelected.className = style.miniButton
             }
-
             miniButtonsRef.current.children[indice - 1].className = style.miniButtonSelected
-
         }
     }, [indice])
+
     if(listRef.current) {
         listRef.current.onmouseenter = () => {
             if(miniButtonsRef.current) miniButtonsRef.current.style.visibility = isMobile ? 'hidden': 'visible'
@@ -125,15 +80,7 @@ export default function List ({ categoryToCall }:Props) {
             if(rigthButtonImageRef.current) rigthButtonImageRef.current.style.visibility = 'hidden'
         }
     }
-    const getVW = (percent:number):number => {
-        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        const res = ((percent * w) / 100)
-        return Math.trunc(res);
-    }
     const moveRight = () => {
-        // const remToPx = (rem:number):number => {
-        //     return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-        // }
         const space = beforeItems.length === 0 ? ((getVW(cardWidth) * afterItems.length)) + (elements * 6) : (((getVW(cardWidth) * afterItems.length * 2)) + (elements * 6) * 2)
         if(listContent.current) {
             listContent.current.ontransitionstart = () => {
@@ -170,7 +117,6 @@ export default function List ({ categoryToCall }:Props) {
     }
     
     const moveLeft = () => {
-        // const clientWidth = document.body.clientWidth
         if(listContent.current) {
             listContent.current.ontransitionstart = () => {
                 setTimeout(() => {
@@ -187,7 +133,7 @@ export default function List ({ categoryToCall }:Props) {
                     listContent.current.style.transform = `translateX(-${((getVW(cardWidth) * afterItems.length)) + (elements * 6)}px)`
                 }
                 if(indice === 2) {
-                    const items = lista.data.slice(-6, -1)
+                    const items = lista.data.slice(-elements, -1)
                     items.push(lista.data[lista.data.length - 1])
                     setBeforeItems(items)
                     setIndice(indice - 1)
@@ -265,13 +211,6 @@ export default function List ({ categoryToCall }:Props) {
                 >
                     <img ref={leftButtonImageRef} src={leftArrowIcon} alt="arrow" />
                 </button>
-                {/* <button style={{
-                    position:'absolute',
-                    top: 0,
-                    left: '50%',
-                    zIndex: 5
-                }}
-                onClick={consologeo}>ASD</button> */}
                 <button className={style.listButtonRight} onClick={moveRight} >
                     <img ref={rigthButtonImageRef} src={leftArrowIcon} alt="arrow" />
                 </button>

@@ -1,6 +1,4 @@
 import style from './PlayButton.module.css';
-
-
 import playIcon from '../../../media/play.svg';
 
 
@@ -18,7 +16,5 @@ export default function PlayButton() {
                 <img src={playIcon} alt="play Icon" />
                 Play
             </button>
-        // <div className={style.ContPlayButton}>
-        // </div>
     )
 }
